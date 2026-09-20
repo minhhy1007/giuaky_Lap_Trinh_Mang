@@ -1,0 +1,4 @@
+Đây là file test_upload.txt dùng để test STOR command.
+Hello from FTP Client!
+Line 1, Line 2, Line 3.
+Tiếng Việt có dấu: Xin chào thế giới!
