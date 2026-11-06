@@ -31,6 +31,8 @@ import java.net.Socket;
  */
 public class ClientHandler implements Runnable {
 
+
+
     private final Socket         clientSocket;
     private final CommandHandler handler;
     private final String         clientId;
@@ -51,6 +53,9 @@ public class ClientHandler implements Runnable {
 
         // Inject tất cả dependency vào CommandHandler
         this.handler = new CommandHandler(session, userDatabase, storageManager);
+        if (clientSocket != null && clientSocket.getInetAddress() != null) {
+            this.handler.setClientIp(clientSocket.getInetAddress().getHostAddress());
+        }
     }
 
     @Override
@@ -69,9 +74,9 @@ public class ClientHandler implements Runnable {
             ProtocolInputStream lineReader =
                     new ProtocolInputStream(socket.getInputStream());
 
-            // PrintWriter vẫn dùng bình thường cho output
+            // PrintWriter dùng UTF-8 chuẩn
             PrintWriter writer = new PrintWriter(
-                    socket.getOutputStream(), true); // auto-flush
+                    new java.io.OutputStreamWriter(socket.getOutputStream(), java.nio.charset.StandardCharsets.UTF_8), true);
 
             String commandLine;
 
@@ -94,6 +99,11 @@ public class ClientHandler implements Runnable {
                     String filename  = (parts.length > 1) ? parts[1].trim() : "";
                     // handleRetr() gửi 150 -> bơm bytes -> trả response 226
                     response = handler.handleRetr(filename, writer, socket.getOutputStream());
+
+                } else if (commandLine.trim().toUpperCase().startsWith("GETSHARED")) {
+                    String[] parts   = commandLine.trim().split("\\s+", 2);
+                    String token     = (parts.length > 1) ? parts[1].trim() : "";
+                    response = handler.handleGetShared(token, writer, socket.getOutputStream());
 
                 } else {
                     // ── Command thông thường → handle() bình thường ───────

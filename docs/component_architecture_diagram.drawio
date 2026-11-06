@@ -1,0 +1,87 @@
+<?xml version="1.0" ?>
+<mxfile host="app.diagrams.net" modified="2026-11-02T14:25:00.000Z" agent="SecureFTPClientPro" version="24.0.0" type="device">
+  <diagram id="Clean_Component_Architecture_Diagram" name="Sơ đồ Kiến trúc &amp; Thành phần Hệ thống (Component Architecture Diagram)">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="#FFFFFF" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="b_client" value="CLIENT (ỨNG DỤNG KHÁCH)" style="swimlane;startSize=32;html=1;whiteSpace=wrap;strokeWidth=2;strokeColor=#000000;fillColor=#FAFAFA;fontFamily=Segoe UI;fontSize=13;fontStyle=1;collapsible=0;" vertex="1" parent="1">
+          <mxGeometry x="50" y="50" width="270" height="720" as="geometry"/>
+        </mxCell>
+        <mxCell id="b_server" value="APPLICATION SERVER (MÁY CHỦ FTP)" style="swimlane;startSize=32;html=1;whiteSpace=wrap;strokeWidth=2;strokeColor=#000000;fillColor=#FAFAFA;fontFamily=Segoe UI;fontSize=13;fontStyle=1;collapsible=0;" vertex="1" parent="1">
+          <mxGeometry x="370" y="50" width="430" height="720" as="geometry"/>
+        </mxCell>
+        <mxCell id="b_data" value="DATA &amp;amp; EXTERNAL (DỮ LIỆU &amp;amp; DỊCH VỤ)" style="swimlane;startSize=32;html=1;whiteSpace=wrap;strokeWidth=2;strokeColor=#000000;fillColor=#FAFAFA;fontFamily=Segoe UI;fontSize=13;fontStyle=1;collapsible=0;" vertex="1" parent="1">
+          <mxGeometry x="850" y="50" width="270" height="720" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_ui" value="&amp;laquo;component&amp;raquo;&lt;br&gt;&lt;b&gt;Giao diện Người dùng (Presentation UI)&lt;/b&gt;&lt;br&gt;&lt;i&gt;(Java Swing Desktop: LoginFrame,&lt;br&gt;MainFrame, AdminDashboard, Dialogs)&lt;/i&gt;" style="shape=module;jettyWidth=8;jettyHeight=4;whiteSpace=wrap;html=1;strokeWidth=1.8;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="70" y="150" width="230" height="95" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_client_svc" value="&amp;laquo;component&amp;raquo;&lt;br&gt;&lt;b&gt;Dịch vụ Khách &amp;amp; Socket (FtpClientService)&lt;/b&gt;&lt;br&gt;&lt;i&gt;(Quản lý phiên, đóng gói lệnh FTP,&lt;br&gt;TCPClient &amp;amp; Binary Transfer Stream)&lt;/i&gt;" style="shape=module;jettyWidth=8;jettyHeight=4;whiteSpace=wrap;html=1;strokeWidth=1.8;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="70" y="440" width="230" height="105" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_tcp_conn" value="&amp;laquo;component&amp;raquo;&lt;br&gt;&lt;b&gt;Bộ Tiếp nhận &amp;amp; Đa luồng (TCPServer)&lt;/b&gt;&lt;br&gt;&lt;i&gt;(ServerSocket Port 6789, Thread Pool,&lt;br&gt;ClientHandler, ProtocolInputStream)&lt;/i&gt;" style="shape=module;jettyWidth=8;jettyHeight=4;whiteSpace=wrap;html=1;strokeWidth=1.8;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="395" y="105" width="380" height="85" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_controller" value="&amp;laquo;component&amp;raquo;&lt;br&gt;&lt;b&gt;Bộ Điều khiển Giao thức (CommandHandler)&lt;/b&gt;&lt;br&gt;&lt;i&gt;(Phân tích &amp;amp; điều phối lệnh FTP: AUTH, FILE,&lt;br&gt;DIR, QUOTA, SHARE, ORDER, PAYMENT)&lt;/i&gt;" style="shape=module;jettyWidth=8;jettyHeight=4;whiteSpace=wrap;html=1;strokeWidth=1.8;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="395" y="235" width="380" height="85" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_auth_sec" value="&amp;laquo;component&amp;raquo;&lt;br&gt;&lt;b&gt;Xác thực &amp;amp; Bảo mật (Security &amp;amp; Auth)&lt;/b&gt;&lt;br&gt;&lt;i&gt;(Băm mật khẩu SHA-256 + Salt,&lt;br&gt;Phân quyền USER / ADMIN, Token Guard)&lt;/i&gt;" style="shape=module;jettyWidth=8;jettyHeight=4;whiteSpace=wrap;html=1;strokeWidth=1.8;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="395" y="365" width="380" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_storage_mgr" value="&amp;laquo;component&amp;raquo;&lt;br&gt;&lt;b&gt;Quản lý Tập tin &amp;amp; Quota (StorageManager)&lt;/b&gt;&lt;br&gt;&lt;i&gt;(Cô lập Sandbox Chroot, Anti Path Traversal,&lt;br&gt;Kiểm soát Quota, Dọn dẹp tệp tạm .tmp)&lt;/i&gt;" style="shape=module;jettyWidth=8;jettyHeight=4;whiteSpace=wrap;html=1;strokeWidth=1.8;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="395" y="490" width="380" height="85" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_dao" value="&amp;laquo;component&amp;raquo;&lt;br&gt;&lt;b&gt;Tầng Truy xuất Dữ liệu (Data Access - DAO)&lt;/b&gt;&lt;br&gt;&lt;i&gt;(UserDAO, FileDAO, ShareDAO, OrderDAO,&lt;br&gt;LogDAO &amp;amp; JDBC Connection Pool)&lt;/i&gt;" style="shape=module;jettyWidth=8;jettyHeight=4;whiteSpace=wrap;html=1;strokeWidth=1.8;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="395" y="620" width="380" height="85" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_mysql" value="&amp;laquo;database&amp;raquo;&lt;br&gt;&lt;b&gt;Cơ sở Dữ liệu (MySQL Database)&lt;/b&gt;&lt;br&gt;&lt;i&gt;(Port 3306 - ACID &amp;amp; Ràng buộc toàn vẹn:&lt;br&gt;users, files, file_shares, orders,&lt;br&gt;plans, payments, transfer_logs)&lt;/i&gt;" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=12;strokeWidth=1.8;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="875" y="115" width="220" height="165" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_fs" value="&amp;laquo;filesystem&amp;raquo;&lt;br&gt;&lt;b&gt;Hệ thống Tệp Lưu trữ (Storage Sandbox)&lt;/b&gt;&lt;br&gt;&lt;i&gt;(Thư mục vật lý: storage/&amp;lt;username&amp;gt;/&lt;br&gt;Phân vùng độc lập theo người dùng)&lt;/i&gt;" style="shape=folder;fontStyle=1;tabWidth=90;tabHeight=20;tabPosition=left;html=1;boundedLbl=1;strokeWidth=1.8;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=11;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="875" y="375" width="220" height="130" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_payment_ext" value="&amp;laquo;external service&amp;raquo;&lt;br&gt;&lt;b&gt;Cổng Thanh toán (VietQR Simulator)&lt;/b&gt;&lt;br&gt;&lt;i&gt;(Sinh mã QR, mô phỏng Webhook&lt;br&gt;xác nhận chuyển khoản &amp;amp; kích hoạt gói)&lt;/i&gt;" style="rounded=1;arcSize=18;whiteSpace=wrap;html=1;strokeWidth=1.8;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="875" y="595" width="220" height="110" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge_100" value="Method Calls&#10;(Internal API)" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.6;strokeColor=#000000;fontFamily=Segoe UI;fontSize=10;fontStyle=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="c_ui" target="c_client_svc">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge_101" value="TCP Socket (Port 6789)&#10;[Control &amp; Data Stream]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;startArrow=block;startFill=1;endArrow=block;endFill=1;strokeWidth=1.6;strokeColor=#000000;fontFamily=Segoe UI;fontSize=10;fontStyle=1;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="c_client_svc" target="c_tcp_conn">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="345" y="471"/>
+              <mxPoint x="345" y="147"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_102" value="Command Dispatch" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.6;strokeColor=#000000;fontFamily=Segoe UI;fontSize=10;fontStyle=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="c_tcp_conn" target="c_controller">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge_103" value="Xác thực / Phân quyền" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;startArrow=block;startFill=1;endArrow=block;endFill=1;strokeWidth=1.6;strokeColor=#000000;fontFamily=Segoe UI;fontSize=10;fontStyle=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="c_controller" target="c_auth_sec">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge_104" value="File Ops &amp; Quota Check" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;startArrow=block;startFill=1;endArrow=block;endFill=1;strokeWidth=1.6;strokeColor=#000000;fontFamily=Segoe UI;fontSize=10;fontStyle=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="c_auth_sec" target="c_storage_mgr">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge_105" value="CRUD Metadata" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.6;strokeColor=#000000;fontFamily=Segoe UI;fontSize=10;fontStyle=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="c_storage_mgr" target="c_dao">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge_106" value="Java File I/O (NIO)&#10;[Raw Byte Stream]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;startArrow=block;startFill=1;endArrow=block;endFill=1;strokeWidth=1.6;strokeColor=#000000;fontFamily=Segoe UI;fontSize=10;fontStyle=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="c_storage_mgr" target="c_fs">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge_107" value="JDBC Driver (Port 3306)&#10;[SQL Queries &amp; Transactions]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;startArrow=block;startFill=1;endArrow=block;endFill=1;strokeWidth=1.6;strokeColor=#000000;fontFamily=Segoe UI;fontSize=10;fontStyle=1;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.6;entryDx=0;entryDy=0;" edge="1" parent="1" source="c_dao" target="c_mysql">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="815" y="645"/>
+              <mxPoint x="815" y="214"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_108" value="Mock REST / Webhook&#10;[Xác nhận thanh toán]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;startArrow=block;startFill=1;endArrow=block;endFill=1;strokeWidth=1.6;strokeColor=#000000;fontFamily=Segoe UI;fontSize=10;fontStyle=1;exitX=1;exitY=0.7;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="c_dao" target="c_payment_ext">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

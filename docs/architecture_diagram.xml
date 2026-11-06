@@ -1,0 +1,215 @@
+<?xml version="1.0" ?>
+<mxfile host="app.diagrams.net" modified="2026-11-02T14:15:00.000Z" agent="SecureFTPClientPro" version="24.0.0" type="device">
+  <diagram id="Component_Architecture_Diagram" name="Sơ đồ Thành phần và Kiến trúc Hệ thống (Component / Architecture Diagram)">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="#FFFFFF" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="tier_client" value="TẦNG KHÁCH (CLIENT TIER - JAVA SWING)" style="swimlane;startSize=30;html=1;whiteSpace=wrap;strokeWidth=2;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=12;fontStyle=1;collapsible=0;" vertex="1" parent="1">
+          <mxGeometry x="35" y="35" width="265" height="755" as="geometry"/>
+        </mxCell>
+        <mxCell id="tier_server" value="TẦNG MÁY CHỦ (APPLICATION SERVER TIER - FTP BACKEND)" style="swimlane;startSize=30;html=1;whiteSpace=wrap;strokeWidth=2;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=12;fontStyle=1;collapsible=0;" vertex="1" parent="1">
+          <mxGeometry x="320" y="35" width="500" height="755" as="geometry"/>
+        </mxCell>
+        <mxCell id="tier_data" value="TẦNG DỮ LIỆU &amp; DỊCH VỤ NGOÀI (DATA &amp; EXTERNAL TIER)" style="swimlane;startSize=30;html=1;whiteSpace=wrap;strokeWidth=2;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=12;fontStyle=1;collapsible=0;" vertex="1" parent="1">
+          <mxGeometry x="840" y="35" width="295" height="755" as="geometry"/>
+        </mxCell>
+        <mxCell id="sub_ui" value="Giao diện Đồ họa (UI Presentation)" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=1.5;strokeColor=#000000;fillColor=#FAFAFA;dashed=1;fontFamily=Segoe UI;fontSize=11;fontStyle=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=6;" vertex="1" parent="1">
+          <mxGeometry x="45" y="75" width="245" height="335" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_login" value="&amp;laquo;component&amp;raquo;&lt;br&gt;&lt;b&gt;Login &amp;amp; Register&lt;/b&gt;&lt;br&gt;&lt;i&gt;(LoginFrame, RegisterDialog)&lt;/i&gt;" style="shape=module;jettyWidth=8;jettyHeight=4;whiteSpace=wrap;html=1;strokeWidth=1.6;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=10;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="55" y="105" width="225" height="48" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_mainui" value="&amp;laquo;component&amp;raquo;&lt;br&gt;&lt;b&gt;Main Dashboard&lt;/b&gt;&lt;br&gt;&lt;i&gt;(MainFrame, FileTable, Toolbars)&lt;/i&gt;" style="shape=module;jettyWidth=8;jettyHeight=4;whiteSpace=wrap;html=1;strokeWidth=1.6;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=10;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="55" y="165" width="225" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_adminui" value="&amp;laquo;component&amp;raquo;&lt;br&gt;&lt;b&gt;Admin Dashboard&lt;/b&gt;&lt;br&gt;&lt;i&gt;(AdminDashboardDialog, UserMgmt)&lt;/i&gt;" style="shape=module;jettyWidth=8;jettyHeight=4;whiteSpace=wrap;html=1;strokeWidth=1.6;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=10;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="55" y="230" width="225" height="48" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_theme" value="&amp;laquo;component&amp;raquo;&lt;br&gt;&lt;b&gt;UI Helpers &amp;amp; Theme&lt;/b&gt;&lt;br&gt;&lt;i&gt;(ThemeManager, ModernButton)&lt;/i&gt;" style="shape=module;jettyWidth=8;jettyHeight=4;whiteSpace=wrap;html=1;strokeWidth=1.6;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=10;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="55" y="290" width="225" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_dialogs" value="&amp;laquo;component&amp;raquo;&lt;br&gt;&lt;b&gt;Sub Dialogs&lt;/b&gt;&lt;br&gt;&lt;i&gt;(PaymentDialog, ShareDialog)&lt;/i&gt;" style="shape=module;jettyWidth=8;jettyHeight=4;whiteSpace=wrap;html=1;strokeWidth=1.6;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=10;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="55" y="348" width="225" height="48" as="geometry"/>
+        </mxCell>
+        <mxCell id="sub_client_srv" value="Dịch vụ Khách &amp; Giao tiếp Socket" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=1.5;strokeColor=#000000;fillColor=#FAFAFA;dashed=1;fontFamily=Segoe UI;fontSize=11;fontStyle=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=6;" vertex="1" parent="1">
+          <mxGeometry x="45" y="430" width="245" height="250" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_client_svc" value="&amp;laquo;component&amp;raquo;&lt;br&gt;&lt;b&gt;FtpClientService&lt;/b&gt;&lt;br&gt;&lt;i&gt;(Session State, Command Builder)&lt;/i&gt;" style="shape=module;jettyWidth=8;jettyHeight=4;whiteSpace=wrap;html=1;strokeWidth=1.6;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=10;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="55" y="460" width="225" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_tcp_client" value="&amp;laquo;component&amp;raquo;&lt;br&gt;&lt;b&gt;TCPClient&lt;/b&gt;&lt;br&gt;&lt;i&gt;(Socket Manager, Stream I/O)&lt;/i&gt;" style="shape=module;jettyWidth=8;jettyHeight=4;whiteSpace=wrap;html=1;strokeWidth=1.6;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=10;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="55" y="530" width="225" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_stream_buf" value="&amp;laquo;component&amp;raquo;&lt;br&gt;&lt;b&gt;Transfer Buffer&lt;/b&gt;&lt;br&gt;&lt;i&gt;(Chunked I/O, Progress Listener)&lt;/i&gt;" style="shape=module;jettyWidth=8;jettyHeight=4;whiteSpace=wrap;html=1;strokeWidth=1.6;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=10;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="55" y="600" width="225" height="55" as="geometry"/>
+        </mxCell>
+        <mxCell id="sub_network" value="Tầng Mạng &amp;amp; Đa luồng (Network &amp;amp; Concurrency)" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=1.5;strokeColor=#000000;fillColor=#FAFAFA;dashed=1;fontFamily=Segoe UI;fontSize=11;fontStyle=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=6;" vertex="1" parent="1">
+          <mxGeometry x="330" y="75" width="480" height="130" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_tcpserver" value="&amp;laquo;component&amp;raquo;&lt;br&gt;&lt;b&gt;TCPServer&lt;/b&gt;&lt;br&gt;&lt;i&gt;(ServerSocket:6789, Pool)&lt;/i&gt;" style="shape=module;jettyWidth=8;jettyHeight=4;whiteSpace=wrap;html=1;strokeWidth=1.6;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=10;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="340" y="105" width="145" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_handler" value="&amp;laquo;component&amp;raquo;&lt;br&gt;&lt;b&gt;ClientHandler&lt;/b&gt;&lt;br&gt;&lt;i&gt;(Thread-per-client Runnable)&lt;/i&gt;" style="shape=module;jettyWidth=8;jettyHeight=4;whiteSpace=wrap;html=1;strokeWidth=1.6;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=10;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="500" y="105" width="145" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_session" value="&amp;laquo;component&amp;raquo;&lt;br&gt;&lt;b&gt;Session Manager&lt;/b&gt;&lt;br&gt;&lt;i&gt;(Session, AuthState, Quota)&lt;/i&gt;" style="shape=module;jettyWidth=8;jettyHeight=4;whiteSpace=wrap;html=1;strokeWidth=1.6;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=10;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="660" y="105" width="140" height="50" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_proto_stream" value="&amp;laquo;component&amp;raquo;&lt;br&gt;&lt;b&gt;ProtocolInputStream&lt;/b&gt;&lt;br&gt;&lt;i&gt;(Line reader &amp;amp; Byte stream isolation)&lt;/i&gt;" style="shape=module;jettyWidth=8;jettyHeight=4;whiteSpace=wrap;html=1;strokeWidth=1.6;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=10;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="410" y="160" width="320" height="36" as="geometry"/>
+        </mxCell>
+        <mxCell id="sub_controller" value="Tầng Điều khiển &amp;amp; Phân tích Lệnh (Protocol Controller)" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=1.5;strokeColor=#000000;fillColor=#FAFAFA;dashed=1;fontFamily=Segoe UI;fontSize=11;fontStyle=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=6;" vertex="1" parent="1">
+          <mxGeometry x="330" y="220" width="480" height="85" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_cmd_handler" value="&amp;laquo;component&amp;raquo;&lt;br&gt;&lt;b&gt;CommandHandler (FTP Protocol Dispatcher)&lt;/b&gt;&lt;br&gt;&lt;i&gt;(USER, PASS, LIST, STOR, RETR, DELE, MKD, RMD, SHARE, ORDER, PAY)&lt;/i&gt;" style="shape=module;jettyWidth=8;jettyHeight=4;whiteSpace=wrap;html=1;strokeWidth=1.6;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=10;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="340" y="248" width="460" height="48" as="geometry"/>
+        </mxCell>
+        <mxCell id="sub_business" value="Tầng Nghiệp vụ Hệ thống (Core Business Services)" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=1.5;strokeColor=#000000;fillColor=#FAFAFA;dashed=1;fontFamily=Segoe UI;fontSize=11;fontStyle=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=6;" vertex="1" parent="1">
+          <mxGeometry x="330" y="320" width="480" height="190" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_storage_mgr" value="&amp;laquo;component&amp;raquo;&lt;br&gt;&lt;b&gt;StorageManager&lt;/b&gt;&lt;br&gt;&lt;i&gt;(Path Isolation, Quota Guard, Traversal Defense)&lt;/i&gt;" style="shape=module;jettyWidth=8;jettyHeight=4;whiteSpace=wrap;html=1;strokeWidth=1.6;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=10;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="340" y="350" width="225" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_security" value="&amp;laquo;component&amp;raquo;&lt;br&gt;&lt;b&gt;SecurityUtil&lt;/b&gt;&lt;br&gt;&lt;i&gt;(SHA-256 + Salt, Input Validator)&lt;/i&gt;" style="shape=module;jettyWidth=8;jettyHeight=4;whiteSpace=wrap;html=1;strokeWidth=1.6;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=10;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="580" y="350" width="220" height="52" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_reconciler" value="&amp;laquo;component&amp;raquo;&lt;br&gt;&lt;b&gt;DataReconciler&lt;/b&gt;&lt;br&gt;&lt;i&gt;(Disk vs DB Metadata Sync)&lt;/i&gt;" style="shape=module;jettyWidth=8;jettyHeight=4;whiteSpace=wrap;html=1;strokeWidth=1.6;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=10;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="340" y="415" width="225" height="48" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_transfer_eng" value="&amp;laquo;component&amp;raquo;&lt;br&gt;&lt;b&gt;Binary Transfer Engine&lt;/b&gt;&lt;br&gt;&lt;i&gt;(Socket Stream &amp;harr; Disk Chunking)&lt;/i&gt;" style="shape=module;jettyWidth=8;jettyHeight=4;whiteSpace=wrap;html=1;strokeWidth=1.6;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=10;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="580" y="415" width="220" height="48" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_audit_log" value="&amp;laquo;component&amp;raquo;&lt;br&gt;&lt;b&gt;Audit &amp;amp; Log System&lt;/b&gt;&lt;br&gt;&lt;i&gt;(Activity &amp;amp; File Transfer Logger)&lt;/i&gt;" style="shape=module;jettyWidth=8;jettyHeight=4;whiteSpace=wrap;html=1;strokeWidth=1.6;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=10;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="455" y="470" width="230" height="34" as="geometry"/>
+        </mxCell>
+        <mxCell id="sub_dao" value="Tầng Truy cập Dữ liệu (Data Access Layer - DAO)" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=1.5;strokeColor=#000000;fillColor=#FAFAFA;dashed=1;fontFamily=Segoe UI;fontSize=11;fontStyle=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=6;" vertex="1" parent="1">
+          <mxGeometry x="330" y="525" width="480" height="250" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_user_dao" value="&amp;laquo;component&amp;raquo;&lt;br&gt;&lt;b&gt;UserDAO&lt;/b&gt;&lt;br&gt;&lt;i&gt;(Auth, Role, Quota)&lt;/i&gt;" style="shape=module;jettyWidth=8;jettyHeight=4;whiteSpace=wrap;html=1;strokeWidth=1.6;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=10;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="340" y="555" width="140" height="48" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_file_dao" value="&amp;laquo;component&amp;raquo;&lt;br&gt;&lt;b&gt;FileDAO&lt;/b&gt;&lt;br&gt;&lt;i&gt;(Files, Metadata)&lt;/i&gt;" style="shape=module;jettyWidth=8;jettyHeight=4;whiteSpace=wrap;html=1;strokeWidth=1.6;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=10;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="500" y="555" width="140" height="48" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_share_dao" value="&amp;laquo;component&amp;raquo;&lt;br&gt;&lt;b&gt;ShareDAO&lt;/b&gt;&lt;br&gt;&lt;i&gt;(Share Links, Perms)&lt;/i&gt;" style="shape=module;jettyWidth=8;jettyHeight=4;whiteSpace=wrap;html=1;strokeWidth=1.6;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=10;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="660" y="555" width="140" height="48" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_order_dao" value="&amp;laquo;component&amp;raquo;&lt;br&gt;&lt;b&gt;OrderDAO &amp;amp; PlanDAO&lt;/b&gt;&lt;br&gt;&lt;i&gt;(Subscriptions, Plans)&lt;/i&gt;" style="shape=module;jettyWidth=8;jettyHeight=4;whiteSpace=wrap;html=1;strokeWidth=1.6;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=10;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="340" y="615" width="140" height="48" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_payment_dao" value="&amp;laquo;component&amp;raquo;&lt;br&gt;&lt;b&gt;PaymentDAO&lt;/b&gt;&lt;br&gt;&lt;i&gt;(Transactions, Status)&lt;/i&gt;" style="shape=module;jettyWidth=8;jettyHeight=4;whiteSpace=wrap;html=1;strokeWidth=1.6;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=10;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="500" y="615" width="140" height="48" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_log_dao" value="&amp;laquo;component&amp;raquo;&lt;br&gt;&lt;b&gt;LogDAO&lt;/b&gt;&lt;br&gt;&lt;i&gt;(TransferLogs, Audit)&lt;/i&gt;" style="shape=module;jettyWidth=8;jettyHeight=4;whiteSpace=wrap;html=1;strokeWidth=1.6;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=10;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="660" y="615" width="140" height="48" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_db_conn" value="&amp;laquo;component&amp;raquo;&lt;br&gt;&lt;b&gt;DBConnection &amp;amp; DatabaseConfig&lt;/b&gt;&lt;br&gt;&lt;i&gt;(JDBC Connection Pool / Driver Manager)&lt;/i&gt;" style="shape=module;jettyWidth=8;jettyHeight=4;whiteSpace=wrap;html=1;strokeWidth=1.6;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=10;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="420" y="675" width="300" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="sub_db_box" value="Cơ sở Dữ liệu Quan hệ (Relational DB)" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=1.5;strokeColor=#000000;fillColor=#FAFAFA;dashed=1;fontFamily=Segoe UI;fontSize=11;fontStyle=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=6;" vertex="1" parent="1">
+          <mxGeometry x="850" y="75" width="275" height="290" as="geometry"/>
+        </mxCell>
+        <mxCell id="db_mysql" value="&amp;laquo;database&amp;raquo;&lt;br&gt;&lt;b&gt;MySQL Database Server 8.x&lt;/b&gt;&lt;br&gt;&lt;i&gt;(JDBC TCP Port 3306)&lt;/i&gt;&lt;br&gt;&lt;br&gt;&amp;bull; users &amp;amp; plans&lt;br&gt;&amp;bull; files &amp;amp; file_shares&lt;br&gt;&amp;bull; orders &amp;amp; payments&lt;br&gt;&amp;bull; subscriptions&lt;br&gt;&amp;bull; transfer_logs" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=12;strokeWidth=1.8;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=10;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="865" y="105" width="245" height="160" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_integrity" value="&amp;laquo;component&amp;raquo;&lt;br&gt;&lt;b&gt;ACID &amp;amp; Constraints Guard&lt;/b&gt;&lt;br&gt;&lt;i&gt;(Foreign Keys, Unique Tokens)&lt;/i&gt;" style="shape=module;jettyWidth=8;jettyHeight=4;whiteSpace=wrap;html=1;strokeWidth=1.6;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=10;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="865" y="280" width="245" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="sub_fs_box" value="Lưu trữ Vật lý (Physical Storage)" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=1.5;strokeColor=#000000;fillColor=#FAFAFA;dashed=1;fontFamily=Segoe UI;fontSize=11;fontStyle=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=6;" vertex="1" parent="1">
+          <mxGeometry x="850" y="380" width="275" height="185" as="geometry"/>
+        </mxCell>
+        <mxCell id="fs_sandbox" value="&amp;laquo;filesystem&amp;raquo;&lt;br&gt;&lt;b&gt;Storage Sandbox Directory&lt;/b&gt;&lt;br&gt;&lt;i&gt;Path: storage/&amp;lt;username&amp;gt;/&lt;/i&gt;&lt;br&gt;&lt;br&gt;&amp;bull; User Dedicated Folders&lt;br&gt;&amp;bull; Temp Cache (.upload.tmp)&lt;br&gt;&amp;bull; Chunked Byte Storage" style="shape=folder;fontStyle=1;tabWidth=110;tabHeight=22;tabPosition=left;html=1;boundedLbl=1;strokeWidth=1.8;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=10;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="865" y="415" width="245" height="135" as="geometry"/>
+        </mxCell>
+        <mxCell id="sub_ext_box" value="Dịch vụ Bên ngoài (External)" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=1.5;strokeColor=#000000;fillColor=#FAFAFA;dashed=1;fontFamily=Segoe UI;fontSize=11;fontStyle=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=6;" vertex="1" parent="1">
+          <mxGeometry x="850" y="580" width="275" height="195" as="geometry"/>
+        </mxCell>
+        <mxCell id="ext_payment" value="&amp;laquo;external service&amp;raquo;&lt;br&gt;&lt;b&gt;Simulated Payment Gateway&lt;/b&gt;&lt;br&gt;&lt;i&gt;(VietQR / Mock Banking API)&lt;/i&gt;&lt;br&gt;&lt;br&gt;&amp;bull; QR Code Generator&lt;br&gt;&amp;bull; Transaction Webhook Simulator&lt;br&gt;&amp;bull; Auto Plan Activation" style="rounded=1;arcSize=18;whiteSpace=wrap;html=1;strokeWidth=1.8;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=10;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="865" y="615" width="245" height="95" as="geometry"/>
+        </mxCell>
+        <mxCell id="ext_notice" value="&amp;laquo;component&amp;raquo;&lt;br&gt;&lt;b&gt;Mock Notification Handler&lt;/b&gt;&lt;br&gt;&lt;i&gt;(Transaction confirmation events)&lt;/i&gt;" style="shape=module;jettyWidth=8;jettyHeight=4;whiteSpace=wrap;html=1;strokeWidth=1.6;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=10;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="865" y="720" width="245" height="42" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge_100" value="Method Calls" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;strokeColor=#000000;fontFamily=Segoe UI;fontSize=10;fontStyle=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="c_mainui" target="c_client_svc">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge_101" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;strokeColor=#000000;fontFamily=Segoe UI;fontSize=10;fontStyle=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="c_client_svc" target="c_tcp_client">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge_102" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;strokeColor=#000000;fontFamily=Segoe UI;fontSize=10;fontStyle=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="c_tcp_client" target="c_stream_buf">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge_103" value="TCP Socket (Port 6789)&#10;[Control: ASCII FTP Protocol]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;startArrow=block;startFill=1;endArrow=block;endFill=1;strokeWidth=1.5;strokeColor=#000000;fontFamily=Segoe UI;fontSize=10;fontStyle=1;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="c_tcp_client" target="c_tcpserver">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="305" y="545"/>
+              <mxPoint x="305" y="130"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_104" value="Binary Socket Stream&#10;[Data: Raw Bytes STOR/RETR]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;startArrow=block;startFill=1;endArrow=block;endFill=1;strokeWidth=1.5;strokeColor=#000000;fontFamily=Segoe UI;fontSize=10;fontStyle=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="c_stream_buf" target="c_transfer_eng">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge_105" value="Command Dispatch" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;strokeColor=#000000;fontFamily=Segoe UI;fontSize=10;fontStyle=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.35;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="c_handler" target="c_cmd_handler">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge_106" value="Session Context" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;strokeColor=#000000;fontFamily=Segoe UI;fontSize=10;fontStyle=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.65;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="c_session" target="c_cmd_handler">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge_107" value="File Ops &amp; Quota" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;strokeColor=#000000;fontFamily=Segoe UI;fontSize=10;fontStyle=1;exitX=0.2;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="c_cmd_handler" target="c_storage_mgr">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge_108" value="Verify / Hash" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;strokeColor=#000000;fontFamily=Segoe UI;fontSize=10;fontStyle=1;exitX=0.8;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="c_cmd_handler" target="c_security">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge_109" value="Java File I/O (NIO)&#10;[Byte Stream &amp; Sandbox Isolation]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;startArrow=block;startFill=1;endArrow=block;endFill=1;strokeWidth=1.5;strokeColor=#000000;fontFamily=Segoe UI;fontSize=10;fontStyle=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.4;entryDx=0;entryDy=0;" edge="1" parent="1" source="c_storage_mgr" target="fs_sandbox">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="575" y="376"/>
+              <mxPoint x="820" y="376"/>
+              <mxPoint x="820" y="469"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_110" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;strokeColor=#000000;fontFamily=Segoe UI;fontSize=10;fontStyle=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="c_storage_mgr" target="c_file_dao">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge_111" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;strokeColor=#000000;fontFamily=Segoe UI;fontSize=10;fontStyle=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.8;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="c_security" target="c_user_dao">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="690" y="510"/>
+              <mxPoint x="452" y="510"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_112" value="Audit Events" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;strokeColor=#000000;fontFamily=Segoe UI;fontSize=10;fontStyle=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="c_audit_log" target="c_log_dao">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge_113" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;strokeColor=#000000;fontFamily=Segoe UI;fontSize=10;fontStyle=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.2;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="c_user_dao" target="c_db_conn">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge_114" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;strokeColor=#000000;fontFamily=Segoe UI;fontSize=10;fontStyle=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="c_file_dao" target="c_db_conn">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge_115" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;strokeColor=#000000;fontFamily=Segoe UI;fontSize=10;fontStyle=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.8;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="c_share_dao" target="c_db_conn">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge_116" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.5;strokeColor=#000000;fontFamily=Segoe UI;fontSize=10;fontStyle=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="c_payment_dao" target="c_db_conn">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge_117" value="JDBC Driver (Port 3306)&#10;[SQL Queries &amp; Transactions]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;startArrow=block;startFill=1;endArrow=block;endFill=1;strokeWidth=1.5;strokeColor=#000000;fontFamily=Segoe UI;fontSize=10;fontStyle=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.6;entryDx=0;entryDy=0;" edge="1" parent="1" source="c_db_conn" target="db_mysql">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="830" y="698"/>
+              <mxPoint x="830" y="201"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_118" value="REST / Mock Events&#10;[VietQR Verification]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;startArrow=block;startFill=1;endArrow=block;endFill=1;strokeWidth=1.5;strokeColor=#000000;fontFamily=Segoe UI;fontSize=10;fontStyle=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="c_payment_dao" target="ext_payment">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

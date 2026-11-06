@@ -1,70 +1,138 @@
 package server;
 
+import server.dao.UserDAO;
+import server.db.DBConnection;
+import server.model.User;
+
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
- * PHASE 4 - User Database
+ * TẦNG QUẢN LÝ TÀI KHOẢN NGƯỜI DÙNG (USER DATABASE)
  *
- * Lưu trữ danh sách username/password hợp lệ.
- * Phase 4 dùng HashMap đơn giản trong bộ nhớ (in-memory).
- * Phase sau có thể thay bằng file, database thật.
- *
- * Tại sao tách ra class riêng?
- *   - Single Responsibility: CommandHandler lo xử lý command,
- *     UserDatabase lo quản lý tài khoản.
- *   - Sau này đổi nguồn dữ liệu (file/DB) chỉ cần sửa class này,
- *     không đụng vào CommandHandler.
+ * Đã nâng cấp trong Phase 2:
+ *   - Kết nối trực tiếp CSDL MySQL thông qua UserDAO
+ *   - Hỗ trợ lưu trữ tài khoản bền vững và mật khẩu băm SHA-256 kèm Salt
+ *   - Cơ chế Fallback dự phòng: Nếu MySQL chưa bật, tự động chuyển về HashMap
+ *     trong RAM để đảm bảo ứng dụng không bao giờ bị sập.
  */
 public class UserDatabase {
 
-    // ----------------------------------------------------------------
-    // Map<username, password> lưu các tài khoản hợp lệ.
-    //
-    // Trong thực tế: password phải được HASH (bcrypt, SHA-256...)
-    // không bao giờ lưu plaintext.
-    // Phase 4 dùng plaintext để dễ hiểu, đây là MÔI TRƯỜNG HỌC TẬP.
-    // ----------------------------------------------------------------
-    private final Map<String, String> users = new HashMap<>();
+    private final UserDAO userDAO;
+    private final Map<String, String> inMemoryUsers = new HashMap<>();
 
-    /**
-     * Constructor: nạp sẵn danh sách tài khoản test.
-     */
     public UserDatabase() {
-        // Tài khoản test cho Phase 4
-        // Format: users.put("username", "password")
-        users.put("admin", "123");
-        users.put("alice", "alice123");
-        users.put("bob",   "bob456");
-        users.put("guest", "guest");
+        this.userDAO = new UserDAO();
+
+        // Tài khoản dự phòng In-Memory khi chạy offline không có MySQL
+        inMemoryUsers.put("admin", "123");
+        inMemoryUsers.put("alice", "alice123");
+        inMemoryUsers.put("bob",   "bob456");
+        inMemoryUsers.put("guest", "guest");
     }
 
     /**
-     * Kiểm tra username/password có hợp lệ không.
+     * Xác thực tài khoản đăng nhập và trả về đối tượng User đầy đủ
      *
-     * @param username  Username Client gõ vào lệnh USER
-     * @param password  Password Client gõ vào lệnh PASS
-     * @return true nếu đúng, false nếu sai hoặc không tồn tại
+     * @param username Username gõ vào lệnh USER
+     * @param password Password gõ vào lệnh PASS
+     * @return Đối tượng User nếu hợp lệ, null nếu sai
+     */
+    public User authenticate(String username, String password) {
+        if (username == null || password == null) return null;
+
+        // 1. Thử xác thực qua MySQL DAO trước
+        if (DBConnection.getInstance().isAvailable()) {
+            User user = userDAO.validateUser(username, password);
+            if (user != null) {
+                return user;
+            }
+        }
+
+        // 2. Fallback sang In-Memory nếu MySQL lỗi hoặc tài khoản offline
+        String storedPass = inMemoryUsers.get(username);
+        if (storedPass != null && storedPass.equals(password)) {
+            User fallbackUser = new User();
+            fallbackUser.setUserId(username.equals("admin") ? 1 : 2);
+            fallbackUser.setUsername(username);
+            fallbackUser.setHomeDir(username);
+            fallbackUser.setRoleId(username.equals("admin") ? 1 : 2);
+            fallbackUser.setRoleName(username.equals("admin") ? "ROLE_ADMIN" : "ROLE_USER");
+            fallbackUser.setQuotaBytes(104857600); // 100MB
+            fallbackUser.setActive(true);
+            return fallbackUser;
+        }
+
+        return null;
+    }
+
+    /**
+     * Phương thức tương thích ngược giữ nguyên chữ ký (validate trả về boolean)
      */
     public boolean validate(String username, String password) {
-        if (username == null || password == null) return false;
-
-        // Lấy password thật từ DB theo username
-        String storedPassword = users.get(username);
-
-        // Nếu username không tồn tại → storedPassword = null → false
-        // Nếu tồn tại → so sánh password
-        return password.equals(storedPassword);
+        return authenticate(username, password) != null;
     }
 
     /**
-     * Kiểm tra username có tồn tại không (không cần password).
-     * Dùng khi xử lý lệnh USER — chỉ kiểm tra username trước.
-     *
-     * @param username  Username cần kiểm tra
-     * @return true nếu username tồn tại trong hệ thống
+     * Kiểm tra username có tồn tại không
      */
     public boolean userExists(String username) {
-        return users.containsKey(username);
+        if (username == null) return false;
+        if (DBConnection.getInstance().isAvailable()) {
+            if (userDAO.findByUsername(username) != null) return true;
+        }
+        return inMemoryUsers.containsKey(username);
+    }
+
+    /**
+     * Đăng ký tài khoản người dùng mới
+     */
+    public boolean register(String username, String password, String email) {
+        if (DBConnection.getInstance().isAvailable()) {
+            boolean success = userDAO.registerUser(username, password, email);
+            if (success) {
+                inMemoryUsers.put(username, password); // Đồng bộ vào bộ nhớ
+                return true;
+            }
+            return false;
+        }
+
+        // Nếu offline, chỉ lưu tạm vào RAM
+        if (inMemoryUsers.containsKey(username)) return false;
+        inMemoryUsers.put(username, password);
+        return true;
+    }
+
+    /**
+     * Đổi mật khẩu tài khoản
+     */
+    public boolean changePassword(int userId, String username, String oldPass, String newPass) {
+        if (DBConnection.getInstance().isAvailable() && userId > 0) {
+            boolean success = userDAO.changePassword(userId, oldPass, newPass);
+            if (success) {
+                inMemoryUsers.put(username, newPass);
+                return true;
+            }
+            return false;
+        }
+
+        // Fallback offline
+        String stored = inMemoryUsers.get(username);
+        if (stored != null && stored.equals(oldPass)) {
+            inMemoryUsers.put(username, newPass);
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Lấy danh sách toàn bộ người dùng (Dành cho Admin)
+     */
+    public List<User> getAllUsers() {
+        if (DBConnection.getInstance().isAvailable()) {
+            return userDAO.getAllUsers();
+        }
+        return List.of();
     }
 }

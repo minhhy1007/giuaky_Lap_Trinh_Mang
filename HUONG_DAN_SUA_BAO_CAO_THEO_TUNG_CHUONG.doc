@@ -1,0 +1,648 @@
+<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+<head>
+<meta charset="utf-8">
+<title>HƯỚNG DẪN CHI TIẾT SỬA ĐỔI VÀ HOÀN THIỆN BÁO CÁO ĐỒ ÁN LẬP TRÌNH MẠNG</title>
+<!--[if gte mso 9]>
+<xml>
+ <w:WordDocument>
+  <w:View>Print</w:View>
+  <w:Zoom>100</w:Zoom>
+  <w:DoNotOptimizeForBrowser/>
+ </w:WordDocument>
+</xml>
+<![endif]-->
+<style>
+@page Section1 {
+    size: 21.0cm 29.7cm; /* A4 */
+    margin: 2.0cm 2.0cm 2.0cm 2.5cm;
+    mso-header-margin: 36.0pt;
+    mso-footer-margin: 36.0pt;
+    mso-paper-source: 0;
+}
+div.Section1 { page: Section1; }
+body {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 13pt;
+    line-height: 1.45;
+    color: #1a1a1a;
+}
+.cover-page {
+    text-align: center;
+    page-break-after: always;
+    padding-top: 35px;
+}
+.cover-uni {
+    font-size: 14pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+.cover-dept {
+    font-size: 13pt;
+    font-weight: bold;
+    margin-bottom: 25px;
+}
+.cover-line {
+    width: 220px;
+    height: 2px;
+    background-color: #000;
+    margin: 0 auto 35px auto;
+}
+.cover-subject {
+    font-size: 14pt;
+    font-weight: bold;
+    color: #0d47a1;
+    margin-bottom: 15px;
+}
+.cover-title {
+    font-size: 17pt;
+    font-weight: bold;
+    color: #0d47a1;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+    line-height: 1.35;
+}
+.cover-info {
+    font-size: 13pt;
+    text-align: left;
+    margin-left: 70px;
+    margin-right: 40px;
+    margin-bottom: 55px;
+    line-height: 1.8;
+}
+.cover-date {
+    font-size: 13pt;
+    font-weight: bold;
+}
+h1 {
+    font-size: 15pt;
+    color: #0d47a1;
+    text-transform: uppercase;
+    border-bottom: 2px solid #1976d2;
+    padding-bottom: 5px;
+    margin-top: 26px;
+    margin-bottom: 12px;
+    page-break-after: avoid;
+}
+h2 {
+    font-size: 13.5pt;
+    color: #1565c0;
+    margin-top: 18px;
+    margin-bottom: 8px;
+    page-break-after: avoid;
+}
+h3 {
+    font-size: 13pt;
+    color: #0d47a1;
+    margin-top: 14px;
+    margin-bottom: 6px;
+    font-weight: bold;
+}
+p {
+    margin-top: 4px;
+    margin-bottom: 8px;
+    text-align: justify;
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 14px;
+    font-size: 12pt;
+}
+table, th, td {
+    border: 1px solid #90caf9;
+}
+th {
+    background-color: #e3f2fd;
+    color: #0d47a1;
+    font-weight: bold;
+    padding: 7px 9px;
+    text-align: center;
+}
+td {
+    padding: 6px 9px;
+    vertical-align: top;
+}
+tr:nth-child(even) {
+    background-color: #f9fbfd;
+}
+.tag-sua {
+    background-color: #ffebee;
+    color: #c62828;
+    font-weight: bold;
+    padding: 3px 6px;
+    border-radius: 3px;
+    border-left: 4px solid #d32f2f;
+    margin-top: 8px;
+    margin-bottom: 4px;
+}
+.tag-them {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    font-weight: bold;
+    padding: 3px 6px;
+    border-radius: 3px;
+    border-left: 4px solid #388e3c;
+    margin-top: 8px;
+    margin-bottom: 4px;
+}
+.tag-nangcap {
+    background-color: #e3f2fd;
+    color: #1565c0;
+    font-weight: bold;
+    padding: 3px 6px;
+    border-radius: 3px;
+    border-left: 4px solid #1976d2;
+    margin-top: 8px;
+    margin-bottom: 4px;
+}
+.code-block {
+    background-color: #f4f6f8;
+    border: 1px solid #cfd8dc;
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 10.5pt;
+    line-height: 1.35;
+    white-space: pre-wrap;
+    margin: 10px 0;
+}
+.qa-box {
+    margin-bottom: 16px;
+    padding: 10px 14px;
+    background-color: #fafbfc;
+    border: 1px solid #e1e4e8;
+    border-radius: 5px;
+    page-break-inside: avoid;
+}
+.qa-question {
+    font-weight: bold;
+    color: #0d47a1;
+    font-size: 13pt;
+    margin-bottom: 5px;
+}
+.qa-answer {
+    color: #24292e;
+    text-align: justify;
+    line-height: 1.45;
+}
+</style>
+</head>
+<body>
+<div class="Section1">
+
+<!-- TRANG BÌA -->
+<div class="cover-page">
+    <div class="cover-uni">TRƯỜNG ĐẠI HỌC CÔNG NGHỆ THÔNG TIN VÀ TRUYỀN THÔNG VIỆT - HÀN</div>
+    <div class="cover-dept">KHOA KHOA HỌC MÁY TÍNH</div>
+    <div class="cover-line"></div>
+    <div class="cover-subject">BÁO CÁO ĐỒ ÁN MÔN HỌC: LẬP TRÌNH MẠNG</div>
+    <div class="cover-title">HƯỚNG DẪN CHI TIẾT SỬA ĐỔI VÀ HOÀN THIỆN BÁO CÁO ĐỒ ÁN THEO TỪNG CHƯƠNG<br/>(CHUẨN HÓA MÃ NGUỒN HIỆN TẠI & LỘ TRÌNH NÂNG CẤP BÀI CUỐI KỲ)</div>
+    
+    <div class="cover-info">
+        <b>Đề tài môn học:</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ứng dụng truyền tập tin Client - Server dựa trên giao thức TCP Socket và tập lệnh FTP tùy biến<br/>
+        <b>Sinh viên thực hiện:</b> &nbsp;Nguyễn Tất Võ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - Mã SV: 24ITE119<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lê Hữu Minh Hy &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - Mã SV: 24ITE043<br/>
+        <b>Lớp sinh hoạt:</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lập trình mạng (11)<br/>
+        <b>Giảng viên hướng dẫn:</b> &nbsp;&nbsp;&nbsp;ThS. Nguyễn Thanh Cẩm<br/>
+        <b>Môi trường phát triển:</b> &nbsp;&nbsp;&nbsp;Java Core JDK 17/21, Socket TCP, Multithreading, Swing GUI FlatLaf<br/>
+    </div>
+    
+    <div class="cover-date">Đà Nẵng, tháng 10 năm 2026</div>
+</div>
+
+<!-- LỜI DẪN -->
+<h1>LỜI DẪN & NGUYÊN TẮC ÁP DỤNG TÀI LIỆU</h1>
+<p>Tài liệu này được biên soạn phân tách <b>chi tiết theo từng chương mục cụ thể</b> bám sát cấu trúc của file báo cáo đồ án. Mục tiêu nhằm giúp sinh viên đối chiếu, sửa đổi các phần còn lệch giữa báo cáo cũ và code Java hiện tại, đồng thời tích hợp sẵn thiết kế <b>Cơ sở Dữ liệu MySQL</b> và các chức năng mở rộng cho bài thi cuối kỳ.</p>
+
+<p><b>Quy ước các khối chỉ dẫn trong tài liệu:</b></p>
+<ul>
+    <li><span class="tag-sua">🔴 NỘI DUNG CẦN SỬA ĐỔI:</span> Đoạn văn, bảng biểu cũ trong báo cáo đang bị sai lệch, cần được sửa đổi hoặc thay thế bằng nội dung chuẩn xác.</li>
+    <li><span class="tag-them">🟢 NỘI DUNG CẦN BỔ SUNG:</span> Các phân tích kỹ thuật, sơ đồ, bảng mã nguồn mới cần chèn thêm vào để bài báo cáo sâu sắc và hoàn thiện.</li>
+    <li><span class="tag-nangcap">🚀 ĐỊNH HƯỚNG NÂNG CẤP CUỐI KỲ:</span> Cách viết mở đường cho giai đoạn nâng cấp CSDL MySQL và các tính năng nâng cao mà không làm mâu thuẫn với hiện trạng code.</li>
+</ul>
+
+<!-- PHẦN MỞ ĐẦU -->
+<h1>PHẦN I: HƯỚNG DẪN ĐIỀU CHỈNH PHẦN MỞ ĐẦU</h1>
+
+<h2>1. Mục 1.3: "Vai trò của giao thức TCP và chuẩn FTP (RFC 959)"</h2>
+<div class="tag-sua">🔴 NỘI DUNG CẦN SỬA ĐỔI:</div>
+<p>Báo cáo cũ đang khẳng định hệ thống phân tách 2 kênh TCP (Port 2121 và dải Passive Port 50000 - 50050). Trong mã nguồn thực tế, hệ thống chạy trên <b>1 kết nối TCP duy nhất (Port 6789)</b>.</p>
+<p><b>Đoạn văn chuẩn hóa thay thế vào mục 1.3:</b></p>
+<p><i>"Đề tài nghiên cứu và xây dựng hệ thống truyền tệp tin tin cậy dựa trên giao thức TCP Socket, áp dụng mô hình <b>Truyền tải đa hợp trên một kết nối (Single-Channel Stream Multiplexing)</b> kết hợp tập lệnh ứng dụng chuẩn hóa theo mã phản hồi 3 chữ số của RFC 959. Giải pháp một kết nối giúp Client và Server trao đổi cả chuỗi lệnh điều khiển và luồng byte nhị phân của tệp tin qua cùng một Socket (Port 6789), loại bỏ hoàn toàn sự phức tạp của việc mở nhiều dải cổng mạng, giúp ứng dụng vượt qua dễ dàng các chính sách tường lửa (Firewall) và cơ chế dịch địa chỉ mạng (NAT) trong môi trường mạng LAN phòng máy thực hành."</i></p>
+
+<h2>2. Mục 2.2: "Mục tiêu cụ thể"</h2>
+<div class="tag-them">🟢 NỘI DUNG CẦN BỔ SUNG:</div>
+<p>Bổ sung vào phần Sản phẩm phần mềm:</p>
+<p><i>"• Xây dựng thành công lớp <code>ProtocolInputStream</code> giải quyết triệt để vấn đề xung đột luồng và lỗi 'nuốt dữ liệu nhị phân' (Buffer-Ahead bug) của bộ đệm Java I/O.<br/>
+• Cài đặt giao diện người dùng trực quan bằng Java Swing hỗ trợ đa dạng giao diện (Theme Dark Custom / Flat), hiển thị thanh tiến trình truyền tệp thời gian thực bằng kỹ thuật xử lý bất đồng bộ <code>SwingWorker</code>."</i></p>
+
+<h2>3. Mục 3.2: "Phạm vi và giới hạn của đề tài"</h2>
+<div class="tag-sua">🔴 NỘI DUNG CẦN SỬA ĐỔI:</div>
+<p>• Sửa cổng mạng: Cổng dịch vụ là <b>TCP Port 6789</b> (thay vì 2121 và 50000-50050).<br/>
+• Sửa danh mục lệnh: Gồm 13 lệnh thực tế: <code>USER</code>, <code>PASS</code>, <code>LOGOUT</code>, <code>PING</code>, <code>ECHO</code>, <code>PWD</code>, <code>LIST</code>, <code>STOR</code>, <code>RETR</code>, <code>DELE</code>, <code>RNFR</code>, <code>RNTO</code>, <code>QUIT</code>.</p>
+
+<div class="tag-nangcap">🚀 ĐỊNH HƯỚNG NÂNG CẤP CUỐI KỲ:</div>
+<p>Ghi chú rõ ràng trong mục Giới hạn đề tài:</p>
+<p><i>"Trong phạm vi giai đoạn giữa kỳ, hệ thống quản lý danh sách tài khoản dưới dạng In-Memory Database để ưu tiên kiểm thử độ tin cậy của tầng Socket. Việc tích hợp hệ quản trị cơ sở dữ liệu quan hệ <b>MySQL qua JDBC</b>, phân quyền sandbox theo từng người dùng và mã hóa kênh truyền <b>FTPS (TLS v1.3)</b> được xác định là mục tiêu hoàn thiện cho giai đoạn cuối kỳ."</i></p>
+
+<!-- CHƯƠNG 1 -->
+<h1>PHẦN II: HƯỚNG DẪN ĐIỀU CHỈNH CHƯƠNG 1 (CƠ SỞ LÝ THUYẾT)</h1>
+
+<h2>1. Mục 1.1 & 1.2: Lý thuyết mạng, OSI 7 tầng, TCP/IP 4 tầng</h2>
+<p><b>Đánh giá:</b> Giữ nguyên toàn bộ nội dung lý thuyết, bảng so sánh và sơ đồ quá trình bắt tay 3 bước TCP vì nhóm đã viết rất tốt và chuẩn học thuật.</p>
+
+<h2>2. Mục 1.3.2: Giao thức truyền tập tin FTP</h2>
+<div class="tag-sua">🔴 NỘI DUNG CẦN SỬA ĐỔI:</div>
+<p>Chuyển mục này thành: <b>"So sánh mô hình FTP 2 kênh truyền thống (RFC 959) và Mô hình 1 kênh đa hợp (Single-Channel Stream)"</b>:</p>
+<ul>
+    <li><i>Mô hình 2 kênh RFC 959:</i> Phân tách riêng Kênh điều khiển và Kênh dữ liệu. Nhược điểm: Kênh dữ liệu mở cổng động thường bị Firewall phía Client chặn (Active Mode) hoặc đòi hỏi Server mở dải cổng NAT rộng (Passive Mode).</li>
+    <li><i>Mô hình 1 kênh đa hợp (Đồ án áp dụng):</i> Truyền cả lệnh văn bản và file nhị phân qua một kết nối Socket duy nhất, tối ưu tài nguyên, không bị tường lửa chặn trong mạng LAN trường học.</li>
+</ul>
+
+<h2>3. Mục 1.4: Công nghệ và công cụ phát triển</h2>
+<div class="tag-them">🟢 NỘI DUNG CẦN BỔ SUNG:</div>
+<ul>
+    <li><b>Java I/O & Byte-Stream:</b> Bổ sung phân tích về lớp tự chế <code>ProtocolInputStream</code> và mảng đệm khối <code>byte[] buffer = new byte[4096]</code>.</li>
+    <li><b>Java Swing & SwingWorker:</b> Giải thích cơ chế đa luồng đồ họa: Tiến trình truyền file nặng thực thi ngầm trong <code>doInBackground()</code>, gửi tín hiệu tiến độ qua <code>ProgressListener</code> để cập nhật <code>JProgressBar</code> mà không làm đơ giao diện.</li>
+</ul>
+
+<h2>4. Mục 1.5: Cơ sở dữ liệu và cơ chế lưu trữ của FTP Server</h2>
+<div class="tag-sua">🔴 NỘI DUNG CẦN SỬA ĐỔI & 🚀 BỔ SUNG NÂNG CẤP CUỐI KỲ:</div>
+<p>Viết rõ kiến trúc lưu trữ được chia làm 2 giai đoạn:</p>
+<ul>
+    <li><b>Giai đoạn hiện tại:</b> Áp dụng nguyên lý Single Responsibility (SRP) tách lớp <code>UserDatabase.java</code>, mô phỏng CSDL trong bộ nhớ (In-Memory Mock Database qua <code>HashMap</code>) để tập trung kiểm thử Socket.</li>
+    <li><b>Giai đoạn nâng cấp cuối kỳ:</b> Nâng cấp kết nối hệ quản trị <b>MySQL Server 8.0 qua JDBC</b>, mật khẩu được băm một chiều bằng thuật toán <b>SHA-256</b> bảo mật.</li>
+</ul>
+
+<!-- CHƯƠNG 2 -->
+<h1>PHẦN III: HƯỚNG DẪN ĐIỀU CHỈNH CHƯƠNG 2 (PHÂN TÍCH & THIẾT KẾ)</h1>
+
+<h2>1. Mục 2.1: Các chức năng của hệ thống FTP Client & Server</h2>
+<div class="tag-sua">🔴 NỘI DUNG CẦN SỬA ĐỔI:</div>
+<p>Cập nhật lại Bảng danh mục chức năng theo đúng 11 file Java thực tế đang chạy:</p>
+<table>
+    <thead>
+        <tr>
+            <th>Phân hệ</th>
+            <th>Tên chức năng</th>
+            <th>Mô tả nghiệp vụ</th>
+            <th>File đảm nhiệm</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Server</td>
+            <td>Lắng nghe đa luồng</td>
+            <td>Mở ServerSocket cổng 6789, tiếp nhận Client qua Thread Pool.</td>
+            <td><code>TCPServer.java</code></td>
+        </tr>
+        <tr>
+            <td>Server</td>
+            <td>Xác thực danh tính</td>
+            <td>Xử lý cặp lệnh USER và PASS, kiểm tra qua UserDatabase.</td>
+            <td><code>CommandHandler.java</code></td>
+        </tr>
+        <tr>
+            <td>Server</td>
+            <td>Quản lý phiên (Session)</td>
+            <td>Duy trì trạng thái đăng nhập, thư mục hiện tại, biến đổi tên.</td>
+            <td><code>Session.java</code></td>
+        </tr>
+        <tr>
+            <td>Server</td>
+            <td>Thao tác tệp vật lý</td>
+            <td>Quét thư mục (LIST), đọc/ghi file (RETR/STOR), xóa (DELE), đổi tên.</td>
+            <td><code>StorageManager.java</code></td>
+        </tr>
+        <tr>
+            <td>Server</td>
+            <td>Chống Path Traversal</td>
+            <td>Chuẩn hóa đường dẫn resolveSafe(), ngăn thoát khỏi storage/.</td>
+            <td><code>StorageManager.java</code></td>
+        </tr>
+        <tr>
+            <td>Server</td>
+            <td>Đọc luồng an toàn</td>
+            <td>Đọc byte-by-byte không buffer-ahead để phân tách text và nhị phân.</td>
+            <td><code>ProtocolInputStream.java</code></td>
+        </tr>
+        <tr>
+            <td>Client</td>
+            <td>Đăng nhập đa giao diện</td>
+            <td>Cửa sổ LoginFrame nhập IP, Port, User, Pass; hỗ trợ chọn Theme.</td>
+            <td><code>LoginFrame.java</code></td>
+        </tr>
+        <tr>
+            <td>Client</td>
+            <td>Duyệt tệp từ xa</td>
+            <td>MainFrame hiển thị bảng JTable tệp tin kèm dung lượng, ngày sửa.</td>
+            <td><code>MainFrame.java</code></td>
+        </tr>
+        <tr>
+            <td>Client</td>
+            <td>Tải lên tệp (STOR)</td>
+            <td>Chọn file qua JFileChooser, gửi lệnh STOR, cập nhật progress %.</td>
+            <td><code>FtpClientService.java</code></td>
+        </tr>
+        <tr>
+            <td>Client</td>
+            <td>Tải về tệp (RETR)</td>
+            <td>Chọn file trên bảng, nhận luồng byte qua Socket, ghi đĩa an toàn.</td>
+            <td><code>FtpClientService.java</code></td>
+        </tr>
+        <tr>
+            <td>Client</td>
+            <td>Đổi tên tệp 2 bước</td>
+            <td>Thực thi chuỗi lệnh RNFR (chọn file) và RNTO (đặt tên mới).</td>
+            <td><code>FtpClientService.java</code></td>
+        </tr>
+        <tr>
+            <td>Client</td>
+            <td>Log Terminal thời gian thực</td>
+            <td>Khung Terminal màu tối hiển thị chi tiết mọi lệnh gửi và mã phản hồi.</td>
+            <td><code>MainFrame.java</code></td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>2. Mục 2.3.2: Mô hình hóa Ca sử dụng (Use Cases)</h2>
+<div class="tag-sua">🔴 NỘI DUNG CẦN SỬA ĐỔI:</div>
+<p>Bỏ toàn bộ các bước mở cổng PASV trong các ca sử dụng UC01, UC03, UC04, UC05. Sửa thành truyền nhận trực tiếp trên Socket hiện hành.</p>
+
+<div class="tag-them">🟢 NỘI DUNG CẦN BỔ SUNG (CA SỬ DỤNG MỚI):</div>
+<p><b>Đặc tả Ca sử dụng: UC07 - Đổi tên tệp an toàn 2 bước (RNFR & RNTO)</b></p>
+<ul>
+    <li><i>Tác nhân:</i> Người dùng máy trạm (FTP User).</li>
+    <li><i>Luồng sự kiện chính:</i>
+        <ol>
+            <li>Người dùng chọn file trên bảng JTable và bấm nút [Đổi tên].</li>
+            <li>Client gửi lệnh <code>RNFR &lt;old_name&gt;</code> qua Socket.</li>
+            <li>Server kiểm tra file tồn tại trong <code>storage/</code>, lưu tên file vào <code>session.setRenameFrom()</code> và phản hồi mã <code>350 File exists, ready for destination name</code>.</li>
+            <li>Client hiển thị hộp thoại nhập tên mới và gửi tiếp lệnh <code>RNTO &lt;new_name&gt;</code>.</li>
+            <li>Server kiểm tra session có <code>renameFrom</code> và tên mới chưa trùng lặp, gọi <code>Files.move()</code> đổi tên file trên đĩa và gửi mã <code>250 Rename successful</code>.</li>
+            <li>Client nhận phản hồi thành công và tự động làm mới danh sách tệp trên giao diện.</li>
+        </ol>
+    </li>
+</ul>
+
+<h2>3. Mục 2.3.3: Sơ đồ Lớp và Đặc tả 11 Lớp thực tế trong Mã nguồn</h2>
+<div class="tag-sua">🔴 NỘI DUNG CẦN SỬA ĐỔI TOÀN BỘ:</div>
+<p>Xóa bỏ các lớp mẫu lý thuyết cũ. Đưa vào bảng đặc tả 11 lớp thực tế:</p>
+
+<p><b>1. Package <code>server</code>:</b></p>
+<ul>
+    <li><code>TCPServer</code>: Khởi tạo ServerSocket port 6789, quản lý <code>ExecutorService threadPool</code>, vòng lặp <code>accept()</code>.</li>
+    <li><code>ClientHandler</code> (implements Runnable): Đại diện cho luồng phục vụ Client, quản lý kênh Socket đọc lệnh và nhận file.</li>
+    <li><code>CommandHandler</code>: Phân tích cú pháp chuỗi lệnh (Parser) và định tuyến xử lý cho 13 lệnh FTP.</li>
+    <li><code>ProtocolInputStream</code>: Bộ đọc giao thức byte-by-byte an toàn không buffer-ahead.</li>
+    <li><code>Session</code>: Quản lý trạng thái đăng nhập, thư mục làm việc hiện tại và biến <code>renameFrom</code>.</li>
+    <li><code>StorageManager</code>: Đọc ghi file vật lý trong <code>storage/</code>, phòng chống Path Traversal qua hàm <code>resolveSafe()</code>.</li>
+    <li><code>UserDatabase</code>: Quản lý danh sách tài khoản hợp lệ (In-Memory Mock Database qua <code>HashMap</code>).</li>
+</ul>
+
+<p><b>2. Package <code>client</code>:</b></p>
+<ul>
+    <li><code>TCPClient</code>: Ứng dụng dòng lệnh Console hoàn chỉnh.</li>
+    <li><code>FtpClientService</code>: Tầng Service mạng đóng gói toàn bộ hàm Socket và interface <code>ProgressListener</code>.</li>
+    <li><code>LoginFrame</code>: Giao diện đăng nhập Swing (hỗ trợ Dark Custom, Nimbus, Windows).</li>
+    <li><code>MainFrame</code>: Giao diện chính với bảng <code>JTable</code> Remote Files, thanh tiến trình <code>JProgressBar</code> và khung Log Terminal.</li>
+</ul>
+
+<h2>4. Mục 2.3.6 (MỤC MỚI CẦN BỔ SUNG): Điểm sáng Kỹ thuật — Lớp ProtocolInputStream</h2>
+<div class="tag-them">🟢 NỘI DUNG CẦN BỔ SUNG:</div>
+<p>Chèn trực tiếp phần phân tích lỗi Buffer-Ahead và đoạn mã nguồn hoàn chỉnh của <code>ProtocolInputStream.java</code>:</p>
+<div class="code-block">public class ProtocolInputStream {
+    private final InputStream in;
+
+    public ProtocolInputStream(InputStream in) {
+        this.in = in;
+    }
+
+    // Đọc chính xác từng byte cho đến '\n' — tuyệt đối KHÔNG đọc lố vào RAM
+    public String readLine() throws IOException {
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        int b;
+        while ((b = in.read()) != -1) {
+            if (b == '\r') continue;
+            if (b == '\n') break;
+            buffer.write(b);
+        }
+        if (b == -1 &amp;&amp; buffer.size() == 0) return null;
+        return buffer.toString(StandardCharsets.UTF_8);
+    }
+
+    // Bàn giao luồng thô để đọc dữ liệu file nhị phân nguyên vẹn
+    public InputStream getRawInputStream() {
+        return this.in;
+    }
+}</div>
+
+<h2>5. Mục 2.3.7 (MỤC MỚI CẦN BỔ SUNG): Thiết kế CSDL MySQL cho Bài Cuối kỳ</h2>
+<div class="tag-nangcap">🚀 ĐỊNH HƯỚNG NÂNG CẤP CUỐI KỲ:</div>
+<p>Chèn trực tiếp lược đồ CSDL và mã SQL tạo bảng chuẩn bị cho giai đoạn cuối kỳ:</p>
+<div class="code-block">CREATE DATABASE IF NOT EXISTS ftp_server_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE ftp_server_db;
+
+CREATE TABLE IF NOT EXISTS users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password_hash VARCHAR(255) NOT NULL,
+    role ENUM('ADMIN', 'USER') DEFAULT 'USER',
+    storage_quota_mb INT DEFAULT 500,
+    is_active BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    INDEX idx_username (username)
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS transfer_logs (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    action ENUM('STOR', 'RETR', 'DELE', 'RNTO') NOT NULL,
+    filename VARCHAR(255) NOT NULL,
+    file_size_bytes BIGINT DEFAULT 0,
+    ip_address VARCHAR(45) NOT NULL,
+    status ENUM('SUCCESS', 'FAILED') DEFAULT 'SUCCESS',
+    transferred_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_logs_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+) ENGINE=InnoDB;</div>
+
+<!-- CHƯƠNG 3 -->
+<h1>PHẦN IV: HƯỚNG DẪN ĐIỀU CHỈNH CHƯƠNG 3 (CÀI ĐẶT & KIỂM THỬ)</h1>
+
+<h2>1. Mục 3.1: Môi trường cài đặt và cấu hình</h2>
+<div class="tag-sua">🔴 NỘI DUNG CẦN SỬA ĐỔI:</div>
+<ul>
+    <li>Cổng dịch vụ: <b>TCP Port 6789</b>. Xóa bỏ dải cổng 50000 - 50050.</li>
+    <li>IP thử nghiệm: <code>127.0.0.1</code> (máy đơn) hoặc IP tĩnh mạng LAN (ví dụ <code>10.212.42.239</code>).</li>
+</ul>
+
+<h2>2. Mục 3.2: Hướng dẫn cài đặt và sử dụng phần mềm</h2>
+<div class="tag-sua">🔴 NỘI DUNG CẦN SỬA ĐỔI:</div>
+<ul>
+    <li><b>Máy chủ:</b> Chạy file <code>start_server.bat</code> mở cửa sổ dòng lệnh Terminal lắng nghe port 6789.</li>
+    <li><b>Máy trạm:</b> Chạy file <code>start_gui.bat</code> mở <code>LoginFrame</code> (chọn Theme Dark Custom) $ightarrow$ đăng nhập thành công mở <code>MainFrame</code> quản lý tệp tin, xem thanh tiến trình và log terminal.</li>
+</ul>
+
+<h2>3. Mục 3.3: Ma trận kiểm thử (Test Cases) thực tế</h2>
+<div class="tag-sua">🔴 NỘI DUNG CẦN SỬA ĐỔI:</div>
+<p>Cập nhật 12 test case thực tế trong code:</p>
+<ul>
+    <li>TC01: Khởi động Server cổng 6789 thành công.</li>
+    <li>TC02: Bắt lỗi trùng cổng BindException khi chạy 2 server.</li>
+    <li>TC03: Đăng nhập đúng `admin/123` trả về mã 230.</li>
+    <li>TC04: Đăng nhập sai mật khẩu trả về mã 530.</li>
+    <li>TC05: Duyệt danh sách tệp `LIST` hiển thị đầy đủ hàng trên bảng JTable.</li>
+    <li>TC06: Tải lên file (`STOR <file> <size>`) cập nhật thanh tiến trình 0-100%.</li>
+    <li>TC07: Tải về file (`RETR <file>`) ghi đĩa an toàn.</li>
+    <li>TC08: Kiểm tra toàn vẹn tệp tin bằng mã băm SHA-256 trùng khớp 100%.</li>
+    <li>TC09: Đổi tên tệp 2 bước (`RNFR` và `RNTO`) thành công.</li>
+    <li>TC10: Chống tấn công Path Traversal (`../../`) qua hàm `resolveSafe()`.</li>
+    <li>TC11: Đăng xuất `LOGOUT` đưa về trạng thái chưa đăng nhập nhưng giữ kết nối Socket.</li>
+    <li>TC12: Kiểm thử tải đồng thời nhiều Client cùng lúc qua Thread Pool.</li>
+</ul>
+
+<!-- KẾT LUẬN -->
+<h1>PHẦN V: HƯỚNG DẪN ĐIỀU CHỈNH KẾT LUẬN & HƯỚNG PHÁT TRIỂN</h1>
+
+<h2>1. Kết quả đạt được hiện tại</h2>
+<div class="tag-sua">🔴 NỘI DUNG CẦN SỬA ĐỔI:</div>
+<p>Khẳng định đã làm chủ mô hình Single-Channel TCP Socket, Thread Pool đa luồng, lớp `ProtocolInputStream` chống Buffer-Ahead và giao diện Swing Flat/Dark UI hiện đại.</p>
+
+<h2>2. Lộ trình nâng cấp bài Cuối kỳ</h2>
+<div class="tag-nangcap">🚀 ĐỊNH HƯỚNG NÂNG CẤP CUỐI KỲ:</div>
+<ol>
+    <li><b>Tích hợp CSDL MySQL:</b> Kết nối qua JDBC, băm mật khẩu SHA-256/BCrypt, lưu nhật ký truyền tệp `transfer_logs`.</li>
+    <li><b>Phân quyền Sandbox:</b> Tự động tạo thư mục riêng `storage/<username>/` cách ly giữa các user.</li>
+    <li><b>Bảo mật kênh truyền FTPS:</b> Ứng dụng SSLSocket và chứng chỉ số X.509 mã hóa dữ liệu qua TLS v1.3.</li>
+    <li><b>Cơ chế Resume:</b> Bổ sung lệnh `REST <offset>` cho phép tải tiếp tệp khi bị đứt mạng.</li>
+</ol>
+
+<!-- PHỤ LỤC Q&A -->
+<h1>PHẦN VI: BỘ 15 CÂU HỎI VẤN ĐÁP BẢO VỆ ĐỒ ÁN VÀ CÂU TRẢ LỜI MẪU</h1>
+
+<div class="qa-box">
+    <div class="qa-question">Câu 1: Em hãy giải thích sự khác biệt cơ bản giữa giao thức TCP và UDP? Tại sao đồ án truyền tệp tin bắt buộc phải dùng TCP?</div>
+    <div class="qa-answer">
+        <b>Trả lời:</b> "Dạ thưa Thầy/Cô, TCP là giao thức hướng kết nối (Connection-oriented), thực hiện bắt tay 3 bước (3-way handshake) trước khi truyền và có cơ chế kiểm tra lỗi, gửi gói tin xác nhận ACK, đánh số thứ tự byte và truyền lại tự động nếu mất gói. Ngược lại, UDP là giao thức phi kết nối (Connectionless), truyền nhanh nhưng không đảm bảo dữ liệu đến đích nguyên vẹn.<br/>
+        Ứng dụng truyền tệp tin bắt buộc phải sử dụng TCP vì các tệp nhị phân (.exe, .zip, .docx, .png) đòi hỏi tính chính xác tuyệt đối 100%, nếu mất hoặc sai lệch dù chỉ 1 bit thì tệp tin sẽ bị hỏng và không mở được."
+    </div>
+</div>
+
+<div class="qa-box">
+    <div class="qa-question">Câu 2: Trong kiến trúc hệ thống của em, luồng lệnh Text và luồng dữ liệu Binary Stream được truyền tải như thế nào?</div>
+    <div class="qa-answer">
+        <b>Trả lời:</b> "Dạ thưa Thầy/Cô, hệ thống của em sử dụng kiến trúc <b>Single-Channel Stream Multiplexing trên một kết nối TCP duy nhất (Port 6789)</b>. Khi gửi lệnh điều khiển (như PWD, LIST, DELE), Client và Server trao đổi các chuỗi văn bản kết thúc bằng ký tự <code>\n</code>. Khi truyền tệp (STOR hoặc RETR), Client thông báo trước kích thước tệp qua lệnh <code>STOR &lt;filename&gt; &lt;filesize&gt;</code>. Sau khi Server phản hồi mã <code>150</code>, hai bên bàn giao Socket sang luồng thô <code>InputStream</code>/<code>OutputStream</code> để đọc/ghi trực tiếp chính xác số byte <code>filesize</code> đó theo từng khối đệm 4096 bytes."
+    </div>
+</div>
+
+<div class="qa-box">
+    <div class="qa-question">Câu 3: Lỗi 'Buffer-Ahead' trong lập trình Java Socket là gì và em đã giải quyết triệt để lỗi này bằng cách nào?</div>
+    <div class="qa-answer">
+        <b>Trả lời:</b> "Dạ thưa Thầy/Cô, đây là lỗi kinh điển khi phối hợp giữa đọc văn bản và đọc file nhị phân trên cùng một Socket. Nếu sử dụng <code>BufferedReader.readLine()</code>, bộ đệm ngầm của Java sẽ tự động đọc trước 8KB từ Socket vào bộ nhớ đệm RAM. Khi đọc dòng lệnh <code>STOR anh.png 5000\n</code>, <code>BufferedReader</code> đã vô tình nuốt mất luôn vài nghìn byte đầu tiên của file ảnh. Khi chuyển sang đọc dữ liệu nhị phân, các byte đó đã bị mất khỏi Socket dẫn đến file nhận được bị thiếu và corrupt.<br/>
+        Em giải quyết triệt để vấn đề này bằng cách tự xây dựng lớp <b><code>ProtocolInputStream</code></b>: Khi đọc dòng lệnh Text, hàm <code>readLine()</code> đọc chính xác từng byte (<code>in.read()</code>) cho đến khi gặp ký tự <code>\n</code> thì dừng lại ngay, tuyệt đối không đọc lố dù chỉ 1 byte. Sau đó, hàm <code>getRawInputStream()</code> bàn giao luồng nguyên vẹn để đọc dữ liệu nhị phân, đảm bảo dữ liệu truyền tải trọn vẹn 100%."
+    </div>
+</div>
+
+<div class="qa-box">
+    <div class="qa-question">Câu 4: Làm thế nào em ngăn chặn tấn công vượt cấp thư mục (Directory / Path Traversal Attack) khi Client gửi lệnh như `DELE ../../Windows/System32`?</div>
+    <div class="qa-answer">
+        <b>Trả lời:</b> "Dạ thưa Thầy/Cô, em phòng thủ đa tầng trong lớp <code>StorageManager.java</code> qua phương thức <code>resolveSafe()</code>: Khi Client gửi một đường dẫn tệp bất kỳ, hệ thống dùng hàm <code>storageRoot.resolve(clientPath).normalize().toAbsolutePath()</code> để triệt tiêu toàn bộ các ký tự nguy hiểm <code>../</code> hoặc <code>./</code>. Sau đó, hệ thống dùng hàm <code>targetPath.startsWith(storageRoot)</code> để kiểm tra. Nếu đường dẫn đích nằm ngoài thư mục gốc <code>storage/</code>, hệ thống lập tức từ chối và phản hồi mã lỗi <code>550 Permission denied</code>."
+    </div>
+</div>
+
+<div class="qa-box">
+    <div class="qa-question">Câu 5: Hệ thống của em phục vụ đồng thời nhiều Client cùng lúc như thế nào?</div>
+    <div class="qa-answer">
+        <b>Trả lời:</b> "Dạ thưa Thầy/Cô, <code>TCPServer</code> sử dụng mô hình đa luồng kết hợp <b>Thread Pool</b> thông qua <code>Executors.newCachedThreadPool()</code>. Vòng lặp chính liên tục chờ kết nối tại <code>serverSocket.accept()</code>. Ngay khi có một Client kết nối thành công, Server tạo ra một đối tượng <code>ClientHandler</code> (implements Runnable) và cấp phát cho Thread Pool thực thi trong một luồng độc lập. Mỗi ClientHandler sở hữu một <code>Session</code> riêng biệt lưu trạng thái đăng nhập và thư mục làm việc, do đó các thao tác upload/download của Client này hoàn toàn không làm nghẽn hay ảnh hưởng đến Client khác."
+    </div>
+</div>
+
+<div class="qa-box">
+    <div class="qa-question">Câu 6: Cơ chế Đổi tên tệp tin trong hệ thống hoạt động như thế nào? Tại sao lại chia làm 2 lệnh RNFR và RNTO?</div>
+    <div class="qa-answer">
+        <b>Trả lời:</b> "Dạ thưa Thầy/Cô, em cài đặt đúng chuẩn giao thức FTP:  
+        <br/>- Bước 1: Client gửi <code>RNFR &lt;old_name&gt;</code> (Rename From). Server kiểm tra tệp có tồn tại không. Nếu có, Server lưu tên tệp này vào biến <code>renameFrom</code> trong <code>Session</code> và phản hồi <code>350 File exists, ready for destination name</code>.  
+        <br/>- Bước 2: Client gửi tiếp <code>RNTO &lt;newname&gt;</code> (Rename To). Server kiểm tra session có <code>renameFrom</code> chưa và tên mới đã tồn tại chưa. Nếu hợp lệ, Server gọi <code>Files.move()</code> để đổi tên thật trên đĩa và xóa biến tạm <code>clearRenameFrom()</code>.  
+        <br/>Cơ chế 2 bước này đảm bảo tính giao dịch nguyên tử (Atomic transaction), ngăn chặn việc đổi tên tùy tiện khi chưa xác thực tệp nguồn."
+    </div>
+</div>
+
+<div class="qa-box">
+    <div class="qa-question">Câu 7: Hiện tại dự án của em lưu trữ tài khoản người dùng ở đâu? Ưu và nhược điểm của cách làm này?</div>
+    <div class="qa-answer">
+        <b>Trả lời:</b> "Dạ thưa Thầy/Cô, hiện tại hệ thống áp dụng nguyên lý thiết kế Single Responsibility tách riêng lớp <code>UserDatabase.java</code>, quản lý tài khoản dạng <b>In-Memory Mock Database</b> bằng cấu trúc dữ liệu <code>HashMap</code>.  
+        <br/>- <b>Ưu điểm:</b> Tốc độ xử lý cực nhanh, độc lập và dễ dàng triển khai kiểm thử Socket trong phòng máy thực hành mà không bắt buộc máy thi phải cài đặt hệ quản trị MySQL/SQL Server.  
+        <br/>- <b>Nhược điểm:</b> Dữ liệu tài khoản sẽ bị mất khi tắt Server.  
+        <br/>Vì vậy, đây là giải pháp cho giai đoạn thử nghiệm mạng giữa kỳ, và nhóm đã hoàn thiện sẵn thiết kế lược đồ CSDL MySQL để nâng cấp qua JDBC ở bài cuối kỳ."
+    </div>
+</div>
+
+<div class="qa-box">
+    <div class="qa-question">Câu 8: Em hãy trình bày thiết kế Cơ sở Dữ liệu MySQL mà em dự kiến tích hợp cho bài cuối kỳ?</div>
+    <div class="qa-answer">
+        <b>Trả lời:</b> "Dạ thưa Thầy/Cô, CSDL MySQL của hệ thống đạt chuẩn 3NF gồm 2 bảng:  
+        <br/>1. Bảng <code>users</code>: Lưu trữ <code>id</code>, <code>username</code> (UNIQUE), <code>password_hash</code> (mã hóa SHA-256), <code>role</code> (ADMIN/USER), <code>storage_quota_mb</code> và trạng thái <code>is_active</code>.  
+        <br/>2. Bảng <code>transfer_logs</code>: Lưu vết lịch sử truyền tệp gồm <code>id</code>, <code>user_id</code> (FK liên kết với bảng users), <code>action</code> (STOR, RETR, DELE), <code>filename</code>, <code>file_size_bytes</code>, <code>ip_address</code> và <code>status</code>.  
+        <br/>Khi nâng cấp, em chỉ cần thay đổi mã nguồn truy vấn JDBC bên trong lớp <code>UserDatabase</code> mà không làm xáo trộn mã nguồn Socket mạng."
+    </div>
+</div>
+
+<div class="qa-box">
+    <div class="qa-question">Câu 9: Giao diện Client của em có bị đơ (Not Responding) khi đang truyền tải một tệp tin dung lượng lớn không? Tại sao?</div>
+    <div class="qa-answer">
+        <b>Trả lời:</b> "Dạ thưa Thầy/Cô, giao diện <b>hoàn toàn mượt mà và không bao giờ bị đơ lag</b>. Trong <code>MainFrame.java</code>, em áp dụng mô hình xử lý bất đồng bộ <b><code>SwingWorker</code></b>: Tiến trình đọc ghi file và truyền dữ liệu mạng được thực thi trong phương thức <code>doInBackground()</code> trên một luồng nền (Background Thread), tách biệt hoàn toàn khỏi luồng xử lý đồ họa Event Dispatch Thread (EDT). Định kỳ mỗi khối 4096 bytes, worker gửi cập nhật % qua <code>ProgressListener</code> để cập nhật thanh tiến trình <code>JProgressBar</code> và log màn hình một cách êm ái."
+    </div>
+</div>
+
+<div class="qa-box">
+    <div class="qa-question">Câu 10: Nếu trong quá trình đang tải file lên (Upload) mà Client bị rút cáp mạng đột ngột thì Server xử lý như thế nào?</div>
+    <div class="qa-answer">
+        <b>Trả lời:</b> "Dạ thưa Thầy/Cô, khi mất kết nối đột ngột, lệnh <code>in.read()</code> trên Socket của Server sẽ ném ra ngoại lệ <code>SocketException: Connection reset</code> hoặc trả về <code>-1</code>. Trong khối lệnh <code>try...catch...finally</code> của <code>ClientHandler.java</code>, Server bắt được ngoại lệ này, ngay lập tức đóng luồng đọc/ghi đĩa <code>FileOutputStream</code>, xóa bỏ file rác tải dở dang và giải phóng socket, đồng thời ghi log thông báo Client ngắt kết nối để đảm bảo an toàn tài nguyên máy chủ."
+    </div>
+</div>
+
+<div class="qa-box">
+    <div class="qa-question">Câu 11: Sự khác biệt giữa lệnh LOGOUT và lệnh QUIT trong hệ thống của em là gì?</div>
+    <div class="qa-answer">
+        <b>Trả lời:</b> "Dạ thưa Thầy/Cô:  
+        <br/>- <code>LOGOUT</code>: Đưa trạng thái của <code>Session</code> quay trở về <code>UNAUTHENTICATED</code>, xóa bỏ thông tin người dùng đang đăng nhập nhưng <b>vẫn giữ nguyên kết nối Socket TCP</b>. Người dùng có thể lập tức đăng nhập bằng tài khoản khác mà không cần kết nối lại từ đầu.  
+        <br/>- <code>QUIT</code>: Gửi phản hồi <code>221 Goodbye</code>, sau đó Server và Client chủ động <b>đóng hoàn toàn kết nối Socket TCP</b>, kết thúc phiên làm việc."
+    </div>
+</div>
+
+<div class="qa-box">
+    <div class="qa-question">Câu 12: Tại sao em lại cấu hình kích thước bộ đệm (Buffer Size) là 4096 bytes (4KB) khi truyền file?</div>
+    <div class="qa-answer">
+        <b>Trả lời:</b> "Dạ thưa Thầy/Cô, kích thước 4096 bytes (4KB) là kích thước tiêu chuẩn tương thích với kích thước một cung từ (Cluster/Block size) trên hệ thống tệp NTFS của Windows và ext4 của Linux. Việc đọc/ghi theo từng khối 4KB giúp tối ưu hóa số lần gọi hàm hệ thống I/O (System Calls), vừa tiết kiệm bộ nhớ RAM của máy ảo JVM, vừa tận dụng tối đa kích thước khung truyền của card mạng (MTU 1500 bytes), giúp đạt tốc độ truyền tải cao nhất."
+    </div>
+</div>
+
+<div class="qa-box">
+    <div class="qa-question">Câu 13: Tại sao em chọn Port 6789 mà không dùng Port 21 mặc định của FTP?</div>
+    <div class="qa-answer">
+        <b>Trả lời:</b> "Dạ thưa Thầy/Cô, Port 21 là cổng chuẩn thuộc dải Well-known Ports (0 - 1023). Trên hệ điều hành Windows và Linux, cổng 21 thường yêu cầu quyền Administrator/Root để mở và rất dễ bị xung đột với các dịch vụ FTP có sẵn của hệ điều hành (như IIS FTP Service). Việc sử dụng cổng <code>6789</code> thuộc dải cổng Registered Ports (1024 - 49151) giúp ứng dụng khởi chạy độc lập, an toàn và người dùng thông thường không cần cấp quyền quản trị cao nhất vẫn chạy được."
+    </div>
+</div>
+
+<div class="qa-box">
+    <div class="qa-question">Câu 14: Làm thế nào để kiểm tra tính toàn vẹn của tệp sau khi truyền qua mạng?</div>
+    <div class="qa-answer">
+        <b>Trả lời:</b> "Dạ thưa Thầy/Cô, em sử dụng thuật toán băm mật mã học <b>SHA-256</b> (trong thư viện <code>java.security.MessageDigest</code>). Trước khi tải file lên, ta tính mã băm SHA-256 của file cục bộ. Sau khi Server nhận xong file trên đĩa, ta tính mã băm SHA-256 của file trên Server. Nếu hai chuỗi hash 64 ký tự lục phân trùng khớp nhau 100%, ta chứng minh được toán học rằng tệp tin truyền qua mạng nguyên vẹn tuyệt đối từng bit, không bị mất mát hay suy hao."
+    </div>
+</div>
+
+<div class="qa-box">
+    <div class="qa-question">Câu 15: Nếu muốn nâng cấp hệ thống này lên chuẩn FTPS (FTP over SSL/TLS) thì em cần thực hiện những bước kỹ thuật nào?</div>
+    <div class="qa-answer">
+        <b>Trả lời:</b> "Dạ thưa Thầy/Cô, quy trình nâng cấp FTPS gồm 3 bước:  
+        <br/>1. Tạo cặp khóa công khai/bí mật và chứng chỉ số tự ký (Self-signed Certificate) thông qua công cụ <code>keytool</code> của JDK, lưu vào file Keystore (.p12 hoặc .jks).  
+        <br/>2. Phía Server: Khởi tạo <code>SSLContext</code>, nạp Keystore và thay thế <code>ServerSocket</code> bằng <code>SSLServerSocketFactory.createServerSocket(6789)</code>.  
+        <br/>3. Phía Client: Cấu hình <code>TrustManager</code> chấp nhận chứng chỉ của Server và thay thế <code>Socket</code> bằng <code>SSLSocketFactory.createSocket()</code>. Khi đó toàn bộ dữ liệu đi qua Socket sẽ tự động được mã hóa TLS 1.3 bảo mật tuyệt đối."
+    </div>
+</div>
+
+</div>
+</body>
+</html>

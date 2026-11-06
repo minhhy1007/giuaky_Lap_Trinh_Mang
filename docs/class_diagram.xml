@@ -1,0 +1,140 @@
+<?xml version="1.0" ?>
+<mxfile host="app.diagrams.net" modified="2026-11-02T15:45:00.000Z" agent="SecureFTPClientPro" version="24.0.0" type="device">
+  <diagram id="Class_Diagram_System" name="Sơ đồ Lớp (Class Diagram) - Hệ thống Secure FTP Client Pro">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="#FFFFFF" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="pkg_server" value="Package server (Máy chủ FTP)" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=190;tabHeight=26;tabPosition=left;html=1;whiteSpace=wrap;strokeWidth=1.5;strokeColor=#444444;fillColor=#FFFFFF;align=center;verticalAlign=top;fontFamily=Segoe UI;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="30" y="50" width="670" height="730" as="geometry"/>
+        </mxCell>
+        <mxCell id="pkg_client" value="Package client (Máy trạm FTP)" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=190;tabHeight=26;tabPosition=left;html=1;whiteSpace=wrap;strokeWidth=1.5;strokeColor=#444444;fillColor=#FFFFFF;align=center;verticalAlign=top;fontFamily=Segoe UI;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="720" y="50" width="420" height="730" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_tcpserver" value="&lt;table style='width:100%;height:100%;border-collapse:collapse;font-family:Segoe UI;font-size:10px;text-align:left;'&gt;&lt;tr&gt;&lt;td style='text-align:center;padding:4px;border-bottom:1.5px solid black;background:#F9F9F9;'&gt;&lt;b&gt;TCPServer&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style='padding:5px;border-bottom:1.5px solid black;vertical-align:top;'&gt;- PORT : int = 6789&lt;br/&gt;- clientCount : AtomicInteger&lt;br/&gt;- threadPool : ExecutorService&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style='padding:5px;vertical-align:top;'&gt;+ main(args : String[]) : void&lt;br/&gt;+ startServer() : void&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=1.6;strokeColor=#000000;fillColor=#FFFFFF;verticalAlign=top;spacing=0;align=left;overflow=fill;" vertex="1" parent="1">
+          <mxGeometry x="50" y="90" width="190" height="115" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_clienthandler" value="&lt;table style='width:100%;height:100%;border-collapse:collapse;font-family:Segoe UI;font-size:10px;text-align:left;'&gt;&lt;tr&gt;&lt;td style='text-align:center;padding:4px;border-bottom:1.5px solid black;background:#F9F9F9;'&gt;&lt;b&gt;ClientHandler&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style='padding:5px;border-bottom:1.5px solid black;vertical-align:top;'&gt;- clientSocket : Socket&lt;br/&gt;- handler : CommandHandler&lt;br/&gt;- clientId : String&lt;br/&gt;- lineReader : ProtocolInputStream&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style='padding:5px;vertical-align:top;'&gt;+ run() : void&lt;br/&gt;- closeConnection() : void&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=1.6;strokeColor=#000000;fillColor=#FFFFFF;verticalAlign=top;spacing=0;align=left;overflow=fill;" vertex="1" parent="1">
+          <mxGeometry x="50" y="260" width="190" height="140" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_protocolstream" value="&lt;table style='width:100%;height:100%;border-collapse:collapse;font-family:Segoe UI;font-size:10px;text-align:left;'&gt;&lt;tr&gt;&lt;td style='text-align:center;padding:4px;border-bottom:1.5px solid black;background:#F9F9F9;'&gt;&lt;b&gt;ProtocolInputStream&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style='padding:5px;border-bottom:1.5px solid black;vertical-align:top;'&gt;- in : InputStream&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style='padding:5px;vertical-align:top;'&gt;+ readLine() : String&lt;br/&gt;+ getRawInputStream() : InputStream&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=1.6;strokeColor=#000000;fillColor=#FFFFFF;verticalAlign=top;spacing=0;align=left;overflow=fill;" vertex="1" parent="1">
+          <mxGeometry x="50" y="460" width="190" height="105" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_commandhandler" value="&lt;table style='width:100%;height:100%;border-collapse:collapse;font-family:Segoe UI;font-size:10px;text-align:left;'&gt;&lt;tr&gt;&lt;td style='text-align:center;padding:4px;border-bottom:1.5px solid black;background:#F9F9F9;'&gt;&lt;b&gt;CommandHandler&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style='padding:5px;border-bottom:1.5px solid black;vertical-align:top;'&gt;- session : Session&lt;br/&gt;- userDatabase : UserDatabase&lt;br/&gt;- storageManager : StorageManager&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style='padding:5px;vertical-align:top;'&gt;+ handle(rawInput : String) : String&lt;br/&gt;+ handleStor(f, in, out) : String&lt;br/&gt;+ handleRetr(f, out, rawOut) : String&lt;br/&gt;- handleList() : String&lt;br/&gt;- handleDele(filename : String) : String&lt;br/&gt;- handleRnfr(oldName : String) : String&lt;br/&gt;- handleRnto(newName : String) : String&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=1.6;strokeColor=#000000;fillColor=#FFFFFF;verticalAlign=top;spacing=0;align=left;overflow=fill;" vertex="1" parent="1">
+          <mxGeometry x="270" y="220" width="205" height="220" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_session" value="&lt;table style='width:100%;height:100%;border-collapse:collapse;font-family:Segoe UI;font-size:10px;text-align:left;'&gt;&lt;tr&gt;&lt;td style='text-align:center;padding:4px;border-bottom:1.5px solid black;background:#F9F9F9;'&gt;&lt;b&gt;Session&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style='padding:5px;border-bottom:1.5px solid black;vertical-align:top;'&gt;- state : State&lt;br/&gt;- pendingUsername : String&lt;br/&gt;- loggedInUser : String&lt;br/&gt;- currentDirectory : String&lt;br/&gt;- renameFrom : String&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style='padding:5px;vertical-align:top;'&gt;+ isAuthenticated() : boolean&lt;br/&gt;+ loginSuccess(user : String) : void&lt;br/&gt;+ reset() : void&lt;br/&gt;+ setRenameFrom(name : String) : void&lt;br/&gt;+ clearRenameFrom() : void&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=1.6;strokeColor=#000000;fillColor=#FFFFFF;verticalAlign=top;spacing=0;align=left;overflow=fill;" vertex="1" parent="1">
+          <mxGeometry x="500" y="90" width="185" height="175" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_userdb" value="&lt;table style='width:100%;height:100%;border-collapse:collapse;font-family:Segoe UI;font-size:10px;text-align:left;'&gt;&lt;tr&gt;&lt;td style='text-align:center;padding:4px;border-bottom:1.5px solid black;background:#F9F9F9;'&gt;&lt;b&gt;UserDatabase&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style='padding:5px;border-bottom:1.5px solid black;vertical-align:top;'&gt;- users : Map&amp;lt;String, String&amp;gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style='padding:5px;vertical-align:top;'&gt;+ validate(u : String, p : String) : boolean&lt;br/&gt;+ userExists(u : String) : boolean&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=1.6;strokeColor=#000000;fillColor=#FFFFFF;verticalAlign=top;spacing=0;align=left;overflow=fill;" vertex="1" parent="1">
+          <mxGeometry x="500" y="310" width="185" height="115" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_storagemanager" value="&lt;table style='width:100%;height:100%;border-collapse:collapse;font-family:Segoe UI;font-size:10px;text-align:left;'&gt;&lt;tr&gt;&lt;td style='text-align:center;padding:4px;border-bottom:1.5px solid black;background:#F9F9F9;'&gt;&lt;b&gt;StorageManager&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style='padding:5px;border-bottom:1.5px solid black;vertical-align:top;'&gt;- storageRoot : Path&lt;br/&gt;- DATE_FORMAT : SimpleDateFormat&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style='padding:5px;vertical-align:top;'&gt;- resolveSafe(cDir, path) : Path&lt;br/&gt;+ listDirectory(home, cDir) : String&lt;br/&gt;+ receiveFile(home, cDir, ...) : String&lt;br/&gt;+ sendFile(home, cDir, ...) : String&lt;br/&gt;+ deleteFile(home, cDir, f) : String&lt;br/&gt;+ renameFile(home, cDir, o, n) : String&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=1.6;strokeColor=#000000;fillColor=#FFFFFF;verticalAlign=top;spacing=0;align=left;overflow=fill;" vertex="1" parent="1">
+          <mxGeometry x="500" y="470" width="185" height="195" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_loginframe" value="&lt;table style='width:100%;height:100%;border-collapse:collapse;font-family:Segoe UI;font-size:10px;text-align:left;'&gt;&lt;tr&gt;&lt;td style='text-align:center;padding:4px;border-bottom:1.5px solid black;background:#F9F9F9;'&gt;&lt;b&gt;LoginFrame&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style='padding:5px;border-bottom:1.5px solid black;vertical-align:top;'&gt;- tfServer, tfPort : JTextField&lt;br/&gt;- tfUsername : JTextField&lt;br/&gt;- pfPassword : JPasswordField&lt;br/&gt;- ftpService : FtpClientService&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style='padding:5px;vertical-align:top;'&gt;- doConnect() : void&lt;br/&gt;- doLogin() : void&lt;br/&gt;- applyTheme(theme : String) : void&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=1.6;strokeColor=#000000;fillColor=#FFFFFF;verticalAlign=top;spacing=0;align=left;overflow=fill;" vertex="1" parent="1">
+          <mxGeometry x="740" y="90" width="180" height="155" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_mainframe" value="&lt;table style='width:100%;height:100%;border-collapse:collapse;font-family:Segoe UI;font-size:10px;text-align:left;'&gt;&lt;tr&gt;&lt;td style='text-align:center;padding:4px;border-bottom:1.5px solid black;background:#F9F9F9;'&gt;&lt;b&gt;MainFrame&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style='padding:5px;border-bottom:1.5px solid black;vertical-align:top;'&gt;- fileTable : JTable&lt;br/&gt;- progressBar : JProgressBar&lt;br/&gt;- logArea : JTextArea&lt;br/&gt;- ftpService : FtpClientService&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style='padding:5px;vertical-align:top;'&gt;- doUpload() : void&lt;br/&gt;- doDownload() : void&lt;br/&gt;- refreshFiles() : void&lt;br/&gt;+ setProgress(pct, msg) : void&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=1.6;strokeColor=#000000;fillColor=#FFFFFF;verticalAlign=top;spacing=0;align=left;overflow=fill;" vertex="1" parent="1">
+          <mxGeometry x="740" y="320" width="180" height="175" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_ftpservice" value="&lt;table style='width:100%;height:100%;border-collapse:collapse;font-family:Segoe UI;font-size:10px;text-align:left;'&gt;&lt;tr&gt;&lt;td style='text-align:center;padding:4px;border-bottom:1.5px solid black;background:#F9F9F9;'&gt;&lt;b&gt;FtpClientService&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style='padding:5px;border-bottom:1.5px solid black;vertical-align:top;'&gt;- socket : Socket&lt;br/&gt;- socketIn : InputStream&lt;br/&gt;- writer : PrintWriter&lt;br/&gt;- connected : boolean&lt;br/&gt;- loggedIn : boolean&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style='padding:5px;vertical-align:top;'&gt;+ connect(host, port) : boolean&lt;br/&gt;+ login(u, p) : String&lt;br/&gt;+ list() : List&amp;lt;FileEntry&amp;gt;&lt;br/&gt;+ stor(file, listener) : String&lt;br/&gt;+ retr(file, dir, listener) : String&lt;br/&gt;+ dele(filename) : String&lt;br/&gt;+ rename(oldName, newName) : String&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=1.6;strokeColor=#000000;fillColor=#FFFFFF;verticalAlign=top;spacing=0;align=left;overflow=fill;" vertex="1" parent="1">
+          <mxGeometry x="945" y="230" width="180" height="215" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_listener" value="&lt;table style='width:100%;height:100%;border-collapse:collapse;font-family:Segoe UI;font-size:10px;text-align:left;'&gt;&lt;tr&gt;&lt;td style='text-align:center;padding:4px;border-bottom:1.5px solid black;background:#F9F9F9;'&gt;&amp;laquo;interface&amp;raquo;&lt;br/&gt;&lt;b&gt;ProgressListener&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style='padding:5px;border-bottom:1.5px solid black;vertical-align:top;'&gt;&lt;i&gt;(none)&lt;/i&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style='padding:5px;vertical-align:top;'&gt;+ onProgress(percent : int,&lt;br/&gt;  transferred : long,&lt;br/&gt;  totalBytes : long) : void&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=1.6;strokeColor=#000000;fillColor=#FFFFFF;verticalAlign=top;spacing=0;align=left;overflow=fill;" vertex="1" parent="1">
+          <mxGeometry x="945" y="90" width="180" height="105" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_tcpclient" value="&lt;table style='width:100%;height:100%;border-collapse:collapse;font-family:Segoe UI;font-size:10px;text-align:left;'&gt;&lt;tr&gt;&lt;td style='text-align:center;padding:4px;border-bottom:1.5px solid black;background:#F9F9F9;'&gt;&lt;b&gt;TCPClient&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style='padding:5px;border-bottom:1.5px solid black;vertical-align:top;'&gt;- DEFAULT_HOST : String&lt;br/&gt;- DEFAULT_PORT : int = 6789&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style='padding:5px;vertical-align:top;'&gt;+ main(args : String[]) : void&lt;br/&gt;- handleDownload(f, ...) : void&lt;br/&gt;- handleUpload(f, ...) : void&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=1.6;strokeColor=#000000;fillColor=#FFFFFF;verticalAlign=top;spacing=0;align=left;overflow=fill;" vertex="1" parent="1">
+          <mxGeometry x="740" y="560" width="180" height="130" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel_1" value="" style="html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Segoe UI;fontSize=10;startArrow=diamond;startFill=1;endArrow=none;startSize=8;" edge="1" parent="1" source="c_tcpserver" target="c_clienthandler">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel_1_ms" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontStyle=1;" vertex="1" connectable="0" parent="rel_1">
+          <mxGeometry x="-0.8" relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel_1_mt" value="0..*" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontStyle=1;" vertex="1" connectable="0" parent="rel_1">
+          <mxGeometry x="0.8" relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel_2" value="" style="html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Segoe UI;fontSize=10;startArrow=diamond;startFill=1;endArrow=none;startSize=8;" edge="1" parent="1" source="c_clienthandler" target="c_commandhandler">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel_2_ms" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontStyle=1;" vertex="1" connectable="0" parent="rel_2">
+          <mxGeometry x="-0.8" relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel_2_mt" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontStyle=1;" vertex="1" connectable="0" parent="rel_2">
+          <mxGeometry x="0.8" relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel_3" value="" style="html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Segoe UI;fontSize=10;startArrow=diamond;startFill=1;endArrow=none;startSize=8;" edge="1" parent="1" source="c_clienthandler" target="c_protocolstream">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel_3_ms" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontStyle=1;" vertex="1" connectable="0" parent="rel_3">
+          <mxGeometry x="-0.8" relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel_3_mt" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontStyle=1;" vertex="1" connectable="0" parent="rel_3">
+          <mxGeometry x="0.8" relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel_4" value="" style="html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Segoe UI;fontSize=10;startArrow=diamond;startFill=1;endArrow=none;startSize=8;" edge="1" parent="1" source="c_commandhandler" target="c_session">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel_4_ms" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontStyle=1;" vertex="1" connectable="0" parent="rel_4">
+          <mxGeometry x="-0.8" relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel_4_mt" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontStyle=1;" vertex="1" connectable="0" parent="rel_4">
+          <mxGeometry x="0.8" relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel_5" value="" style="html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Segoe UI;fontSize=10;startArrow=diamond;startFill=0;endArrow=none;startSize=8;" edge="1" parent="1" source="c_commandhandler" target="c_userdb">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel_5_ms" value="*" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontStyle=1;" vertex="1" connectable="0" parent="rel_5">
+          <mxGeometry x="-0.8" relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel_5_mt" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontStyle=1;" vertex="1" connectable="0" parent="rel_5">
+          <mxGeometry x="0.8" relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel_6" value="" style="html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Segoe UI;fontSize=10;startArrow=diamond;startFill=0;endArrow=none;startSize=8;" edge="1" parent="1" source="c_commandhandler" target="c_storagemanager">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel_6_ms" value="*" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontStyle=1;" vertex="1" connectable="0" parent="rel_6">
+          <mxGeometry x="-0.8" relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel_6_mt" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontStyle=1;" vertex="1" connectable="0" parent="rel_6">
+          <mxGeometry x="0.8" relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel_7" value="" style="html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Segoe UI;fontSize=10;endArrow=open;endSize=6;" edge="1" parent="1" source="c_loginframe" target="c_ftpservice">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel_7_ms" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontStyle=1;" vertex="1" connectable="0" parent="rel_7">
+          <mxGeometry x="-0.8" relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel_7_mt" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontStyle=1;" vertex="1" connectable="0" parent="rel_7">
+          <mxGeometry x="0.8" relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel_8" value="creates &amp;amp; opens" style="html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Segoe UI;fontSize=10;dashed=1;endArrow=open;endSize=6;" edge="1" parent="1" source="c_loginframe" target="c_mainframe">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel_9" value="" style="html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Segoe UI;fontSize=10;endArrow=open;endSize=6;" edge="1" parent="1" source="c_mainframe" target="c_ftpservice">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel_9_ms" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontStyle=1;" vertex="1" connectable="0" parent="rel_9">
+          <mxGeometry x="-0.8" relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel_9_mt" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontStyle=1;" vertex="1" connectable="0" parent="rel_9">
+          <mxGeometry x="0.8" relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel_10" value="" style="html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Segoe UI;fontSize=10;startArrow=diamond;startFill=0;endArrow=none;startSize=8;" edge="1" parent="1" source="c_ftpservice" target="c_listener">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel_10_ms" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontStyle=1;" vertex="1" connectable="0" parent="rel_10">
+          <mxGeometry x="-0.8" relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel_10_mt" value="0..1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontStyle=1;" vertex="1" connectable="0" parent="rel_10">
+          <mxGeometry x="0.8" relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="rel_11" value="implements / passes" style="html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Segoe UI;fontSize=10;dashed=1;endArrow=open;endSize=6;" edge="1" parent="1" source="c_mainframe" target="c_listener">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

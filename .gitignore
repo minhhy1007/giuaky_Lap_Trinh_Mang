@@ -1,0 +1,16 @@
+# Compiled Class Files
+out/
+*.class
+
+# IDE configurations
+.idea/
+*.iml
+
+# Sensitive local configurations
+config/db.properties
+
+# Local storage and downloads
+downloads/
+storage/
+*.log
+

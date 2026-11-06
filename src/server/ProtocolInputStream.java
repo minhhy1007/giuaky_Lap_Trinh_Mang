@@ -48,22 +48,22 @@ public class ProtocolInputStream {
      * @return  Dòng text (không có '\n'), hoặc null nếu kết nối đóng
      */
     public String readLine() throws IOException {
-        StringBuilder sb = new StringBuilder();
+        java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
         int byteRead;
 
         while ((byteRead = in.read()) != -1) {
             if (byteRead == '\n') {
-                // Kết thúc dòng — trả về nội dung đã đọc
-                return sb.toString();
+                return baos.toString(java.nio.charset.StandardCharsets.UTF_8);
             }
             if (byteRead == '\r') {
-                // Bỏ qua ký tự \r (Windows \r\n line ending)
                 continue;
             }
-            sb.append((char) byteRead);
+            baos.write(byteRead);
         }
 
-        // byteRead == -1 → EOF → client đóng kết nối
+        if (baos.size() > 0) {
+            return baos.toString(java.nio.charset.StandardCharsets.UTF_8);
+        }
         return null;
     }
 

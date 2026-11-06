@@ -2,368 +2,348 @@ package client;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.awt.event.*;
 
 /**
- * PHASE 7 — Màn hình Đăng nhập (Login Screen)
+ * GIAO DIỆN ĐĂNG NHẬP CHUYÊN NGHIỆP (MODERN DESKTOP LOGIN SCREEN)
  *
- * Kiến trúc:
- *   LoginFrame  ──gọi──►  FtpClientService.connect() + .login()
- *   LoginFrame  KHÔNG biết gì về Socket, InputStream hay PrintWriter.
- *
- * Luồng sử dụng:
- *   1. Người dùng điền Server, Port, Username, Password.
- *   2. Nhấn "Kết nối" → FtpClientService.connect().
- *   3. Nhấn "Đăng nhập" → FtpClientService.login().
- *   4. Login thành công → ẩn LoginFrame, mở MainFrame.
+ * Chuẩn hóa màu sắc & độ tương phản:
+ * - Nút "Đăng nhập": Nền xanh Primary #3B82F6, chữ trắng #FFFFFF (tương phản cao).
+ * - Nút "Kiểm tra kết nối": Nút phụ nền #1F2937, viền #374151, chữ #F9FAFB dễ đọc.
+ * - Nút "Đăng ký tài khoản mới": Nút phụ nền #1F2937, viền #374151, chữ #3B82F6 đồng nhất theme.
+ * - Sử dụng ModernButton: Tự vẽ 100% bằng Graphics2D, triệt tiêu hoàn toàn lỗi nền trắng chữ trắng.
+ * - Checkbox "Hiện mật khẩu" đồng bộ, chữ rõ ràng.
  */
 public class LoginFrame extends JFrame {
 
-    // ── Components giao diện ─────────────────────────────────────────
+    static {
+        ThemeManager.applyTheme();
+    }
+
+    // ── Components ───────────────────────────────────────────────────
     private JTextField     tfServer;
     private JTextField     tfPort;
     private JTextField     tfUsername;
     private JPasswordField pfPassword;
-    private JButton        btnConnect;
-    private JButton        btnLogin;
+    private JCheckBox      chkShowPass;
+    private ModernButton   btnConnect;
+    private ModernButton   btnLogin;
+    private ModernButton   btnRegister;
     private JLabel         lblStatus;
 
-    // ── Service Layer (không biết Socket) ────────────────────────────
+    // ── Service Layer ────────────────────────────────────────────────
     private final FtpClientService ftpService = new FtpClientService();
-
-    // ── Màu sắc giao diện ────────────────────────────────────────────
-    private static final Color CLR_BG      = new Color(30, 34, 45);
-    private static final Color CLR_PANEL   = new Color(42, 47, 62);
-    private static final Color CLR_ACCENT  = new Color(99, 179, 237);
-    private static final Color CLR_SUCCESS = new Color(72, 199, 116);
-    private static final Color CLR_ERROR   = new Color(252, 100, 100);
-    private static final Color CLR_TEXT    = new Color(226, 232, 240);
-    private static final Color CLR_MUTED   = new Color(130, 140, 160);
-    private static final Color CLR_INPUT_BG= new Color(55, 62, 80);
 
     public LoginFrame() {
         initUI();
         setVisible(true);
     }
 
-    // ================================================================
-    // Khởi tạo giao diện
-    // ================================================================
-
     private void initUI() {
-        setTitle("FTP Client — Đăng nhập");
+        setTitle("FTP Client — Đăng nhập hệ thống");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(440, 480);
-        setLocationRelativeTo(null); // giữa màn hình
+        setSize(480, 560);
+        setLocationRelativeTo(null);
         setResizable(false);
 
-        // ── Panel nền chính ──────────────────────────────────────────
-        JPanel bgPanel = new JPanel(new BorderLayout());
-        bgPanel.setBackground(CLR_BG);
-        bgPanel.setBorder(new EmptyBorder(30, 40, 30, 40));
+        // Nền chính
+        JPanel root = new JPanel(new BorderLayout());
+        root.setBackground(ThemeManager.CLR_BG);
+        root.setBorder(new EmptyBorder(30, 36, 30, 36));
 
-        // ── Tiêu đề ──────────────────────────────────────────────────
-        JLabel lblTitle = new JLabel("🌐 FTP Client", SwingConstants.CENTER);
-        lblTitle.setFont(new Font("Segoe UI", Font.BOLD, 26));
-        lblTitle.setForeground(CLR_ACCENT);
-        lblTitle.setBorder(new EmptyBorder(0, 0, 6, 0));
+        // ── Header: Logo & Tên ứng dụng ──────────────────────────────
+        JPanel headerPanel = new JPanel();
+        headerPanel.setLayout(new BoxLayout(headerPanel, BoxLayout.Y_AXIS));
+        headerPanel.setBackground(ThemeManager.CLR_BG);
+        headerPanel.setBorder(new EmptyBorder(0, 0, 20, 0));
 
-        JLabel lblSubtitle = new JLabel("Lập Trình Mạng — FTP Project", SwingConstants.CENTER);
-        lblSubtitle.setFont(new Font("Segoe UI", Font.PLAIN, 13));
-        lblSubtitle.setForeground(CLR_MUTED);
-        lblSubtitle.setBorder(new EmptyBorder(0, 0, 24, 0));
+        JLabel lblBrand = new JLabel("FTP CLOUD CLIENT");
+        lblBrand.setFont(new Font("Segoe UI", Font.BOLD, 24));
+        lblBrand.setForeground(ThemeManager.CLR_PRIMARY);
+        lblBrand.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JPanel headerPanel = new JPanel(new BorderLayout());
-        headerPanel.setBackground(CLR_BG);
-        headerPanel.add(lblTitle,    BorderLayout.NORTH);
-        headerPanel.add(lblSubtitle, BorderLayout.CENTER);
+        JLabel lblDesc = new JLabel("Hệ thống truyền nhận và lưu trữ tệp tin bảo mật");
+        lblDesc.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+        lblDesc.setForeground(ThemeManager.CLR_MUTED);
+        lblDesc.setAlignmentX(Component.CENTER_ALIGNMENT);
+        lblDesc.setBorder(new EmptyBorder(4, 0, 0, 0));
 
-        // ── Panel form ───────────────────────────────────────────────
-        JPanel formPanel = new JPanel(new GridBagLayout());
-        formPanel.setBackground(CLR_PANEL);
-        formPanel.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(new Color(70, 80, 100), 1),
-                new EmptyBorder(24, 28, 24, 28)));
+        headerPanel.add(lblBrand);
+        headerPanel.add(lblDesc);
+        root.add(headerPanel, BorderLayout.NORTH);
+
+        // ── Card Panel chứa form đăng nhập ───────────────────────────
+        JPanel cardPanel = new JPanel(new GridBagLayout());
+        cardPanel.setBackground(ThemeManager.CLR_PANEL);
+        cardPanel.setBorder(BorderFactory.createCompoundBorder(
+                new LineBorder(ThemeManager.CLR_BORDER, 1, true),
+                new EmptyBorder(22, 24, 22, 24)));
 
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.fill      = GridBagConstraints.HORIZONTAL;
-        gbc.insets    = new Insets(6, 0, 6, 0);
-        gbc.weightx   = 1.0;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(5, 0, 5, 0);
+        gbc.weightx = 1.0;
 
-        // ── Dòng Server ──────────────────────────────────────────────
-        tfServer = createTextField("localhost");
-        tfPort   = createTextField("6789");
+        // 1. Dòng Server & Port trên cùng một hàng
+        JLabel lblServerHost = createFieldLabel("Máy chủ FTP:");
+        JLabel lblServerPort = createFieldLabel("Cổng Port:");
 
-        JPanel serverRow = new JPanel(new GridLayout(1, 2, 8, 0));
-        serverRow.setBackground(CLR_PANEL);
+        JPanel hostPortLabelRow = new JPanel(new GridLayout(1, 2, 10, 0));
+        hostPortLabelRow.setOpaque(false);
+        hostPortLabelRow.add(lblServerHost);
+        hostPortLabelRow.add(lblServerPort);
+
+        tfServer = createStyledTextField("localhost");
+        tfPort   = createStyledTextField("6789");
+
+        JPanel serverRow = new JPanel(new GridLayout(1, 2, 10, 0));
+        serverRow.setOpaque(false);
         serverRow.add(tfServer);
         serverRow.add(tfPort);
 
-        // ── Các dòng input ───────────────────────────────────────────
-        tfUsername = createTextField("admin");
+        gbc.gridy = 0; cardPanel.add(hostPortLabelRow, gbc);
+        gbc.gridy = 1; cardPanel.add(serverRow, gbc);
+
+        // 2. Dòng Tên đăng nhập
+        JLabel lblUser = createFieldLabel("Tên đăng nhập:");
+        tfUsername = createStyledTextField("admin");
+        gbc.gridy = 2; cardPanel.add(lblUser, gbc);
+        gbc.gridy = 3; cardPanel.add(tfUsername, gbc);
+
+        // 3. Dòng Mật khẩu & Hiện/Ẩn mật khẩu
+        JLabel lblPass = createFieldLabel("Mật khẩu:");
         pfPassword = new JPasswordField("123");
         stylePasswordField(pfPassword);
 
-        // ── Layout các dòng ──────────────────────────────────────────
-        addFormRow(formPanel, gbc, 0, "🖥  Địa chỉ Server & Port:", serverRow);
-        addFormRow(formPanel, gbc, 1, "👤 Tên đăng nhập:",         tfUsername);
-        addFormRow(formPanel, gbc, 2, "🔑 Mật khẩu:",              pfPassword);
-
-        // ── Nút bấm ──────────────────────────────────────────────────
-        btnConnect = createButton("Kết nối",   CLR_ACCENT);
-        btnLogin   = createButton("Đăng nhập", CLR_SUCCESS);
-        btnLogin.setEnabled(false); // Chưa connect chưa được login
-
-        JPanel btnPanel = new JPanel(new GridLayout(1, 2, 10, 0));
-        btnPanel.setBackground(CLR_PANEL);
-        btnPanel.setBorder(new EmptyBorder(14, 0, 0, 0));
-
-        gbc.gridy    = 3;
-        gbc.gridwidth = 2;
-        gbc.insets   = new Insets(14, 0, 0, 0);
-        btnPanel.add(btnConnect);
-        btnPanel.add(btnLogin);
-        formPanel.add(btnPanel, gbc);
-
-        // ── Nhãn trạng thái ──────────────────────────────────────────
-        lblStatus = new JLabel("⚪  Chưa kết nối", SwingConstants.CENTER);
-        lblStatus.setFont(new Font("Segoe UI", Font.BOLD, 13));
-        lblStatus.setForeground(CLR_MUTED);
-        lblStatus.setBorder(new EmptyBorder(10, 0, 0, 0));
-
-        // ── Theme Selector ───────────────────────────────────────────
-        JPanel bottomPanel = new JPanel(new BorderLayout(0, 4));
-        bottomPanel.setBackground(CLR_BG);
-        bottomPanel.add(lblStatus, BorderLayout.NORTH);
-
-        JPanel themeRow = new JPanel(new FlowLayout(FlowLayout.CENTER, 8, 4));
-        themeRow.setBackground(CLR_BG);
-        JLabel themeLabel = new JLabel("Giao di\u1ec7n:");
-        themeLabel.setForeground(CLR_MUTED);
-        themeLabel.setFont(new Font("Segoe UI", Font.PLAIN, 11));
-
-        String[] themes = {"Dark Custom", "Nimbus", "Windows", "Metal"};
-        JComboBox<String> themeBox = new JComboBox<>(themes);
-        themeBox.setFont(new Font("Segoe UI", Font.PLAIN, 11));
-        themeBox.setSelectedItem("Dark Custom");
-        themeBox.addActionListener(e -> {
-            String selected = (String) themeBox.getSelectedItem();
-            applyTheme(selected);
-        });
-
-        themeRow.add(themeLabel);
-        themeRow.add(themeBox);
-        bottomPanel.add(themeRow, BorderLayout.SOUTH);
-
-        // ── Ghép layout ──────────────────────────────────────────────
-        bgPanel.add(headerPanel,  BorderLayout.NORTH);
-        bgPanel.add(formPanel,    BorderLayout.CENTER);
-        bgPanel.add(bottomPanel,  BorderLayout.SOUTH);
-        setContentPane(bgPanel);
-
-        // ── Gắn sự kiện ──────────────────────────────────────────────
-        btnConnect.addActionListener(e -> doConnect());
-        btnLogin.addActionListener(e   -> doLogin());
-
-        // Enter trong pfPassword = nhấn Login
-        pfPassword.addActionListener(e -> {
-            if (btnLogin.isEnabled()) doLogin();
-        });
-    }
-
-    // ================================================================
-    // Chuyển đổi Theme (Look and Feel)
-    // ================================================================
-
-    private void applyTheme(String themeName) {
-        try {
-            switch (themeName) {
-                case "Nimbus":
-                    for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-                        if ("Nimbus".equals(info.getName())) {
-                            UIManager.setLookAndFeel(info.getClassName());
-                            break;
-                        }
-                    }
-                    break;
-                case "Windows":
-                    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-                    break;
-                case "Metal":
-                    UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
-                    break;
-                case "Dark Custom":
-                default:
-                    // Dark theme đã được set sẵn bởi màu tùy chỉnh của chúng ta
-                    UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
-                    break;
+        chkShowPass = new JCheckBox("Hiện mật khẩu");
+        chkShowPass.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+        chkShowPass.setForeground(ThemeManager.CLR_MUTED);
+        chkShowPass.setOpaque(false);
+        chkShowPass.setFocusPainted(false);
+        chkShowPass.addActionListener(e -> {
+            if (chkShowPass.isSelected()) {
+                pfPassword.setEchoChar((char) 0);
+            } else {
+                pfPassword.setEchoChar('•');
             }
-            // Cập nhật giao diện toàn bộ cửa sổ
-            SwingUtilities.updateComponentTreeUI(this);
-            this.pack();
-            this.setSize(440, 520);
-            this.setLocationRelativeTo(null);
-        } catch (Exception ex) {
-            lblStatus.setText("Lỗi đổi theme: " + ex.getMessage());
-            lblStatus.setForeground(CLR_ERROR);
-        }
+        });
+
+        JPanel passRow = new JPanel(new BorderLayout(0, 4));
+        passRow.setOpaque(false);
+        passRow.add(pfPassword, BorderLayout.CENTER);
+        passRow.add(chkShowPass, BorderLayout.SOUTH);
+
+        gbc.gridy = 4; cardPanel.add(lblPass, gbc);
+        gbc.gridy = 5; cardPanel.add(passRow, gbc);
+
+        // 4. Nút bấm chính & phụ bằng ModernButton (Chống 100% chữ trắng nền trắng)
+        btnLogin = new ModernButton("Đăng nhập", ThemeManager.CLR_PRIMARY, Color.WHITE, null);
+        btnLogin.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        btnLogin.setPreferredSize(new Dimension(0, 40));
+
+        btnConnect = new ModernButton("Kiểm tra kết nối", ThemeManager.CLR_PANEL, ThemeManager.CLR_TEXT, ThemeManager.CLR_BORDER);
+        btnConnect.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+        btnConnect.setPreferredSize(new Dimension(0, 36));
+
+        btnRegister = new ModernButton("Đăng ký tài khoản mới", ThemeManager.CLR_PANEL, ThemeManager.CLR_PRIMARY, ThemeManager.CLR_BORDER);
+        btnRegister.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+        btnRegister.setPreferredSize(new Dimension(0, 36));
+
+        JPanel btnActionPanel = new JPanel();
+        btnActionPanel.setLayout(new BoxLayout(btnActionPanel, BoxLayout.Y_AXIS));
+        btnActionPanel.setOpaque(false);
+        btnActionPanel.setBorder(new EmptyBorder(14, 0, 0, 0));
+
+        btnLogin.setAlignmentX(Component.CENTER_ALIGNMENT);
+        btnLogin.setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
+        btnActionPanel.add(btnLogin);
+        btnActionPanel.add(Box.createVerticalStrut(10));
+
+        JPanel secondaryRow = new JPanel(new GridLayout(1, 2, 10, 0));
+        secondaryRow.setOpaque(false);
+        secondaryRow.add(btnConnect);
+        secondaryRow.add(btnRegister);
+        btnActionPanel.add(secondaryRow);
+
+        gbc.gridy = 6;
+        cardPanel.add(btnActionPanel, gbc);
+
+        root.add(cardPanel, BorderLayout.CENTER);
+
+        // ── Trạng thái kết nối phía dưới ─────────────────────────────
+        JPanel footerPanel = new JPanel(new BorderLayout(0, 6));
+        footerPanel.setBackground(ThemeManager.CLR_BG);
+        footerPanel.setBorder(new EmptyBorder(14, 0, 0, 0));
+
+        lblStatus = new JLabel("Trạng thái: Chưa kết nối máy chủ", SwingConstants.CENTER);
+        lblStatus.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+        lblStatus.setForeground(ThemeManager.CLR_MUTED);
+        footerPanel.add(lblStatus, BorderLayout.CENTER);
+
+        root.add(footerPanel, BorderLayout.SOUTH);
+        setContentPane(root);
+
+        // ── Sự kiện ──────────────────────────────────────────────────
+        btnConnect.addActionListener(e -> doConnect());
+        btnLogin.addActionListener(e -> doLogin());
+        btnRegister.addActionListener(e -> doOpenRegister());
+
+        tfUsername.addActionListener(e -> pfPassword.requestFocusInWindow());
+        pfPassword.addActionListener(e -> doLogin());
     }
 
     // ================================================================
-    // Hành động kết nối
+    // Logic kết nối & đăng nhập
     // ================================================================
 
     private void doConnect() {
         String host = tfServer.getText().trim();
-        int    port;
+        int port;
         try {
             port = Integer.parseInt(tfPort.getText().trim());
         } catch (NumberFormatException ex) {
-            setStatus("❌  Cổng không hợp lệ!", CLR_ERROR);
+            setStatus("Cổng Port không hợp lệ!", ThemeManager.CLR_DANGER);
             return;
         }
 
-        setStatus("🔄  Đang kết nối đến " + host + ":" + port + "...", CLR_MUTED);
+        setStatus("Đang kết nối đến " + host + ":" + port + "...", ThemeManager.CLR_MUTED);
         btnConnect.setEnabled(false);
 
-        // Kết nối trong Thread riêng để không block UI
         new Thread(() -> {
             boolean ok = ftpService.connect(host, port);
             SwingUtilities.invokeLater(() -> {
                 if (ok) {
-                    setStatus("🟢  Đã kết nối thành công!", CLR_SUCCESS);
-                    btnLogin.setEnabled(true);
+                    setStatus("Đã kết nối thành công đến máy chủ!", ThemeManager.CLR_SUCCESS);
                     btnConnect.setText("Kết nối lại");
                 } else {
-                    setStatus("🔴  Kết nối thất bại! Kiểm tra Server đang chạy.", CLR_ERROR);
+                    setStatus("Kết nối thất bại! Vui lòng kiểm tra Server đang chạy.", ThemeManager.CLR_DANGER);
                 }
                 btnConnect.setEnabled(true);
             });
         }).start();
     }
 
-    // ================================================================
-    // Hành động đăng nhập
-    // ================================================================
-
     private void doLogin() {
-        if (!ftpService.isConnected()) {
-            setStatus("⚠️  Vui lòng kết nối trước!", CLR_ERROR);
+        String host = tfServer.getText().trim();
+        int port;
+        try {
+            port = Integer.parseInt(tfPort.getText().trim());
+        } catch (NumberFormatException ex) {
+            setStatus("Cổng Port không hợp lệ!", ThemeManager.CLR_DANGER);
             return;
         }
 
         String user = tfUsername.getText().trim();
         String pass = new String(pfPassword.getPassword());
 
-        setStatus("🔄  Đang đăng nhập...", CLR_MUTED);
+        if (user.isEmpty() || pass.isEmpty()) {
+            setStatus("Vui lòng nhập đầy đủ Tên đăng nhập và Mật khẩu!", ThemeManager.CLR_WARN);
+            return;
+        }
+
+        setStatus("Đang kết nối & xác thực tài khoản...", ThemeManager.CLR_MUTED);
         btnLogin.setEnabled(false);
+        btnConnect.setEnabled(false);
 
         new Thread(() -> {
             try {
+                if (!ftpService.isConnected()) {
+                    boolean ok = ftpService.connect(host, port);
+                    if (!ok) {
+                        SwingUtilities.invokeLater(() -> {
+                            setStatus("Không thể kết nối đến máy chủ " + host + ":" + port, ThemeManager.CLR_DANGER);
+                            btnLogin.setEnabled(true);
+                            btnConnect.setEnabled(true);
+                        });
+                        return;
+                    }
+                }
+
                 String resp = ftpService.login(user, pass);
                 SwingUtilities.invokeLater(() -> {
                     if (resp != null && resp.startsWith("230")) {
-                        setStatus("✅  Đăng nhập thành công! Chào " + user, CLR_SUCCESS);
-                        // Mở MainFrame sau 500ms để người dùng thấy thông báo
-                        Timer t = new Timer(500, ev -> {
+                        setStatus("Đăng nhập thành công! Đang vào hệ thống...", ThemeManager.CLR_SUCCESS);
+                        Timer t = new Timer(250, ev -> {
                             new MainFrame(ftpService);
                             LoginFrame.this.dispose();
                         });
                         t.setRepeats(false);
                         t.start();
                     } else {
-                        setStatus("🔴  " + (resp != null ? resp : "Đăng nhập thất bại"), CLR_ERROR);
+                        String errMsg = resp != null ? resp : "Đăng nhập thất bại";
+                        if (errMsg.contains("530")) {
+                            errMsg = "Tên đăng nhập hoặc mật khẩu không chính xác (hoặc tài khoản đã bị khóa)!";
+                        }
+                        setStatus(errMsg, ThemeManager.CLR_DANGER);
                         btnLogin.setEnabled(true);
+                        btnConnect.setEnabled(true);
                     }
                 });
             } catch (Exception ex) {
                 SwingUtilities.invokeLater(() -> {
-                    setStatus("🔴  Lỗi: " + ex.getMessage(), CLR_ERROR);
+                    setStatus("Lỗi kết nối: " + ex.getMessage(), ThemeManager.CLR_DANGER);
                     btnLogin.setEnabled(true);
+                    btnConnect.setEnabled(true);
                 });
             }
         }).start();
     }
 
-    // ================================================================
-    // Hàm hỗ trợ tạo UI
-    // ================================================================
+    private void doOpenRegister() {
+        new RegisterDialog(this, ftpService).setVisible(true);
+    }
+
+    public void fillCredentials(String user, String pass) {
+        if (tfUsername != null) tfUsername.setText(user);
+        if (pfPassword != null) pfPassword.setText(pass);
+    }
 
     private void setStatus(String text, Color color) {
         lblStatus.setText(text);
         lblStatus.setForeground(color);
     }
 
-    private JTextField createTextField(String placeholder) {
-        JTextField tf = new JTextField(placeholder);
-        tf.setBackground(CLR_INPUT_BG);
-        tf.setForeground(CLR_TEXT);
-        tf.setCaretColor(CLR_TEXT);
-        tf.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+    // ================================================================
+    // Helper tạo component chuẩn Modern Dark
+    // ================================================================
+
+    private JLabel createFieldLabel(String text) {
+        JLabel lbl = new JLabel(text);
+        lbl.setFont(new Font("Segoe UI", Font.BOLD, 12));
+        lbl.setForeground(ThemeManager.CLR_TEXT);
+        lbl.setBorder(new EmptyBorder(3, 0, 3, 0));
+        return lbl;
+    }
+
+    private JTextField createStyledTextField(String text) {
+        JTextField tf = new JTextField(text);
+        tf.setBackground(ThemeManager.CLR_BG);
+        tf.setForeground(ThemeManager.CLR_TEXT);
+        tf.setCaretColor(ThemeManager.CLR_TEXT);
+        tf.setFont(new Font("Segoe UI", Font.PLAIN, 13));
         tf.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(new Color(70, 80, 100)),
-                new EmptyBorder(6, 10, 6, 10)));
+                new LineBorder(ThemeManager.CLR_BORDER, 1, true),
+                new EmptyBorder(7, 10, 7, 10)));
         return tf;
     }
 
     private void stylePasswordField(JPasswordField pf) {
-        pf.setBackground(CLR_INPUT_BG);
-        pf.setForeground(CLR_TEXT);
-        pf.setCaretColor(CLR_TEXT);
-        pf.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        pf.setBackground(ThemeManager.CLR_BG);
+        pf.setForeground(ThemeManager.CLR_TEXT);
+        pf.setCaretColor(ThemeManager.CLR_TEXT);
+        pf.setFont(new Font("Segoe UI", Font.PLAIN, 13));
         pf.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(new Color(70, 80, 100)),
-                new EmptyBorder(6, 10, 6, 10)));
-    }
-
-    private JButton createButton(String text, Color bgColor) {
-        JButton btn = new JButton(text);
-        btn.setBackground(bgColor);
-        btn.setForeground(Color.WHITE);
-        btn.setFont(new Font("Segoe UI", Font.BOLD, 14));
-        btn.setFocusPainted(false);
-        btn.setBorderPainted(false);
-        btn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        btn.setPreferredSize(new Dimension(0, 38));
-        // Hover effect
-        Color hoverColor = bgColor.darker();
-        btn.addMouseListener(new MouseAdapter() {
-            @Override public void mouseEntered(MouseEvent e) {
-                if (btn.isEnabled()) btn.setBackground(hoverColor);
-            }
-            @Override public void mouseExited(MouseEvent e)  {
-                btn.setBackground(bgColor);
-            }
-        });
-        return btn;
-    }
-
-    private void addFormRow(JPanel panel, GridBagConstraints gbc,
-                            int row, String labelText, JComponent field) {
-        gbc.gridy     = row * 2;
-        gbc.gridwidth = 2;
-        gbc.insets    = new Insets(row == 0 ? 0 : 10, 0, 2, 0);
-        JLabel lbl = new JLabel(labelText);
-        lbl.setForeground(CLR_MUTED);
-        lbl.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-        panel.add(lbl, gbc);
-
-        gbc.gridy  = row * 2 + 1;
-        gbc.insets = new Insets(0, 0, 0, 0);
-        panel.add(field, gbc);
+                new LineBorder(ThemeManager.CLR_BORDER, 1, true),
+                new EmptyBorder(7, 10, 7, 10)));
     }
 
     // ================================================================
-    // Entry point
+    // Main Entry Point
     // ================================================================
 
     public static void main(String[] args) {
-        // Dùng Look and Feel của hệ điều hành (trông native hơn)
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception ignored) {}
-
+        ThemeManager.applyTheme();
         SwingUtilities.invokeLater(LoginFrame::new);
     }
 }

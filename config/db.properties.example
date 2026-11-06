@@ -1,0 +1,15 @@
+# ==============================================================================
+# TEMPLATE CẤU HÌNH KẾT NỐI CƠ SỞ DỮ LIỆU MYSQL (KHÔNG CHỨA MẬT KHẨU THẬT)
+# Hãy sao chép file này thành db.properties và điền thông tin của môi trường
+# ==============================================================================
+db.host=localhost
+db.port=3306
+db.name=custom_ftp_db
+db.user=root
+db.password=YOUR_PASSWORD_HERE
+
+db.useSSL=false
+db.allowPublicKeyRetrieval=true
+db.serverTimezone=UTC
+db.characterEncoding=UTF-8
+

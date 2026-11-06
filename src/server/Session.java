@@ -1,131 +1,135 @@
 package server;
 
+import server.model.User;
+
 /**
- * PHASE 5 - Session (cập nhật)
+ * PHASE 2 - Session (Máy trạng thái phiên làm việc FSM & Phân quyền)
  *
- * Lưu trữ TRẠNG THÁI của một phiên kết nối Client cụ thể.
- * Mỗi ClientHandler → mỗi CommandHandler → mỗi Session.
- * Các Session hoàn toàn độc lập nhau.
- *
- * Vòng đời (lifecycle) của một Session:
- *
- *   [UNAUTHENTICATED]
- *       │  USER <name>
- *       ▼
- *   [WAITING_PASSWORD]      ← biết username, chưa biết password
- *       │  PASS đúng            │  PASS sai
- *       ▼                       ▼
- *   [AUTHENTICATED]         [UNAUTHENTICATED]
- *       │  LOGOUT / QUIT
- *       ▼
- *   [UNAUTHENTICATED]
+ * Lưu trữ trạng thái và danh tính của Client đang kết nối:
+ *   - FSM States: UNAUTHENTICATED -> WAITING_PASSWORD -> AUTHENTICATED
+ *   - Lưu trữ đối tượng User đầy đủ (ID, Role, HomeDir, Quota)
+ *   - Cung cấp phương thức kiểm tra quyền Server-side (isAdmin)
+ *   - Quản lý thư mục hiện tại trong Sandbox của người dùng
  */
 public class Session {
 
-    // ----------------------------------------------------------------
-    // Enum định nghĩa các trạng thái rõ ràng.
-    // Dùng enum thay vì boolean để dễ mở rộng sau này.
-    // ----------------------------------------------------------------
     public enum State {
-        UNAUTHENTICATED,   // chưa gõ USER
-        WAITING_PASSWORD,  // đã gõ USER, đang chờ PASS
-        AUTHENTICATED      // đã login thành công
+        UNAUTHENTICATED,   // Chưa xác thực
+        WAITING_PASSWORD,  // Đã gửi USER, đang chờ PASS
+        AUTHENTICATED      // Đã xác thực thành công
     }
 
-    // Trạng thái hiện tại — bắt đầu là UNAUTHENTICATED
     private State state = State.UNAUTHENTICATED;
-
-    // Username vừa gõ bằng lệnh USER, chờ xác nhận bằng PASS
-    // null nếu chưa gõ USER
     private String pendingUsername = null;
-
-    // Username đã xác thực thành công — chỉ có giá trị khi AUTHENTICATED
     private String loggedInUser = null;
+    private User currentUser = null; // Đối tượng User đầy đủ sau khi đăng nhập thành công
+    private String currentDirectory = ""; // Đường dẫn tương đối bên trong Sandbox của User
 
-    // ----------------------------------------------------------------
-    // PHASE 5: Thư mục hiện tại của session (relative path từ storageRoot)
-    // ""       = root (storage/)
-    // "folder" = storage/folder/
-    // Reset về "" khi logout
-    // ----------------------------------------------------------------
-    private String currentDirectory = "";
+    // renameFrom — lưu tên file đang chờ đổi tên (RNFR/RNTO)
+    private String renameFrom = null;
 
-    // ----------------------------------------------------------------
     // Getters
-    // ----------------------------------------------------------------
+    public State getState()             { return state; }
+    public String getPendingUsername()  { return pendingUsername; }
+    public String getLoggedInUser()     { return loggedInUser; }
+    public User getCurrentUser()        { return currentUser; }
 
-    public State getState() {
-        return state;
-    }
-
-    public String getPendingUsername() {
-        return pendingUsername;
-    }
-
-    public String getLoggedInUser() {
-        return loggedInUser;
-    }
-
-    /** Kiểm tra nhanh xem Client đã login thành công chưa. */
     public boolean isAuthenticated() {
         return state == State.AUTHENTICATED;
     }
 
-    // ----------------------------------------------------------------
-    // State transitions — thay đổi trạng thái theo từng bước auth
-    // ----------------------------------------------------------------
+    /**
+     * Kiểm tra phiên hiện tại có quyền Quản trị viên (ROLE_ADMIN) hay không.
+     * Kiểm tra nghiêm ngặt tại Server, không tin role client gửi lên.
+     */
+    public boolean isAdmin() {
+        return isAuthenticated() && currentUser != null && currentUser.isAdmin();
+    }
 
     /**
-     * Gọi khi Client gõ USER <username>.
-     * Chuyển sang trạng thái chờ password.
-     *
-     * @param username  Username Client gõ vào
+     * Lấy tên thư mục Sandbox của User hiện tại trên máy chủ
      */
+    public String getHomeDir() {
+        if (currentUser != null && currentUser.getHomeDir() != null) {
+            return currentUser.getHomeDir();
+        }
+        return (loggedInUser != null) ? loggedInUser : "";
+    }
+
+    // State Transitions
     public void setPendingUsername(String username) {
         this.pendingUsername = username;
         this.state = State.WAITING_PASSWORD;
     }
 
-    /**
-     * Gọi khi PASS đúng.
-     * Chuyển sang AUTHENTICATED, lưu tên user.
-     */
+    public void loginSuccess(User user) {
+        this.currentUser = user;
+        this.loggedInUser = (user != null) ? user.getUsername() : this.pendingUsername;
+        this.pendingUsername = null;
+        this.state = State.AUTHENTICATED;
+    }
+
     public void loginSuccess() {
         this.loggedInUser = this.pendingUsername;
         this.pendingUsername = null;
         this.state = State.AUTHENTICATED;
     }
 
-    /**
-     * Gọi khi PASS sai hoặc khi LOGOUT.
-     * Reset về UNAUTHENTICATED, xóa mọi thông tin.
-     */
     public void reset() {
-        this.state           = State.UNAUTHENTICATED;
+        this.state = State.UNAUTHENTICATED;
         this.pendingUsername = null;
-        this.loggedInUser    = null;
-        this.currentDirectory = "";  // reset về root khi logout
+        this.loggedInUser = null;
+        this.currentUser = null;
+        this.currentDirectory = "";
+        this.renameFrom = null;
     }
 
-    // PHASE 5: Getters/setters cho currentDirectory
-    public String getCurrentDirectory()          { return currentDirectory; }
-    public void setCurrentDirectory(String dir)  { this.currentDirectory = dir; }
+    public String getCurrentDirectory()         { return currentDirectory; }
+    public void setCurrentDirectory(String dir) { this.currentDirectory = (dir != null) ? dir.trim() : ""; }
 
-    // ----------------------------------------------------------------
-    // PHASE 7: renameFrom — lưu tên file đang chờ đổi tên (RNFR/RNTO)
-    // null khi chưa có lệnh RNFR nào
-    // ----------------------------------------------------------------
-    private String renameFrom = null;
+    /**
+     * Di chuyển lên thư mục cha (CDUP) mà không bao giờ vượt ra ngoài Sandbox.
+     */
+    public void cdup() {
+        if (currentDirectory == null || currentDirectory.isEmpty()) {
+            currentDirectory = "";
+            return;
+        }
+        int lastSlash = currentDirectory.lastIndexOf('/');
+        if (lastSlash > 0) {
+            currentDirectory = currentDirectory.substring(0, lastSlash);
+        } else {
+            currentDirectory = "";
+        }
+    }
+
+    /**
+     * Chuyển thư mục làm việc (CWD).
+     */
+    public void cd(String dir) {
+        if (dir == null || dir.isEmpty() || dir.equals("/")) {
+            currentDirectory = "";
+        } else if (dir.equals("..")) {
+            cdup();
+        } else {
+            String clean = dir.startsWith("/") ? dir.substring(1) : dir;
+            if (clean.endsWith("/")) clean = clean.substring(0, clean.length() - 1);
+            if (currentDirectory.isEmpty()) {
+                currentDirectory = clean;
+            } else {
+                currentDirectory = currentDirectory + "/" + clean;
+            }
+        }
+    }
 
     public String getRenameFrom()          { return renameFrom; }
-    public void   setRenameFrom(String n)  { this.renameFrom = n; }
-    public void   clearRenameFrom()        { this.renameFrom = null; }
+    public void setRenameFrom(String n)    { this.renameFrom = n; }
+    public void clearRenameFrom()          { this.renameFrom = null; }
     public boolean hasRenameFrom()         { return renameFrom != null; }
 
     @Override
     public String toString() {
-        return "Session{state=" + state
-                + ", pending=" + pendingUsername
-                + ", loggedIn=" + loggedInUser + "}";
+        return String.format("Session[State=%s, User=%s, Role=%s, Sandbox=%s]",
+                state, loggedInUser, (currentUser != null ? currentUser.getRoleName() : "N/A"), getHomeDir());
     }
 }

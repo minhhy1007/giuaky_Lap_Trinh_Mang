@@ -1,0 +1,302 @@
+<?xml version="1.0" ?>
+<mxfile host="app.diagrams.net" modified="2026-11-02T15:00:00.000Z" agent="SecureFTPClientPro" version="24.0.0" type="device">
+  <diagram id="Sequence_Diagram_RETR" name="Sơ đồ Tuần tự (Sequence Diagram) - Chức năng Tải tệp (RETR)">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="#FFFFFF" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="p_client" value="&amp;laquo;boundary&amp;raquo;&lt;br&gt;&lt;b&gt;Client&lt;/b&gt;&lt;br&gt;(FTP Client Pro)" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=1.8;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="40" y="55" width="150" height="48" as="geometry"/>
+        </mxCell>
+        <mxCell id="line_115" value="" style="endArrow=none;dashed=1;html=1;strokeWidth=1.5;strokeColor=#666666;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="115" y="105" as="sourcePoint"/>
+            <mxPoint x="115" y="780" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p_server" value="&amp;laquo;control&amp;raquo;&lt;br&gt;&lt;b&gt;FTP Server&lt;/b&gt;&lt;br&gt;(TCPServer / Handler)" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=1.8;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="280" y="55" width="150" height="48" as="geometry"/>
+        </mxCell>
+        <mxCell id="line_355" value="" style="endArrow=none;dashed=1;html=1;strokeWidth=1.5;strokeColor=#666666;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="355" y="105" as="sourcePoint"/>
+            <mxPoint x="355" y="780" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p_auth" value="&amp;laquo;service&amp;raquo;&lt;br&gt;&lt;b&gt;Auth Service&lt;/b&gt;&lt;br&gt;(Xác thực &amp; Phân quyền)" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=1.8;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="520" y="55" width="150" height="48" as="geometry"/>
+        </mxCell>
+        <mxCell id="line_595" value="" style="endArrow=none;dashed=1;html=1;strokeWidth=1.5;strokeColor=#666666;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="595" y="105" as="sourcePoint"/>
+            <mxPoint x="595" y="780" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p_storage" value="&amp;laquo;subsystem&amp;raquo;&lt;br&gt;&lt;b&gt;File Storage&lt;/b&gt;&lt;br&gt;(Storage Sandbox)" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=1.8;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="760" y="55" width="150" height="48" as="geometry"/>
+        </mxCell>
+        <mxCell id="line_835" value="" style="endArrow=none;dashed=1;html=1;strokeWidth=1.5;strokeColor=#666666;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="835" y="105" as="sourcePoint"/>
+            <mxPoint x="835" y="780" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="p_db" value="&amp;laquo;entity&amp;raquo;&lt;br&gt;&lt;b&gt;Database&lt;/b&gt;&lt;br&gt;(MySQL Database)" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=1.8;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="980" y="55" width="150" height="48" as="geometry"/>
+        </mxCell>
+        <mxCell id="line_1055" value="" style="endArrow=none;dashed=1;html=1;strokeWidth=1.5;strokeColor=#666666;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1055" y="105" as="sourcePoint"/>
+            <mxPoint x="1055" y="780" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="act_client" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=1.5;strokeColor=#000000;fillColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="108" y="130" width="14" height="635" as="geometry"/>
+        </mxCell>
+        <mxCell id="act_server" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=1.5;strokeColor=#000000;fillColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="348" y="130" width="14" height="635" as="geometry"/>
+        </mxCell>
+        <mxCell id="act_auth" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=1.5;strokeColor=#000000;fillColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="588" y="180" width="14" height="215" as="geometry"/>
+        </mxCell>
+        <mxCell id="act_db_read" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=1.5;strokeColor=#000000;fillColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="1048" y="415" width="14" height="30" as="geometry"/>
+        </mxCell>
+        <mxCell id="act_storage" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=1.5;strokeColor=#000000;fillColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="828" y="455" width="14" height="145" as="geometry"/>
+        </mxCell>
+        <mxCell id="act_db_log" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeWidth=1.5;strokeColor=#000000;fillColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="1048" y="665" width="14" height="75" as="geometry"/>
+        </mxCell>
+        <mxCell id="msg_1" value="1: Kết nối TCP Socket (Port 6789)" style="html=1;verticalAlign=bottom;strokeWidth=1.6;strokeColor=#000000;fontFamily=Segoe UI;fontSize=10;fontStyle=1;endArrow=block;endFill=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="122" y="135" as="sourcePoint"/>
+            <mxPoint x="348" y="135" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="msg_2" value="2: Gửi thông tin xác thực (USER &amp;amp; PASS)" style="html=1;verticalAlign=bottom;strokeWidth=1.6;strokeColor=#000000;fontFamily=Segoe UI;fontSize=10;fontStyle=1;endArrow=block;endFill=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="122" y="160" as="sourcePoint"/>
+            <mxPoint x="348" y="160" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="msg_3" value="3: Kiểm tra đăng nhập: authenticate(user, pass)" style="html=1;verticalAlign=bottom;strokeWidth=1.6;strokeColor=#000000;fontFamily=Segoe UI;fontSize=10;fontStyle=1;endArrow=block;endFill=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="362" y="185" as="sourcePoint"/>
+            <mxPoint x="588" y="185" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="frame_alt1" value="alt [XÁC THỰC TÀI KHOẢN]" style="shape=umlFrame;whiteSpace=wrap;html=1;strokeWidth=1.8;strokeColor=#000000;fillColor=none;fontFamily=Segoe UI;fontSize=11;fontStyle=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=6;" vertex="1" parent="1">
+          <mxGeometry x="55" y="202" width="600" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="lbl_alt1_fail" value="[Xác thực thất bại]" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="135" y="206" width="150" height="18" as="geometry"/>
+        </mxCell>
+        <mxCell id="msg_4a" value="4a: Phản hồi lỗi xác thực (530 Login incorrect)" style="html=1;verticalAlign=bottom;strokeWidth=1.6;strokeColor=#000000;fontFamily=Segoe UI;fontSize=10;fontStyle=1;endArrow=open;dashed=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="588" y="222" as="sourcePoint"/>
+            <mxPoint x="362" y="222" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="msg_4a_cli" value="Thông báo lỗi xác thực &amp;amp; đóng kết nối" style="html=1;verticalAlign=bottom;strokeWidth=1.6;strokeColor=#000000;fontFamily=Segoe UI;fontSize=10;fontStyle=1;endArrow=open;dashed=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="348" y="222" as="sourcePoint"/>
+            <mxPoint x="122" y="222" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="div_alt1" value="" style="strokeWidth=1.5;dashed=1;strokeColor=#000000;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="55" y="237" as="sourcePoint"/>
+            <mxPoint x="655" y="237" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lbl_alt1_ok" value="[Xác thực thành công]" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="135" y="240" width="150" height="18" as="geometry"/>
+        </mxCell>
+        <mxCell id="msg_4b" value="4b: Xác thực thành công (230 User logged in)" style="html=1;verticalAlign=bottom;strokeWidth=1.6;strokeColor=#000000;fontFamily=Segoe UI;fontSize=10;fontStyle=1;endArrow=open;dashed=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="588" y="256" as="sourcePoint"/>
+            <mxPoint x="362" y="256" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="msg_4b_cli" value="Khởi tạo phiên làm việc thành công" style="html=1;verticalAlign=bottom;strokeWidth=1.6;strokeColor=#000000;fontFamily=Segoe UI;fontSize=10;fontStyle=1;endArrow=open;dashed=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="348" y="256" as="sourcePoint"/>
+            <mxPoint x="122" y="256" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="msg_5" value="5: Gửi yêu cầu tải tệp: RETR &amp;lt;filename&amp;gt;" style="html=1;verticalAlign=bottom;strokeWidth=1.6;strokeColor=#000000;fontFamily=Segoe UI;fontSize=10;fontStyle=1;endArrow=block;endFill=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="122" y="287" as="sourcePoint"/>
+            <mxPoint x="348" y="287" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="msg_6" value="6: Kiểm tra quyền truy xuất tệp: checkPermission(userId, filename, READ)" style="html=1;verticalAlign=bottom;strokeWidth=1.6;strokeColor=#000000;fontFamily=Segoe UI;fontSize=10;fontStyle=1;endArrow=block;endFill=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="362" y="312" as="sourcePoint"/>
+            <mxPoint x="588" y="312" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="frame_alt2" value="alt [KIỂM TRA QUYỀN TRUY XUẤT TỆP]" style="shape=umlFrame;whiteSpace=wrap;html=1;strokeWidth=1.8;strokeColor=#000000;fillColor=none;fontFamily=Segoe UI;fontSize=11;fontStyle=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=6;" vertex="1" parent="1">
+          <mxGeometry x="55" y="330" width="600" height="70" as="geometry"/>
+        </mxCell>
+        <mxCell id="lbl_alt2_denied" value="[Không đủ quyền truy xuất]" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="135" y="334" width="200" height="18" as="geometry"/>
+        </mxCell>
+        <mxCell id="msg_7a" value="7a: Từ chối: 550 Permission denied (Không có quyền đọc)" style="html=1;verticalAlign=bottom;strokeWidth=1.6;strokeColor=#000000;fontFamily=Segoe UI;fontSize=10;fontStyle=1;endArrow=open;dashed=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="588" y="350" as="sourcePoint"/>
+            <mxPoint x="362" y="350" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="msg_7a_cli" value="Thông báo lỗi: Quyền truy xuất tệp bị từ chối" style="html=1;verticalAlign=bottom;strokeWidth=1.6;strokeColor=#000000;fontFamily=Segoe UI;fontSize=10;fontStyle=1;endArrow=open;dashed=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="348" y="350" as="sourcePoint"/>
+            <mxPoint x="122" y="350" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="div_alt2" value="" style="strokeWidth=1.5;dashed=1;strokeColor=#000000;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="55" y="365" as="sourcePoint"/>
+            <mxPoint x="655" y="365" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lbl_alt2_ok" value="[Đủ quyền truy xuất]" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="135" y="368" width="200" height="18" as="geometry"/>
+        </mxCell>
+        <mxCell id="msg_7b" value="7b: Quyền hợp lệ: checkPermission = OK" style="html=1;verticalAlign=bottom;strokeWidth=1.6;strokeColor=#000000;fontFamily=Segoe UI;fontSize=10;fontStyle=1;endArrow=open;dashed=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="588" y="384" as="sourcePoint"/>
+            <mxPoint x="362" y="384" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="msg_8" value="8: Truy vấn metadata tệp: SELECT file_id, file_size, checksum FROM files WHERE ..." style="html=1;verticalAlign=bottom;strokeWidth=1.6;strokeColor=#000000;fontFamily=Segoe UI;fontSize=10;fontStyle=1;endArrow=block;endFill=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="362" y="415" as="sourcePoint"/>
+            <mxPoint x="1048" y="415" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="msg_8_res" value="Trả về thông tin metadata tệp tin (size, checksum, status)" style="html=1;verticalAlign=bottom;strokeWidth=1.6;strokeColor=#000000;fontFamily=Segoe UI;fontSize=10;fontStyle=1;endArrow=open;dashed=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1048" y="435" as="sourcePoint"/>
+            <mxPoint x="362" y="435" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="msg_9" value="9: Truy xuất tệp từ ổ đĩa: resolveSafe(userHome, filename)" style="html=1;verticalAlign=bottom;strokeWidth=1.6;strokeColor=#000000;fontFamily=Segoe UI;fontSize=10;fontStyle=1;endArrow=block;endFill=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="362" y="458" as="sourcePoint"/>
+            <mxPoint x="828" y="458" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="frame_alt3" value="alt [KIỂM TRA TỒN TẠI VÀ TRUYỀN DỮ LIỆU TỆP TIN]" style="shape=umlFrame;whiteSpace=wrap;html=1;strokeWidth=1.8;strokeColor=#000000;fillColor=none;fontFamily=Segoe UI;fontSize=11;fontStyle=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=6;" vertex="1" parent="1">
+          <mxGeometry x="55" y="478" width="1030" height="287" as="geometry"/>
+        </mxCell>
+        <mxCell id="lbl_alt3_notfound" value="[Tệp không tồn tại / Không thể đọc]" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="135" y="482" width="300" height="18" as="geometry"/>
+        </mxCell>
+        <mxCell id="msg_10a" value="10a: File not found / Cannot read file (file.exists() == false)" style="html=1;verticalAlign=bottom;strokeWidth=1.6;strokeColor=#000000;fontFamily=Segoe UI;fontSize=10;fontStyle=1;endArrow=open;dashed=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="828" y="498" as="sourcePoint"/>
+            <mxPoint x="362" y="498" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="msg_10a_cli" value="10: Phản hồi lỗi: 550 File not found hoặc Cannot read file" style="html=1;verticalAlign=bottom;strokeWidth=1.6;strokeColor=#000000;fontFamily=Segoe UI;fontSize=10;fontStyle=1;endArrow=open;dashed=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="348" y="498" as="sourcePoint"/>
+            <mxPoint x="122" y="498" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="div_alt3" value="" style="strokeWidth=1.5;dashed=1;strokeColor=#000000;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="55" y="514" as="sourcePoint"/>
+            <mxPoint x="1085" y="514" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lbl_alt3_found" value="[Tệp tồn tại &amp;amp; Sẵn sàng truyền]" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="135" y="518" width="250" height="18" as="geometry"/>
+        </mxCell>
+        <mxCell id="msg_10b" value="10b: Tệp tồn tại, cung cấp File Handle &amp;amp; Kích thước byte" style="html=1;verticalAlign=bottom;strokeWidth=1.6;strokeColor=#000000;fontFamily=Segoe UI;fontSize=10;fontStyle=1;endArrow=open;dashed=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="828" y="532" as="sourcePoint"/>
+            <mxPoint x="362" y="532" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="msg_11_ready" value="11: Phản hồi sẵn sàng: 150 Opening binary mode (SIZE &amp;lt;fileSize&amp;gt;)" style="html=1;verticalAlign=bottom;strokeWidth=1.6;strokeColor=#000000;fontFamily=Segoe UI;fontSize=10;fontStyle=1;endArrow=open;dashed=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="348" y="552" as="sourcePoint"/>
+            <mxPoint x="122" y="552" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="msg_11_read" value="Đọc luồng nhị phân từ đĩa (FileInputStream buffer 4096B)" style="html=1;verticalAlign=bottom;strokeWidth=1.6;strokeColor=#000000;fontFamily=Segoe UI;fontSize=10;fontStyle=1;endArrow=block;endFill=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="828" y="576" as="sourcePoint"/>
+            <mxPoint x="362" y="576" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="msg_11_send" value="Truyền luồng dữ liệu nhị phân về Client (Binary Socket Stream)" style="html=1;verticalAlign=bottom;strokeWidth=1.6;strokeColor=#000000;fontFamily=Segoe UI;fontSize=10;fontStyle=1;endArrow=block;endFill=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="348" y="576" as="sourcePoint"/>
+            <mxPoint x="122" y="576" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="msg_12" value="12: Nhận bytes &amp;amp; ghi vào FileOutputStream tại downloads/ (Cập nhật Progress)" style="html=1;verticalAlign=bottom;strokeWidth=1.6;strokeColor=#000000;fontFamily=Segoe UI;fontSize=10;fontStyle=1;endArrow=block;endFill=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="122" y="602" as="sourcePoint"/>
+            <mxPoint x="220" y="602" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="frame_alt4" value="alt [KẾT QUẢ TẢI TỆP TIN]" style="shape=umlFrame;whiteSpace=wrap;html=1;strokeWidth=1.8;strokeColor=#000000;fillColor=none;fontFamily=Segoe UI;fontSize=11;fontStyle=1;align=left;verticalAlign=top;spacingLeft=10;spacingTop=6;" vertex="1" parent="1">
+          <mxGeometry x="85" y="625" width="985" height="130" as="geometry"/>
+        </mxCell>
+        <mxCell id="lbl_alt4_ok" value="[Tải tệp thành công &amp;amp; Đầy đủ dữ liệu]" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="155" y="630" width="260" height="18" as="geometry"/>
+        </mxCell>
+        <mxCell id="msg_13a" value="13a: Phản hồi hoàn tất: 226 Transfer complete (kèm SHA256)" style="html=1;verticalAlign=bottom;strokeWidth=1.6;strokeColor=#000000;fontFamily=Segoe UI;fontSize=10;fontStyle=1;endArrow=open;dashed=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="348" y="648" as="sourcePoint"/>
+            <mxPoint x="122" y="648" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="msg_14a" value="14a: Nhận kết quả thành công, đóng file &amp;amp; thông báo hoàn tất" style="html=1;verticalAlign=bottom;strokeWidth=1.6;strokeColor=#000000;fontFamily=Segoe UI;fontSize=10;fontStyle=1;endArrow=block;endFill=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="122" y="668" as="sourcePoint"/>
+            <mxPoint x="230" y="668" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="msg_log_ok" value="Ghi nhật ký audit: INSERT transfer_logs (RETR, SUCCESS)" style="html=1;verticalAlign=bottom;strokeWidth=1.6;strokeColor=#000000;fontFamily=Segoe UI;fontSize=10;fontStyle=1;endArrow=block;endFill=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="362" y="668" as="sourcePoint"/>
+            <mxPoint x="1048" y="668" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="div_alt4" value="" style="strokeWidth=1.5;dashed=1;strokeColor=#000000;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="85" y="690" as="sourcePoint"/>
+            <mxPoint x="1070" y="690" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lbl_alt4_fail" value="[Lỗi mạng / Gián đoạn kết nối Socket]" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Segoe UI;fontSize=10;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="155" y="695" width="260" height="18" as="geometry"/>
+        </mxCell>
+        <mxCell id="msg_13b" value="13b: Phản hồi lỗi: 426 Connection closed; transfer aborted" style="html=1;verticalAlign=bottom;strokeWidth=1.6;strokeColor=#000000;fontFamily=Segoe UI;fontSize=10;fontStyle=1;endArrow=open;dashed=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="348" y="715" as="sourcePoint"/>
+            <mxPoint x="122" y="715" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="msg_14b" value="14b: Xóa tệp tải dở dang (.part) &amp;amp; hiển thị cảnh báo lỗi" style="html=1;verticalAlign=bottom;strokeWidth=1.6;strokeColor=#000000;fontFamily=Segoe UI;fontSize=10;fontStyle=1;endArrow=block;endFill=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="122" y="735" as="sourcePoint"/>
+            <mxPoint x="230" y="735" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="msg_log_fail" value="Ghi nhật ký audit: INSERT transfer_logs (RETR, FAILED)" style="html=1;verticalAlign=bottom;strokeWidth=1.6;strokeColor=#000000;fontFamily=Segoe UI;fontSize=10;fontStyle=1;endArrow=block;endFill=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="362" y="735" as="sourcePoint"/>
+            <mxPoint x="1048" y="735" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

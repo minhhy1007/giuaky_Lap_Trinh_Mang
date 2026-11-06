@@ -15,15 +15,17 @@ import java.net.Socket;
  */
 public class TCPClient {
 
-    private static final String SERVER_HOST = "localhost";
-    private static final int    SERVER_PORT = 6789;
+    private static final String DEFAULT_HOST = "127.0.0.1";
+    private static final int    DEFAULT_PORT = 6789;
 
     public static void main(String[] args) {
+        String serverHost = (args.length > 0 && !args[0].isBlank()) ? args[0] : DEFAULT_HOST;
+        int serverPort = (args.length > 1) ? Integer.parseInt(args[1]) : DEFAULT_PORT;
 
         System.out.println("=== FTP Project - Phase 6: FTP Client ===");
-        System.out.println("[Client] Kết nối đến " + SERVER_HOST + ":" + SERVER_PORT + "...");
+        System.out.println("[Client] Kết nối đến " + serverHost + ":" + serverPort + "...");
 
-        try (Socket socket = new Socket(SERVER_HOST, SERVER_PORT)) {
+        try (Socket socket = new Socket(serverHost, serverPort)) {
 
             System.out.println("[Client] ✓ Kết nối thành công!");
             System.out.println();
@@ -83,7 +85,7 @@ public class TCPClient {
             System.out.println("[Client] Kết thúc.");
 
         } catch (java.net.ConnectException e) {
-            System.err.println("[Client] LỖI: Server chưa chạy trên port " + SERVER_PORT);
+            System.err.println("[Client] LỖI: Server chưa chạy trên port " + serverPort);
         } catch (IOException e) {
             System.err.println("[Client] LỖI I/O: " + e.getMessage());
         }

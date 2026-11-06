@@ -1,0 +1,106 @@
+@startuml
+!theme plain
+skinparam monochrome true
+skinparam shadowing false
+skinparam defaultFontName "Segoe UI"
+skinparam defaultFontSize 14
+skinparam usecaseFontSize 13
+skinparam roundCorner 10
+skinparam actorStyle awesome
+left to right direction
+
+title SƠ ĐỒ USE CASE HỆ THỐNG SECURE FTP CLIENT PRO & SERVER (A4 LANDSCAPE)
+
+actor "Khách vãng lai\n(Guest)" as Guest
+actor "Người dùng\n(Standard User)" as User
+actor "Quản trị viên\n(Administrator)" as Admin
+
+' Quan hệ kế thừa giữa các Actor
+Admin -up-|> User : <<generalization>>
+
+package "Hệ thống Secure FTP Client Pro & Server (System Boundary)" {
+  ' --- Phân hệ 1: Xác thực & Tài khoản ---
+  usecase "Đăng ký tài khoản" as UC_Reg
+  usecase "Đăng nhập hệ thống" as UC_Login
+  usecase "Đổi mật khẩu cá nhân" as UC_Pass
+
+  ' --- Phân hệ 2: Quản lý Tệp tin & Thư mục ---
+  usecase "Duyệt danh sách tệp & thư mục" as UC_List
+  usecase "Tải tệp tin lên (Upload)" as UC_Upload
+  usecase "Tải tệp tin về (Download)" as UC_Download
+  usecase "Quản lý thư mục\n(Tạo / Chuyển / Xóa)" as UC_Dir
+  usecase "Đổi tên & Xóa tệp tin" as UC_FileOps
+
+  ' --- Phân hệ 3: Chia sẻ & Phân quyền Tệp tin ---
+  usecase "Tạo liên kết chia sẻ tệp" as UC_Share
+  usecase "Quản lý & Thu hồi chia sẻ" as UC_ManageShare
+  usecase "Tải tệp chia sẻ qua Token" as UC_GetShared
+
+  ' --- Phân hệ 4: Gói cước & Thanh toán mô phỏng ---
+  usecase "Xem & Đăng ký gói cước" as UC_Plans
+  usecase "Thanh toán mô phỏng (Mock)" as UC_Pay
+  usecase "Xem lịch sử đơn hàng" as UC_Orders
+
+  ' --- Phân hệ 5: Nhật ký hoạt động ---
+  usecase "Xem nhật ký hoạt động cá nhân" as UC_UserLogs
+
+  ' --- Phân hệ 6: Quản trị hệ thống cấp cao (Admin) ---
+  usecase "Quản trị tài khoản người dùng" as UC_AdminUsers
+  usecase "Khóa / Mở khóa tài khoản" as UC_AdminLock
+  usecase "Phân quyền vai trò người dùng" as UC_AdminRole
+  usecase "Điều chỉnh hạn mức Quota" as UC_AdminQuota
+  usecase "Quản lý toàn bộ đơn hàng" as UC_AdminOrders
+  usecase "Kiểm toán nhật ký toàn hệ thống" as UC_AdminLogs
+  usecase "Xem thống kê KPI & Doanh thu" as UC_AdminStats
+
+  ' --- Phân hệ 7: Ca sử dụng phụ thuộc (Include / Extend) ---
+  usecase "Kiểm tra hạn mức Quota\n(Handshake 125/SIZE)" as UC_IncQuota
+  usecase "Cảnh báo vượt Quota (552)" as UC_ExtQuota
+  usecase "Xác thực mã Token & Quyền" as UC_IncToken
+  usecase "Từ chối tải khi quyền là VIEW" as UC_ExtView
+  usecase "Cộng dung lượng Quota (ACID)" as UC_IncPay
+  usecase "Bảo vệ tài khoản quản trị\n(Chống tự khóa / hạ quyền)" as UC_IncProtect
+}
+
+' Liên kết tác nhân Khách vãng lai (Guest)
+Guest --> UC_Reg
+Guest --> UC_Login
+Guest --> UC_GetShared
+
+' Liên kết tác nhân Người dùng (Standard User)
+User --> UC_Pass
+User --> UC_List
+User --> UC_Upload
+User --> UC_Download
+User --> UC_Dir
+User --> UC_FileOps
+User --> UC_Share
+User --> UC_ManageShare
+User --> UC_GetShared
+User --> UC_Plans
+User --> UC_Pay
+User --> UC_Orders
+User --> UC_UserLogs
+
+' Liên kết tác nhân Quản trị viên (Administrator)
+Admin --> UC_AdminUsers
+Admin --> UC_AdminLock
+Admin --> UC_AdminRole
+Admin --> UC_AdminQuota
+Admin --> UC_AdminOrders
+Admin --> UC_AdminLogs
+Admin --> UC_AdminStats
+
+' Quan hệ <<include>> (Quan hệ bắt buộc)
+UC_Upload .> UC_IncQuota : <<include>>
+UC_GetShared .> UC_IncToken : <<include>>
+UC_Pay .> UC_IncPay : <<include>>
+UC_AdminLock .> UC_IncProtect : <<include>>
+UC_AdminRole .> UC_IncProtect : <<include>>
+
+' Quan hệ <<extend>> (Quan hệ mở rộng có điều kiện)
+UC_ExtQuota .> UC_Upload : <<extend>>
+UC_ExtView .> UC_GetShared : <<extend>>
+
+@enduml
+

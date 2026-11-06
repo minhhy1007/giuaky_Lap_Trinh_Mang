@@ -1,0 +1,938 @@
+TRƯỜNG ĐẠI HỌC CÔNG NGHỆ THÔNG TIN VÀ
+TRUYỀN THÔNG VIỆT HÀN
+KHOA KHOA HỌC MÁY TÍNH
+LẬP TRÌNH MẠNG
+ĐỀ TÀI: SỬ DỤNG GIAO THỨC TCP, FTP VÀ MÔ HÌNH CLIENT-SERVER ĐỂ PHÁT TRIỂN ỨNG DỤNG FTP CLIENT VÀ FTP SERVER
+Sinh viên thực hiện:    Nguyễn Tất Võ   - 24ITE119
+Sinh viên thực hiện:    Lê Hữu Minh Hy- 24ITE043
+Lớp :    Lập trình mạng (11)
+Giảng viên hướng dẫn: ThS. Nguyễn Thanh Cẩm
+Đà Nẵng, tháng 10 năm 2026
+TRƯỜNG ĐẠI HỌC CÔNG NGHỆ THÔNG TIN VÀ
+TRUYỀN THÔNG VIỆT HÀN
+KHOA KHOA HỌC MÁY TÍNH
+LẬP TRÌNH MẠNG
+ĐỀ TÀI: SỬ DỤNG GIAO THỨC TCP, FTP VÀ MÔ HÌNH CLIENT-SERVER ĐỂ PHÁT TRIỂN ỨNG DỤNG FTP CLIENT VÀ FTP SERVER
+Sinh viên thực hiện:    Nguyễn Tất Võ      - 24ITE119
+Sinh viên thực hiện:    Lê Hữu Minh Hy  - 24ITE043
+Lớp :      Lập trình mạng (11)
+Giảng viên hướng dẫn: ThS. Nguyễn Thanh Cẩm
+Đà Nẵng, tháng 10 năm 2026
+LỜI CẢM ƠN
+Em xin gửi lời cảm ơn chân thành đến quý thầy cô Trường Đại học Công nghệ Thông tin và Truyền thông Việt - Hàn đã truyền đạt cho em những kiến thức và bài học quý báu trong học kỳ vừa qua.
+Em xin trân trọng gửi lời cảm ơn đến ThS. Nguyễn Thanh Cẩm - giảng viên Trường Đại học Công nghệ Thông tin và Truyền thông Việt - Hàn đã tận tình hướng dẫn và giúp đỡ em trong suốt quá trình làm đồ án, giúp em có thêm nhiều kiến thức bổ ích, và hiểu rõ hơn vấn đề mình nghiên cứu. Và trong thời gian làm đồ án vừa qua, thầy đã giành nhiều thời gian quý báu và tâm huyết để hướng dẫn em hoàn thành đồ án này.
+Dưới đây là kết quả của quá trình tìm hiểu và nghiên cứu mà em đã đạt được trong học kỳ vừa qua. Tuy có nhiều cố gắng học hỏi trau dồi để nâng cao kiến thức nhưng không thể tránh khỏi những sai sót. Em rất mong được những sự góp ý quý báu của các thầy giáo, cô giáo cũng như tất cả các bạn để đồ án của em được hoàn thiện hơn.
+Em xin chân thành cảm ơn!
+Đà Nẵng, ngày … tháng … năm 2026
+Sinh viên
+Lê Hữu Minh Hy    Nguyễn Tất Võ
+NHẬN XÉT
+Đà Nẵng, ngày … tháng … năm 2026
+Giảng viên hướng dẫn
+MỤC LỤC
+LỜI CẢM ƠN1
+NHẬN XÉT2
+MỤC LỤC3
+DANH MỤC CÁC KÝ HIỆU VÀ TỪ VIẾT TẮT6
+MỞ ĐẦU8
+1. Giới thiệu (Mở rộng thành 4 tiểu mục chuyên sâu)8
+1.1. Bối cảnh công nghệ thông tin và chuyển đổi số8
+1.2. Phân tích thực trạng và bất cập của 4 phương thức truyền tệp truyền thống8
+1.3. Vai trò của giao thức TCP và chuẩn FTP (RFC 959)9
+1.4. Tính cấp thiết và lý do chọn đề tài9
+2. Mục tiêu, nhiệm vụ của đề tài (Bổ sung chi tiết và Bảng nhiệm vụ)9
+2.1. Mục tiêu tổng quát9
+2.2. Mục tiêu cụ thể9
+3. Đối tượng, phạm vi và phương pháp tiếp cận10
+3.1. Đối tượng nghiên cứu10
+3.2. Phạm vi và giới hạn của đề tài10
+3.3. Bốn phương pháp tiếp cận chủ đạo10
+CHƯƠNG 1: CƠ SỞ LÝ THUYẾT VÀ MỘT SỐ CÔNG NGHỆ11
+1.1. Giới thiệu sơ lược về lập trình mạng11
+1.2. Các mô hình lập trình mạng12
+1.2.1. Mô hình tham chiếu 7 tầng OSI12
+1.2.2. Mô hình kiến trúc 4 tầng TCP/IP14
+1.2.3. Mô hình Khách - Chủ (Client - Server Organization - Cl-SO)15
+1.2.4. Mô hình mạng ngang hàng (Peer-to-Peer - P2P)16
+1.2.5. Mô hình tính toán phân tán (Distributed Computing Systems)16
+1.3. Các giao thức theo tầng mạng và giao thức FTP trong đồ án17
+1.3.1. Giao thức tầng Giao vận: TCP (Transmission Control Protocol)17
+1.3.2. Giao thức truyền tập tin FTP (File Transfer Protocol - RFC 959)18
+1.4. Sơ lược về công nghệ và công cụ phát triển18
+1.4.1. Ngôn ngữ lập trình Java18
+1.4.2 Thư viện mạng Java Network API (java.net.*)19
+1.4.3 Thư viện luồng nhập/xuất Java I/O (java.io.*)19
+1.4.4 Kỹ thuật Lập trình đa luồng (Multithreading & Thread Pool)19
+1.4.5 Giao diện đồ họa người dùng Java Swing & FlatLaf UI19
+1.5. Giới thiệu về cơ sở dữ liệu và cơ chế lưu trữ của FTP Server19
+CHƯƠNG 2: PHÂN TÍCH VÀ THIẾT KẾ HỆ THỐNG FTP CLIENT VÀ FTP SERVER21
+2.1. Giới thiệu sơ lược bài toán và các chức năng của FTP Client & Server21
+2.2. Mô hình tổng quát của hệ thống FTP (Mô hình Client - Server)23
+2.3. Lồng ghép phân tích thiết kế hướng đối tượng (OOAD) theo tài liệu PGS.TS Huỳnh Công Pháp25
+2.3.1. Triết lý OOAD trong môi trường mạng phân tán25
+2.3.2. Mô hình hóa Ca sử dụng (Use Case Analysis)25
+2.3.3. Mô hình hóa Lớp và Đối tượng (Class Diagram & Object Design)29
+2.3.4. Mô hình hóa Trình tự và Hành trình thông điệp FTP qua 7 tầng OSI32
+2.3.5. Thiết kế chi tiết Giao thức truyền tập tin FTP RFC 95935
+CHƯƠNG 3: CÀI ĐẶT - KIỂM THỬ VÀ KẾT QUẢ ĐẠT ĐƯỢC38
+3.1. Giới thiệu môi trường cài đặt và cấu hình hệ thống38
+3.2. Hướng dẫn cài đặt và sử dụng phần mềm FTP Client & Server39
+3.3.Kịch bản kiểm thử (Test Cases) và Ma trận kết quả FTP40
+3.4. Đánh giá hiệu năng và kết quả đạt được45
+KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN46
+1. Những kiến thức và kỹ năng học được:46
+2. Những kết quả thực tiễn đã làm được46
+3. Những hạn chế còn tồn tại47
+4. Hướng khắc phục và phát triển trong tương lai47
+TÀI LIỆU THAM KHẢO48
+I. TÀI LIỆU TIẾNG VIỆT48
+II. TÀI LIỆU TIẾNG ANH (CÁC TIÊU CHUẨN VÀ SÁCH CHUYÊN NGÀNH QUỐC TẾ)49
+DANH MỤC CÁC KÝ HIỆU VÀ TỪ VIẾT TẮT
+Từ viết tắt
+Tên tiếng Anh đầy đủ
+Ý nghĩa chuyên ngành tiếng Việt
+FTP
+File Transfer Protocol
+Giao thức truyền tập tin mạng tiêu chuẩn quốc tế (RFC 959)
+TCP
+Transmission Control Protocol
+Giao thức điều khiển truyền vận (hướng kết nối tin cậy)
+IP
+Internet Protocol
+Giao thức liên mạng (định vị và định tuyến gói tin logic)
+OSI
+Open Systems Interconnection
+Mô hình tham chiếu kết nối các hệ thống mở 7 tầng
+UDP
+User Datagram Protocol
+Giao thức gói dữ liệu người dùng (phi kết nối tốc độ cao)
+PASV
+Passive Mode
+Chế độ truyền dữ liệu thụ động trong giao thức FTP
+PORT
+Active Mode
+Chế độ truyền dữ liệu chủ động trong giao thức FTP
+PDU
+Protocol Data Unit
+Đơn vị dữ liệu giao thức quy chuẩn tại từng tầng mạng
+P2P
+Peer-to-Peer
+Mô hình kiến trúc mạng ngang hàng bình đẳng
+OOAD
+Object-Oriented Analysis & Design
+Phương pháp luận phân tích và thiết kế hướng đối tượng
+UML
+Unified Modeling Language
+Ngôn ngữ mô hình hóa thống nhất chuẩn quốc tế
+JVM
+Java Virtual Machine
+Máy ảo Java thực thi mã bytecode đa nền tảng
+JDK
+Java Development Kit
+Bộ công cụ phát triển phần mềm ứng dụng Java
+GUI
+Graphical User Interface
+Giao diện đồ họa tương tác người dùng trực quan
+LAN
+Local Area Network
+Mạng máy tính cục bộ trong cơ quan, trường học
+MTU
+Maximum Transmission Unit
+Kích thước đơn vị truyền dữ liệu tối đa của khung mạng
+MỞ ĐẦU
+1. Giới thiệu (Mở rộng thành 4 tiểu mục chuyên sâu)
+1.1. Bối cảnh công nghệ thông tin và chuyển đổi số
+Phân tích bối cảnh dữ liệu số là tài sản cốt lõi: nhu cầu thực tiễn tại VKU trong việc luân chuyển các tệp tin bài thực hành, file ISO cài đặt, máy ảo VMware/VirtualBox (5GB – 20GB), video bài giảng 4K và database dumps trong mạng nội bộ.
+1.2. Phân tích thực trạng và bất cập của 4 phương thức truyền tệp truyền thống
+USB / Ổ cứng ngoài: Thao tác thủ công, nguy cơ số một lây nhiễm virus Autorun/Malware trong phòng máy thực hành, rủi ro hỏng hóc vật lý.
+Email: Giới hạn 25MB, cơ chế mã hóa Base64 làm phình 33% dung lượng thực tế.
+Cloud công cộng (Google Drive, Dropbox): Phụ thuộc cáp quang quốc tế, nguy cơ nghẽn mạng giờ cao điểm và lo ngại bảo mật dữ liệu nội bộ theo Luật An ninh mạng.
+Chia sẻ Windows SMB: Bất tương thích giữa các hệ điều hành khác nhau, cấu hình phân quyền phức tạp và lỗ hổng bảo mật khai thác mạng LAN.
+1.3. Vai trò của giao thức TCP và chuẩn FTP (RFC 959)
+Phân tích cơ chế phân tách kinh điển giữa Kênh điều khiển (Port 21) và Kênh dữ liệu (Port 20 / Passive Mode) giúp luồng tệp tin lớn không làm nghẽn luồng lệnh.
+Vai trò của TCP: Bắt tay 3 bước (3-way handshake), kiểm soát thứ tự phân đoạn, cơ chế cửa sổ trượt (Sliding Window) và kiểm soát tắc nghẽn.
+1.4. Tính cấp thiết và lý do chọn đề tài
+Khẳng định giá trị thực tiễn (giải pháp chia sẻ tệp nội bộ tốc độ tối đa của hạ tầng LAN Gigabit 1000Mbps ~ 125MB/s) và giá trị học thuật tổng hợp kiến thức môn học.
+2. Mục tiêu, nhiệm vụ của đề tài (Bổ sung chi tiết và Bảng nhiệm vụ)
+2.1. Mục tiêu tổng quát
+Xây dựng hệ thống Client - Server độc lập, hiệu năng cao, bảo mật, đáp ứng chuẩn RFC 959.
+2.2. Mục tiêu cụ thể
+• Về kiến thức: Nắm vững mô hình 7 tầng OSI, 4 tầng TCP/IP, lập trình Socket Java (Socket, ServerSocket), mô hình đồng thời đa luồng (ExecutorService, ThreadPoolExecutor), giải quyết bài toán NAT/Firewall qua chế độ Passive Mode (PASV).
+• Về sản phẩm phần mềm: Xây dựng FTP Server đa luồng (quản lý phân quyền, cơ chế Sandbox chống tấn công Directory Traversal, log thời gian thực) và FTP Client GUI (bố cục 2 khung nhìn cục bộ và máy chủ kiểu FileZilla, thanh tiến trình % truyền tải).
+• Về an toàn & hiệu năng: Kỹ thuật truyền nhị phân đệm khối 16KB/32KB và kiểm định toàn vẹn bằng hàm băm SHA-256.
+3. Đối tượng, phạm vi và phương pháp tiếp cận
+3.1. Đối tượng nghiên cứu
+Bộ giao thức TCP/IP, chuẩn RFC 959, Java Socket IPC, Multithreading Concurrency, phương pháp luận OOAD với UML.
+3.2. Phạm vi và giới hạn của đề tài
+• Phạm vi không gian: Mạng LAN phòng máy VKU, dải IPv4 nội bộ.
+• Phạm vi chức năng: 12 câu lệnh chuẩn (USER, PASS, LIST, STOR, RETR, PWD, CWD, MKD, RMD, DELE, PASV, QUIT).
+• Phạm vi công nghệ: Java JDK 17/21 đa nền tảng (Windows/Linux/macOS), Java Swing FlatLaf.
+• Giới hạn đề tài: Nêu rõ các phần chưa mở rộng (chưa tích hợp FTPS/TLS, chưa hỗ trợ lệnh tiếp tục truyền dở REST) để làm cơ sở cho hướng phát triển.
+3.3. Bốn phương pháp tiếp cận chủ đạo
+• Phương pháp nghiên cứu lý thuyết chuẩn hóa RFC.
+• Phương pháp phân tích thiết kế OOAD với UML.
+• Phương pháp phát triển phần mềm lặp (Iterative/Agile).
+• Phương pháp đo lường thực nghiệm và đánh giá định lượng (Throughput MB/s, mã băm SHA-256).
+CHƯƠNG 1: CƠ SỞ LÝ THUYẾT VÀ MỘT SỐ CÔNG NGHỆ
+1.1. Giới thiệu sơ lược về lập trình mạng
+Trong cấu trúc khoa học máy tính hiện đại, lập trình mạng (Network Programming) là một phân ngành kỹ thuật phần mềm nghiên cứu và triển khai các chương trình thực thi phân tán trên nhiều máy tính độc lập khác nhau, có khả năng giao tiếp, đồng bộ hóa và trao đổi dữ liệu với nhau thông qua hạ tầng mạng máy tính (như mạng cục bộ LAN, mạng diện rộng WAN, hoặc mạng toàn cầu Internet).
+Khác biệt cốt lõi giữa một chương trình đơn lẻ (Standalone Application) và một ứng dụng mạng (Networked Application) nằm ở bản chất của kênh giao tiếp. Trong một chương trình đơn lẻ chạy trên một máy tính, các tiểu trình hoặc tiến trình có thể trao đổi dữ liệu thông qua vùng bộ nhớ chung (Shared Memory), biến toàn cục hoặc các cơ chế IPC (Inter-Process Communication) của hệ điều hành trên cùng một CPU. Ngược lại, trong môi trường mạng, các tiến trình chạy trên các không gian địa chỉ bộ nhớ hoàn toàn tách biệt, ở khoảng cách địa lý xa xôi. Chúng bắt buộc phải trao đổi thông điệp (Message Passing) qua card mạng (Network Interface Card - NIC), qua cáp truyền dẫn hoặc sóng điện từ, tuân thủ các quy tắc giao thức chặt chẽ.
+Lập trình mạng đóng vai trò huyết mạch trong việc xây dựng tất cả các dịch vụ công nghệ ngày nay: từ các hệ thống truyền tệp tin (FTP, SFTP), dịch vụ thư điện tử (SMTP, POP3, IMAP), duyệt web (HTTP/HTTPS), đến các hạ tầng điện toán đám mây (Cloud Computing), dịch vụ vi mô (Microservices) và mạng lưới vạn vật kết nối (IoT). Nắm vững kỹ thuật lập trình mạng giúp kỹ sư phần mềm làm chủ các kỹ thuật điều khiển luồng, quản lý kết nối, tối ưu hóa băng thông và xử lý các sự cố ngắt kết nối vật lý một cách linh hoạt.
+1.2. Các mô hình lập trình mạng
+Để thiết kế và triển khai ứng dụng mạng một cách khoa học, kỹ sư phải dựa trên các mô hình kiến trúc chuẩn mực. Mỗi mô hình trừu tượng hóa các khía cạnh khác nhau của hệ thống, từ các tầng vật lý phần cứng cho đến các tầng ứng dụng logic.
+1.2.1. Mô hình tham chiếu 7 tầng OSI
+Mô hình tham chiếu kết nối các hệ thống mở OSI (Open Systems Interconnection) được Tổ chức Tiêu chuẩn hóa Quốc tế (ISO) ban hành vào năm 1984, đóng vai trò là khung lý thuyết chuẩn tắc để hiểu rõ cách thức dữ liệu di chuyển từ phần mềm ứng dụng của máy tính này qua môi trường mạng đến phần mềm ứng dụng của máy tính khác. Mô hình gồm 7 tầng độc lập, mỗi tầng cung cấp dịch vụ cho tầng ngay trên nó và sử dụng dịch vụ của tầng ngay dưới nó:
+· Tầng 1 - Tầng Vật lý (Physical Layer): Chịu trách nhiệm truyền các luồng bit nhị phân thô (Raw Bitstream 0 và 1) qua môi trường vật lý (cáp đồng, cáp quang, sóng vô tuyến). Quy định các tiêu chuẩn điện áp, tốc độ truyền, hình dạng đầu nối và pinout.
+· Tầng 2 - Tầng Liên kết dữ liệu (Data Link Layer): Chuyển đổi đường truyền bit vật lý thô thành một liên kết tin cậy giữa hai nút mạng trực tiếp (Node-to-Node). Đóng gói dữ liệu thành các Khung (Frames), quản lý địa chỉ vật lý MAC (Media Access Control), phát hiện và kiểm soát lỗi bằng mã CRC.
+· Tầng 3 - Tầng Mạng (Network Layer): Chịu trách nhiệm định tuyến (Routing) và chuyển tiếp các gói tin (Packets) từ nguồn đến đích xuyên qua nhiều mạng con khác nhau (Host-to-Host). Sử dụng địa chỉ logic IP (IPv4, IPv6) để định danh thiết bị.
+· Tầng 4 - Tầng Giao vận (Transport Layer): Chịu trách nhiệm truyền dữ liệu tin cậy từ đầu cuối đến đầu cuối giữa các tiến trình ứng dụng (Process-to-Process). Phân mảnh dữ liệu thành các Phân đoạn (Segments/Datagrams), quản lý số hiệu cổng (Port Numbers), kiểm soát luồng và kiểm soát tắc nghẽn.
+· Tầng 5 - Tầng Phiên (Session Layer): Thiết lập, quản lý, đồng bộ hóa và kết thúc các phiên đối thoại (Sessions) giữa các ứng dụng chạy trên hai máy tính khác nhau. Cung cấp cơ chế điểm kiểm tra (Checkpoints) để phục hồi khi có gián đoạn.
+· Tầng 6 - Tầng Trình diễn (Presentation Layer): Đảm bảo dữ liệu được truyền đi ở định dạng mà ứng dụng ở đích có thể đọc hiểu được. Đảm nhận việc dịch mã ký tự (ASCII, Unicode, EBCDIC), nén dữ liệu và mã hóa/giải mã an toàn.
+· Tầng 7 - Tầng Ứng dụng (Application Layer): Tầng cao nhất, cung cấp các giao diện dịch vụ mạng trực tiếp cho các chương trình ứng dụng của người dùng (như FTP, HTTP, SMTP).
+Hình 1.1 Mô hình OSI
+Nguyên lý Đóng gói (Encapsulation) và Giải đóng gói (Decapsulation): Khi gửi dữ liệu, thông điệp đi từ Tầng 7 xuống Tầng 1, mỗi tầng sẽ gắn thêm vào phần đầu một tiêu đề quản lý (Header) và có thể có đuôi (Trailer). Tại bên nhận, tiến trình diễn ra theo chiều ngược lại, mỗi tầng bóc tách Header tương ứng và chuyển dữ liệu gốc lên tầng trên.
+1.2.2. Mô hình kiến trúc 4 tầng TCP/IP
+Hình 1.2 Cấu trúc địa chỉ IP
+Trong thực tế triển khai mạng toàn cầu Internet, bộ giao thức TCP/IP (hay mô hình DoD - Department of Defense) mới là chuẩn kiến trúc thực tế được áp dụng rộng rãi. Mô hình TCP/IP rút gọn 7 tầng của OSI thành 4 tầng thực tiễn:
+Tầng OSI tương ứng
+Tầng TCP/IP
+Đơn vị dữ liệu (PDU)
+Giao thức tiêu biểu
+7. Tầng Ứng dụng
+6. Tầng Trình diễn
+5. Tầng Phiên
+1. Tầng Ứng dụng (Application)
+Dữ liệu / Thông điệp (Data / Message)
+FTP, HTTP, SMTP, DNS, Telnet, POP3, Custom TCP Socket
+4. Tầng Giao vận
+2. Tầng Giao vận (Transport)
+Phân đoạn Segment (TCP) Gói tin Datagram (UDP)
+TCP (Truyền tin cậy có kết nối), UDP (Truyền nhanh phi kết nối)
+3. Tầng Mạng
+3. Tầng Liên mạng (Internet)
+Gói tin IP (IP Packet)
+IP (IPv4, IPv6), ICMP, ARP, RARP, IGMP
+2. Tầng Liên kết dữ liệu
+1. Tầng Vật lý
+4. Tầng Truy cập mạng (Network Access / Link)
+Khung dữ liệu Frame Luồng bit nhị phân
+Ethernet (IEEE 802.3), Wi-Fi (IEEE 802.11), PPP, Cáp đồng/quang
+Hình 1.3 Sơ đồ so sánh: Mô hình 7 Tầng OSI và Bộ Giao thức TCP/IP
+1.2.3. Mô hình Khách - Chủ (Client - Server Organization - Cl-SO)
+Mô hình Khách - Chủ (Client - Server) là kiến trúc mạng kinh điển và là nền tảng cốt lõi của giao thức FTP. Trong mô hình này, các tiến trình tham gia được phân định rạch ròi thành hai vai trò:
+Máy chủ (Server / FTP Server): Là tiến trình hoạt động bị động, chạy liên tục và
+mở cổng dịch vụ cố định (Port 21 theo chuẩn FTP hoặc Port 2121) để lắng nghe các
+yêu cầu kết nối từ các máy trạm. Máy chủ quản lý kho lưu trữ tệp tin tập trung, kiểm soát quyền truy cập, tiếp nhận lệnh và truyền dữ liệu.
+Máy trạm (Client / FTP Client): Là tiến trình chủ động do người dùng vận hành.
+Khi có nhu cầu quản lý tệp, Client sẽ khởi tạo kết nối mạng tới địa chỉ IP và cổng dịch vụ của FTP Server, gửi các lệnh FTP (như USER, PASS, LIST, RETR, STOR) và nhận kết quả phản hồi.
+Các biến thể kiến trúc Client-Server:
+Kiến trúc 2 tầng (2-Tier): FTP Client kết nối trực tiếp đến FTP Server xử lý lệnh và lưu trữ dữ liệu tệp tin. Đây là mô hình chuẩn mực được áp dụng trong đề tài.
+Kiến trúc 3 tầng (3-Tier): Tách biệt thành FTP Client GUI - FTP Application Gateway
+- Kho lưu trữ Cloud/SAN. Thích hợp cho các trung tâm dữ liệu quy mô lớn. Đánh giá ưu nhược điểm: Mô hình Cl-SO giúp tệp tin được quản lý tập trung, tính toàn vẹn và bảo mật cao, dễ dàng kiểm soát phân quyền người dùng và sao lưu dự phòng. Tuy nhiên, nhược điểm là nếu máy chủ gặp sự cố thì dịch vụ truyền tệp bị gián đoạn, đòi hỏi máy chủ phải có cơ chế đa luồng mạnh mẽ.
+1.2.4. Mô hình mạng ngang hàng (Peer-to-Peer - P2P)
+Khác biệt với cấu trúc phân cấp của Client-Server, mô hình mạng ngang hàng (Peer-to-Peer - P2P) không có sự phân chia cố định giữa máy chủ và máy trạm. Mỗi nút mạng (gọi là một Peer hay Servent - Server/Client kết hợp) đều sở hữu quyền hạn và nghĩa vụ bình đẳng như nhau:
+· Mỗi nút vừa hoạt động như một Client khi cần tải tệp từ các nút khác, vừa đóng vai trò như một Server khi tải lên tệp cho các nút khác trong mạng.
+· Phân loại P2P: Mạng P2P thuần túy (Gnutella), Mạng P2P lai (BitTorrent Tracker), và Mạng P2P có cấu trúc (bảng băm phân tán DHT).
+So sánh với FTP Client-Server: P2P tối ưu cho việc chia sẻ tệp công cộng giữa hàng triệu người dùng phân tán, nhưng không phù hợp cho quản lý tập tin tập trung nộibộ của doanh nghiệp/trường học vốn đòi hỏi phân quyền chặt chẽ như FTP.
+1.2.5. Mô hình tính toán phân tán (Distributed Computing Systems)
+Mô hình phân tán là bước phát triển nâng cao của lập trình mạng, trong đó một hệ thống lưu trữ và xử lý tệp được cấu thành từ nhiều máy chủ vật lý độc lập kết nối qua mạng, nhưng xuất hiện trước người dùng như một máy chủ duy nhất.
+Trong ngữ cảnh FTP nâng cao, các hệ thống FTP Cluster hoặc Distributed FTP (như HDFS, GlusterFS) cho phép lưu trữ tệp trên nhiều node mạng khác nhau để tăng tốc độ truyền tải song song và đảm bảo khả năng chịu lỗi cao.
+1.3. Các giao thức theo tầng mạng và giao thức FTP trong đồ án
+Giao thức mạng là tập hợp các quy tắc chuẩn hóa điều khiển truyền thông giữa các thực thể mạng. Dưới đây là phân tích chi tiết hai giao thức nòng cốt của đồ án: Giao thức tầng giao vận TCP và Giao thức truyền tập tin chuẩn FTP (RFC 959):
+1.3.1. Giao thức tầng Giao vận: TCP (Transmission Control Protocol)
+Đồ án sử dụng giao thức TCP làm nền tảng truyền tải bởi các ưu điểm vượt trội:
+· Đặc tính hướng kết nối (Connection-Oriented): Trước khi truyền dữ liệu, kết nối TCP được thiết lập thông qua cơ chế Bắt tay 3 bước (Three-way Handshake):
+ACK  SYN Chờ Server Client Chờ Chờ  ACK  ACK  SYN Chờ Server Client Chờ Chờ  ACK Trước hết, giao thức TCP phía máy gửi phải yêu cầu thiết lập một kênh truyền bằng cách gửi một phân đoạn (segment) gọi là SYN đến giao thức TCP phía máy nhận.
+ACK
+SYN
+Ch
+ờ
+Server
+Client
+Ch
+ờ
+Ch
+ờ
+ACK
+ACK
+SYN
+Ch
+ờ
+Server
+Client
+Ch
+ờ
+Ch
+ờ
+ACK
+Giao thức TCP phía máy nhận trả lại một phân đoạn (segment) gọi là
+ACK để xác nhận đã nhận được thành công.
+Giao thức TCP phía máy gửi tiếp tục gửi một phân đoạn ACK để xác nhận và sau đó là quá trình gửi dữ liệu.
+Hình  1.1. Quá trình bắt tay 3 bước
+Giao thức TCP sử dụng truyền thông dạng luồng dữ liệu hay dãy các bytes (byte-stream) liên tục trên kênh truyền
+Hình  1.2. Minh họa việc truyền dữ liệu bởi giao thức TCP
+Đảm bảo độ tin cậy tuyệt đối (100% Reliable): TCP sử dụng số thứ tự byte (Sequence Number) và gói tin báo nhận (ACK). Nếu một gói tin bị thất lạc hoặc lỗi checksum trên đường truyền, TCP sẽ tự động kích hoạt cơ chế truyền lại (Retransmission). Điều này đảm bảo các tệp tin nhị phân (.exe, .zip, .docx, .iso) khi truyền qua FTP không bao giờ bị sai lệch dù chỉ 1 bit.
+· Kiểm soát luồng và chống tắc nghẽn: Cơ chế cửa sổ trượt (Sliding Window) giúp điều tiết tốc độ truyền giữa FTP Server và FTP Client, tránh làm tràn bộ đệm máy nhận.
+1.3.2. Giao thức truyền tập tin FTP (File Transfer Protocol - RFC 959)
+Giao thức FTP được định nghĩa trong RFC 959 (do J. Postel và J. Reynolds biên soạn) là một trong những giao thức tầng ứng dụng lâu đời và phổ biến nhất trên Internet. Điểm đột phá của kiến trúc FTP là cơ chế tách biệt hoàn toàn hai kênh kết nối:
+· Kênh điều khiển (Control Connection): Client mở kết nối tới cổng dịch vụ của Server (mặc định Port 21 hoặc 2121). Kênh này duy trì liên tục trong suốt phiên làm việc, chuyên dùng để gửi các chuỗi lệnh văn bản ASCII ngắn (USER, PASS, LIST, RETR, STOR...) và nhận các mã phản hồi số học 3 chữ số.
+· Kênh dữ liệu (Data Connection): Được mở độc lập mỗi khi có yêu cầu truyền dữ liệu (như truyền nội dung file hoặc danh sách thư mục). Sau khi truyền hết luồng dữ liệu, kênh này sẽ tự động đóng lại để giải phóng tài nguyên hệ thống.
+Hai chế độ truyền dữ liệu trong FTP: Active Mode và Passive Mode:
+Chế độ chủ động (Active Mode / Lệnh PORT): Client mở một cổng dữ liệu ngẫu nhiên $N$ và gửi lệnh `PORT` thông báo cho Server. Server sẽ chủ động kết nối từ Port 20 tới cổng $N$ của Client. Nhược điểm: Chế độ này thường bị Tường lửa (Firewall) hoặc NAT ở phía Client chặn kết nối vào.
+Chế độ thụ động (Passive Mode / Lệnh PASV): Client gửi lệnh `PASV` lên Server. Server sẽ mở một cổng dữ liệu ngẫu nhiên $P$ và phản hồi địa chỉ IP cùng cổng $P$ về cho Client. Client sẽ chủ động kết nối tới cổng $P$ của Server để nhận/gửi dữ liệu. Đây là chế độ chuẩn mực tối ưu nhất hiện nay vì vượt qua được mọi cấu hình Firewall/NAT phía Client, và được đồ án lựa chọn làm chế độ mặc định.
+1.4. Sơ lược về công nghệ và công cụ phát triển
+Để hiện thực hóa ứng dụng FTP Client và FTP Server, nhóm đã lựa chọn bộ công cụ và thư viện Java chuyên nghiệp:
+1.4.1. Ngôn ngữ lập trình Java
+Java với máy ảo JVM cho phép ứng dụng FTP Server và Client chạy độc lập nền tảng trên cả Windows, Linux và macOS. Bộ thu gom rác tự động (Garbage Collection) giúp quản lý bộ đệm truyền file hiệu quả, tránh rò rỉ bộ nhớ khi truyền tải dữ liệu hàng trăm MB.
+1.4.2 Thư viện mạng Java Network API (java.net.*)
+Lớp ServerSocket: Sử dụng tại FTP Server để lắng nghe cổng điều khiển (Port 2121) và các cổng dữ liệu ngẫu nhiên ở chế độ Passive Mode.
+Lớp Socket: Thiết lập kênh giao tiếp 2 chiều Full-Duplex giữa FTP Client và FTP Server.
+Lớp InetAddress: Phân giải tên miền và định danh địa chỉ IP của Client và Server.
+1.4.3 Thư viện luồng nhập/xuất Java I/O (java.io.*)
+BufferedInputStream và BufferedOutputStream: Tạo vùng đệm bộ nhớ RAM (Buffer 16KB - 64KB) giúp tăng tốc độ đọc ghi tệp từ ổ đĩa và truyền qua Socket.
+BufferedReader và PrintWriter: Đọc và ghi các dòng lệnh văn bản FTP kết thúc bằng ký tự chuẩn `\r\n` trên Kênh điều khiển.
+File, FileInputStream, FileOutputStream: Thao tác trực tiếp với hệ thống tệp tin vật lý trên đĩa cứng.
+1.4.4 Kỹ thuật Lập trình đa luồng (Multithreading & Thread Pool)
+FTP Server sử dụng mô hình đa luồng hướng đối tượng: Luồng chính lắng nghe `serverSocket.accept()`, khi có kết nối mới sẽ bàn giao cho một thể hiện `FTPClientHandler` thực thi trong `ExecutorService` (Thread Pool). Mỗi kết nối Client chạy hoàn toàn độc lập, đảm bảo máy chủ phục vụ đồng thời hàng chục Client truyền tệp cùng lúc.
+1.4.5 Giao diện đồ họa người dùng Java Swing & FlatLaf UI
+Ứng dụng FTP Client được trang bị giao diện trực quan gồm: Thanh kết nối nhanh (Quick Connect), Cây thư mục cục bộ (Local Site), Cây thư mục máy chủ (Remote Site), Hàng đợi truyền tệp (Transfer Queue) và Cửa sổ log lệnh FTP theo phong cách FileZilla.
+1.5. Giới thiệu về cơ sở dữ liệu và cơ chế lưu trữ của FTP Server
+Hệ thống FTP Server đòi hỏi hai cơ chế lưu trữ nền tảng:
+Quản lý kho tệp tin (Virtual File System & User Home Directories): FTP Server ánh xạ thư mục gốc vật lý (`server_storage/`) thành không gian lưu trữ của từng người dùng (`server_storage/<username>/`). Toàn bộ thao tác tệp đều được kiểm tra tính hợp lệ bằng thuật toán chuẩn hóa đường dẫn `File.getCanonicalPath()` để ngăn chặn lỗi bảo mật vượt cấp thư mục (Directory Traversal Attack).
+Quản lý tài khoản người dùng FTP: Thông tin danh tính (Username, Password mã hóa băm, Phân quyền đọc/ghi) được quản lý qua dịch vụ `UserManager`, có thể lưu dưới dạng file cấu hình an toàn hoặc bảng cơ sở dữ liệu quan hệ (MySQL/SQLite).
+CHƯƠNG 2: PHÂN TÍCH VÀ THIẾT KẾ HỆ THỐNG FTP CLIENT VÀ FTP SERVER
+2.1. Giới thiệu sơ lược bài toán và các chức năng của FTP Client & Server
+Bài toán đặt ra cho đồ án là phát triển một hệ thống ứng dụng truyền tập tin chuẩn mực theo tiêu chuẩn FTP RFC 959, bao gồm hai phân hệ phần mềm hoạt động ăn khớp với nhau: FTP Server (Máy chủ lưu trữ và điều phối tệp tin) và FTP Client (Ứng dụng máy trạm cung cấp giao diện đồ họa cho người dùng thao tác truyền tải dữ liệu qua mạng LAN).
+Chi tiết các phân hệ chức năng trong hệ thống FTP Client & Server:
+Phân hệ
+Tên chức năng
+Mô tả chi tiết nghiệp vụ
+Phạm vi thực hiện
+Phân hệ
+Tên chức năng
+Mô tả chi tiết nghiệp vụ
+Phạm vi áp dụng
+FTP Server
+Khởi tạo dịch vụ & Lắng nghe
+Mở ServerSocket trên cổng 21/2121; sẵn sàng tiếp nhận các kết nối TCP từ các máy trạm trong mạng.
+Máy chủ
+FTP Server
+Xác thực danh tính FTP
+Xử lý cặp lệnh USER và PASS; kiểm tra quyền truy cập và cấp phát phiên làm việc (Session) riêng biệt.
+Máy chủ
+FTP Server
+Bộ phân tích cú pháp lệnh
+Tiếp nhận dòng lệnh text qua kênh điều khiển; bóc tách mã lệnh và tham số; định tuyến xử lý theo chuẩn RFC 959.
+Máy chủ
+FTP Server
+Điều phối kênh dữ liệu PASV
+Khi nhận lệnh PASV, Server mở cổng động ngẫu nhiên, phản hồi địa chỉ IP và Port cho Client kết nối truyền file.
+Máy chủ
+FTP Server
+Quản lý tệp & Sandbox
+Thực hiện đọc ghi tệp trên đĩa cứng; giới hạn quyền thao tác của Client bên trong thư mục Home được cấp phát.
+Máy chủ
+FTP Server
+Bảng điều khiển & Ghi log
+Giao diện quản trị Server: xem danh sách Client đang kết nối, theo dõi luồng lệnh/mã phản hồi thời gian thực.
+Máy chủ
+FTP Client
+Thanh kết nối nhanh (Quick Connect)
+Nhập Host IP, Port, Username, Password; chủ động thiết lập kết nối TCP tới FTP Server.
+Máy trạm
+FTP Client
+Duyệt cây thư mục 2 phía
+Hiển thị song song danh sách tệp trên máy tính cá nhân (Local Site) và danh sách tệp trên máy chủ (Remote Site).
+Máy trạm
+FTP Client
+Tải tệp lên (Upload - STOR)
+Chọn file từ Local Site; gửi lệnh STOR; mở kênh dữ liệu đẩy luồng byte lên Server kèm thanh tiến trình %.
+Máy trạm -> Máy chủ
+FTP Client
+Tải tệp về (Download - RETR)
+Chọn file từ Remote Site; gửi lệnh RETR; mở kênh dữ liệu nhận luồng byte và ghi đĩa cục bộ.
+Máy chủ -> Máy trạm
+FTP Client
+Quản lý tệp từ xa (Remote Ops)
+Hỗ trợ xóa tệp (DELE), tạo thư mục mới (MKD), xóa thư mục (RMD) và đổi tên tệp trực tiếp trên máy chủ.
+Máy trạm
+FTP Client
+Khung thông điệp lệnh & phản hồi
+Hiển thị chi tiết toàn bộ các dòng lệnh FTP gửi đi và mã phản hồi 3 chữ số nhận về từ Server.
+Máy trạm
+2.2. Mô hình tổng quát của hệ thống FTP (Mô hình Client - Server)
+Hình  2.1. Mô hình tổng quan hệ thống FTP Client – FTP Server
+Hệ thống tuân thủ nghiêm ngặt mô hình Khách - Chủ (Client - Server) theo đặc tả kiến trúc RFC 959. Điểm khác biệt cơ bản nhất của FTP so với các giao thức thông thường (như HTTP) là việc duy trì hai kết nối TCP độc lập chạy song song giữa Client và Server:
+1. Kết nối Điều khiển (Control Connection): Được Client khởi tạo tới cổng 21 (hoặc cổng cấu hình 2121) của Server. Kết nối này sử dụng giao thức Telnet-like text, duy trì liên tục trong suốt phiên làm việc, chuyên dùng để truyền các lệnh FTP và mã phản hồi trạng thái.
+2. Kết nối Dữ liệu (Data Connection): Được thiết lập tạm thời mỗi khi cần truyền tệp (Upload/Download) hoặc lấy danh sách tệp (LIST). Kết nối này truyền dữ
+liệu dạng luồng byte nhị phân thuần túy (Binary Stream) với tốc độ tối đa, và tự động đóng lại ngay khi truyền xong.
+Sơ đồ cơ chế hoạt động ở Chế độ thụ động (Passive Mode - PASV):
+Client gửi lệnh `PASV` qua Kênh điều khiển.
+Server mở một cổng dữ liệu ngẫu nhiên $P$ (ví dụ: Port 50021) trên máy chủ và phản hồi mã `227 Entering Passive Mode (h1,h2,h3,h4,p1,p2)` (trong đó $P = p1 \times 256 + p2$).
+Client phân tích cổng $P$ và chủ động mở một Socket dữ liệu mới kết nối tới Server tại cổng $P$.
+Client gửi lệnh truyền tệp (`STOR filename` hoặc `RETR filename`) qua Kênh điều khiển.
+Server phản hồi mã `150 Opening BINARY mode data connection`.
+Dữ liệu tệp được truyền qua Kênh dữ liệu.
+Sau khi truyền hết byte cuối cùng, Kênh dữ liệu tự động đóng lại. Server gửi mã `226 Transfer complete` qua Kênh điều khiển thông báo cho Client.
+2.3. Lồng ghép phân tích thiết kế hướng đối tượng (OOAD) theo tài liệu PGS.TS Huỳnh Công Pháp
+2.3.1. Triết lý OOAD trong môi trường mạng phân tán
+Theo tài liệu giảng dạy "Lập trình mạng" và "Phân tích thiết kế hệ thống hướng đối tượng" của PGS.TS Huỳnh Công Pháp (VKU / Đại học Đà Nẵng), việc phân tích và thiết kế hệ thống mạng FTP Client và FTP Server đòi hỏi tư duy hướng đối tượng mở rộng trong môi trường phân tán:
+Các thực thể đối tượng (`FTPClient`, `FTPServer`, `FTPClientHandler`, `DataConnection`) cư trú trên các máy tính độc lập, ở hai đầu mút của mạng, không có bộ nhớ dùng chung.
+Tương tác giữa các đối tượng từ xa được thực hiện thông qua Cơ chế trao đổi thông điệp (Message Passing). Đối tượng Client đóng gói ý định của mình thành một đối tượng `FTPCommand` (ví dụ: `RETR document.pdf`), tuần tự hóa thành chuỗi văn bản ASCII đi qua mô hình 7 tầng mạng đến Server. Đối tượng `FTPClientHandler` ở Server bóc tách thông điệp, thực thi nghiệp vụ trên hệ thống tệp và đóng gói kết quả thành đối tượng `FTPResponse` (ví dụ: `150 Opening BINARY mode`) gửi ngược lại.
+2.3.2. Mô hình hóa Ca sử dụng (Use Case Analysis)
+Hệ thống bao gồm hai tác nhân chính: Người dùng FTP Client (FTP User) và Quản trị viên máy chủ (Server Administrator). Dưới đây là đặc tả chi tiết 6 Ca sử dụng cốt lõi của hệ thống FTP Client & Server:
+Đặc tả Ca sử dụng 1: UC01 - Khởi động và Cấu hình FTP Server
+Tác nhân: Quản trị viên máy chủ (Server Administrator).
+Điều kiện tiên quyết: Máy chủ đã được cài đặt môi trường Java, cổng dịch vụ (21 hoặc 2121) chưa bị ứng dụng khác chiếm dụng.
+Luồng sự kiện chính:
+Quản trị viên khởi chạy FTPServer GUI, cấu hình Cổng lắng nghe (Port: 2121) và Thư mục gốc lưu trữ (Root Directory).
+Quản trị viên nhấn nút [Khởi động Server].
+Đối tượng `FTPServerCore` khởi tạo thể hiện `new ServerSocket(2121)` và kích hoạt luồng lắng nghe nền `ListenerThread`.
+Giao diện Server cập nhật đèn trạng thái màu xanh và ghi log: "FTP Server running on port 2121. Ready for connections."
+Server sẵn sàng tiếp nhận các kết nối điều khiển từ Client.
+Luồng sự kiện ngoại lệ:
+Nếu cổng bị trùng, Server bắt ngoại lệ `BindException`, hiển thị thông báo lỗi yêu cầu quản trị viên chọn cổng khác.
+Đặc tả Ca sử dụng 2: UC02 - Kết nối và Xác thực danh tính FTP (USER & PASS)
+Tác nhân: Người dùng máy trạm (FTP User).
+Luồng sự kiện chính:
+Người dùng nhập Host IP (ví dụ: 192.168.1.100), Port (2121), Username và Password trên thanh Quick Connect của FTP Client.
+Người dùng nhấn nút [Quick Connect].
+FTP Client tạo `new Socket(host, port)` kết nối tới FTP Server.
+Server chấp nhận tại `accept()`, sinh ra đối tượng `FTPClientHandler` chạy trong luồng riêng và gửi lời chào: `220 Service ready for new user`.
+Client gửi lệnh `USER <username>` $ ightarrow$ Server kiểm tra và đáp lại: `331 User name okay, need password`.
+Client gửi lệnh `PASS <password>` $ ightarrow$ Server xác thực qua `UserManager`.
+Nếu hợp lệ, Server đáp lại: `230 User logged in, proceed`.
+Client tự động gửi tiếp lệnh `PWD` để lấy đường dẫn hiện tại và lệnh `PASV` + `LIST` để tải danh sách tệp ban đầu lên giao diện Remote Site.
+Đặc tả Ca sử dụng 3: UC03 - Duyệt thư mục và danh sách tệp từ xa (LIST, PWD, CWD)
+Tác nhân: Người dùng máy trạm (FTP User).
+Luồng sự kiện chính:
+Người dùng nhấp đúp vào một thư mục trên bảng Remote Site hoặc chuyển đổi thư mục.
+Client gửi lệnh `CWD <dirname>` (Change Working Directory).
+Server chuyển đổi thư mục làm việc và phản hồi: `250 Directory successfully changed`.
+Client gửi lệnh `PASV` $ ightarrow$ Server mở cổng dữ liệu và phản hồi mã `227` kèm địa chỉ cổng $P$.
+Client mở Socket dữ liệu kết nối tới cổng $P$ của Server.
+Client gửi lệnh `LIST` qua Kênh điều khiển $ ightarrow$ Server phản hồi: `150 Here comes the directory listing`.
+Server quét thư mục vật lý, định dạng danh sách theo chuẩn UNIX/FTP và đẩy qua Kênh dữ liệu.
+Client đọc dòng dữ liệu từ Kênh dữ liệu, phân tích cú pháp và đổ lên bảng hiển thị Remote Site.
+Server đóng Kênh dữ liệu và gửi phản hồi: `226 Directory send OK` qua Kênh điều khiển.
+Đặc tả Ca sử dụng 4: UC04 - Tải tệp lên FTP Server (Upload - STOR)
+Tác nhân: Người dùng máy trạm (FTP User).
+Luồng sự kiện chính:
+Người dùng chọn tệp tin trên bảng Local Site, nhấp chuột phải và chọn [Upload] (hoặc kéo thả sang bảng Remote Site).
+Client gửi lệnh thiết lập chế độ nhị phân: `TYPE I` $ ightarrow$ Server phản hồi `200 Type set to I`.
+Client gửi lệnh `PASV` $ ightarrow$ Server mở cổng dữ liệu và phản hồi mã `227`.
+Client mở Socket dữ liệu kết nối tới cổng dữ liệu của Server.
+Client gửi lệnh `STOR <filename>` qua Kênh điều khiển.
+Server kiểm tra quyền ghi và gửi phản hồi: `150 Ok to send data`.
+Client khởi tạo luồng nền `FileTransferWorker`, mở `FileInputStream` đọc tệp cục bộ và đẩy luồng byte vào Kênh dữ liệu theo từng khối đệm 16KB.
+Thanh tiến trình trên Client liên tục cập nhật tỷ lệ % hoàn thành và tốc độ truyền.
+Sau khi gửi hết byte cuối cùng, Client đóng luồng dữ liệu.
+Server ghi xong toàn bộ file vào đĩa, đóng Kênh dữ liệu và phản hồi: `226 Transfer complete`.
+Client tự động gửi lệnh làm mới danh sách tệp trên Remote Site.
+Đặc tả Ca sử dụng 5: UC05 - Tải tệp về máy trạm (Download - RETR)
+Tác nhân: Người dùng máy trạm (FTP User).
+Luồng sự kiện chính:
+Người dùng chọn tệp trên bảng Remote Site và chọn [Download].
+Client gửi `TYPE I` $ ightarrow$ Server phản hồi `200 Type set to I`.
+Client gửi `PASV` $ ightarrow$ Server phản hồi `227` kèm cổng dữ liệu.
+Client mở Socket dữ liệu kết nối tới cổng dữ liệu của Server.
+Client gửi lệnh `RETR <filename>` qua Kênh điều khiển.
+Server kiểm tra tệp tồn tại và phản hồi: `150 Opening BINARY mode data connection for <filename>`.
+Server mở `FileInputStream`, đọc từng khối byte từ đĩa và đẩy vào Kênh dữ liệu.
+Client đọc luồng byte từ Kênh dữ liệu và ghi tuần tự vào `FileOutputStream` trên máy trạm, đồng thời cập nhật thanh tiến trình.
+Server truyền hết dữ liệu và đóng Kênh dữ liệu.
+Client nhận tín hiệu EOF, hoàn tất ghi đĩa cục bộ. Server gửi phản hồi: `226 Transfer complete` qua Kênh điều khiển.
+Đặc tả Ca sử dụng 6: UC06 - Thao tác tệp và thư mục từ xa (DELE, MKD, RMD)
+Tác nhân: Người dùng máy trạm (FTP User).
+Luồng sự kiện chính:
+Người dùng chọn tệp cần xóa và bấm phím Delete (hoặc chọn [Tạo thư mục mới]).
+Client gửi lệnh tương ứng: `DELE <filename>` hoặc `MKD <dirname>`.
+Server tiếp nhận lệnh, kiểm tra quyền hạn và gọi phương thức xử lý trên hệ điều hành.
+Nếu thành công, Server phản hồi mã `250 Requested file action okay, completed` hoặc `257 "dirname" created`.
+Client nhận phản hồi và tự động cập nhật lại danh sách tệp trên giao diện.
+2.3.3. Mô hình hóa Lớp và Đối tượng (Class Diagram & Object Design)
+Kiến trúc hệ thống FTP được thiết kế theo các nguyên tắc hướng đối tượng phân rã thành các gói chuyên biệt:
+Tên Lớp (Class)
+Gói phân nhóm
+Trách nhiệm chính trong hệ thống FTP
+Tên Lớp (Class)
+Gói phân nhóm
+Vai trò và Trách nhiệm chính trong hệ thống FTP
+FTPServerCore
+server.network
+Khởi tạo ServerSocket cổng 21/2121; quản lý vòng lặp accept(), lắng nghe kết nối mới và cấp phát ClientHandler qua ThreadPool.
+FTPClientHandler
+server.network
+Triển khai Runnable; đại diện cho phiên phục vụ Client; quản lý Kênh điều khiển, phân tích tập lệnh FTP RFC 959 và phản hồi mã trạng thái.
+FTPDataConnection
+server.network
+Quản lý việc mở cổng động ở chế độ Passive Mode (PASV) hoặc kết nối tới cổng Client ở chế độ Active Mode (PORT); truyền dữ liệu nhị phân.
+FTPCommandDispatcher
+server.command
+Bộ điều phối phân tích cú pháp lệnh FTP; ánh xạ chuỗi lệnh nhận được sang các phương thức xử lý nghiệp vụ tương ứng.
+UserManager
+server.auth
+Quản lý xác thực tài khoản FTP (USER/PASS), lưu trữ thông tin phân quyền và đường dẫn thư mục gốc (Home Directory) của từng user.
+VirtualFileSystem
+server.storage
+Đóng gói các thao tác I/O trên hệ thống tệp: duyệt danh sách (LIST), đọc ghi khối byte (RETR/STOR), xóa tệp (DELE), tạo thư mục (MKD).
+FTPClientCore
+client.network
+Tiến trình mạng phía Client; duy trì Socket điều khiển, luồng gửi lệnh FTP và luồng nhận mã phản hồi từ Server.
+FTPDataClient
+client.network
+Quản lý Socket dữ liệu phía Client; tiếp nhận hoặc gửi luồng byte khi Upload/Download file hoặc nhận danh sách LIST.
+FileTransferWorker
+client.network
+Triển khai SwingWorker để thực hiện truyền nhận tệp trong luồng ngầm, cập nhật % thanh tiến trình mà không làm đơ giao diện.
+FTPCommand
+common.protocol
+Đối tượng mô hình hóa lệnh FTP gồm: Tên lệnh (Command Name) và Danh sách tham số (Arguments).
+FTPResponse
+common.protocol
+Đối tượng mô hình hóa phản hồi FTP gồm: Mã trạng thái 3 chữ số (Reply Code) và Chuỗi thông báo (Reply Text).
+FTPFileItem
+common.model
+Đối tượng lưu trữ thông tin thuộc tính tệp/thư mục: Tên, Kích thước, Loại (File/Dir), Thời gian sửa đổi, Quyền hạn.
+FTPServerGUI
+server.ui
+Giao diện đồ họa máy chủ: Quản lý cổng, danh sách Client online, khung hiển thị log giao tiếp FTP thời gian thực.
+FTPClientGUI
+client.ui
+Giao diện đồ họa máy trạm: Thanh kết nối nhanh, Cây thư mục Local Site & Remote Site, Hàng đợi truyền file, Cửa sổ log.
+Chi tiết thuộc tính và phương thức của các Lớp then chốt:
+Lớp `FTPServerCore`:
+Thuộc tính: `private ServerSocket controlSocket`, `private int controlPort`, `private boolean isRunning`, `private ExecutorService clientThreadPool`.
+Phương thức: `public void startServer(int port)` (mở cổng và chạy vòng lặp lắng nghe), `public void stopServer()` (ngắt toàn bộ phiên kết nối), `private void dispatchClient(Socket socket)`.
+Lớp `FTPClientHandler` (implements Runnable):
+Thuộc tính: `private Socket controlSocket`, `private BufferedReader cmdReader`, `private PrintWriter cmdWriter`, `private FTPDataConnection dataConnection`, `private String currentUsername`, `private File currentDirectory`, `private boolean isAuthenticated`.
+Phương thức: `public void run()` (vòng lặp tiếp nhận lệnh), `public void sendResponse(int code, String text)` (gửi chuỗi phản hồi chuẩn `<code text>\r\n`), `private void handlePasv()`, `private void handleList()`, `private void handleRetr(String filename)`, `private void handleStor(String filename)`.
+Lớp `FTPDataConnection`:
+Thuộc tính: `private ServerSocket passiveServerSocket`, `private Socket dataSocket`, `private int passivePort`, `private boolean isPassiveMode`.
+Phương thức: `public int openPassiveConnection()` (mở cổng dữ liệu ngẫu nhiên và trả về số hiệu cổng), `public Socket getDataSocket()` (chờ kết nối và trả về Socket truyền dữ liệu), `public void closeDataConnection()` (đóng kênh dữ liệu).
+2.3.4. Mô hình hóa Trình tự và Hành trình thông điệp FTP qua 7 tầng OSI
+Dưới đây là sơ đồ trình tự tương tác chi tiết của phiên truyền tệp tin qua FTP ở chế độ Passive Mode:
+Sơ đồ trình tự Tải tệp lên (Upload - STOR) ở Chế độ Passive Mode:
+Bước 1: Client gửi lệnh `TYPE I` qua Kênh điều khiển $ ightarrow$ Server phản hồi `200 Type set to I`.
+Bước 2: Client gửi lệnh `PASV` $ ightarrow$ `FTPClientHandler` gọi `dataConnection.openPassiveConnection()` $ ightarrow$ Server mở cổng động (vd: 50021) $ ightarrow$ Server phản hồi mã `227 Entering Passive Mode (192,168,1,100,195,101)`.
+Bước 3: `FTPClientCore` phân tích mã 227, lấy được IP và Port 50021 $ ightarrow$ `FTPDataClient` tạo thể hiện `new Socket("192.168.1.100", 50021)` kết nối tới kênh dữ liệu Server.
+Bước 4: Client gửi lệnh `STOR tailieu.zip` qua Kênh điều khiển.
+Bước 5: Server gửi phản hồi: `150 Opening BINARY mode data connection for tailieu.zip`.
+Bước 6: Client đẩy luồng dữ liệu byte qua Kênh dữ liệu theo từng khối đệm 16KB; Server tiếp nhận và ghi vào `FileOutputStream`.
+Bước 7: Khi gửi xong, Client đóng luồng Socket dữ liệu.
+Bước 8: Server nhận tín hiệu kết thúc file (EOF), đóng tệp trên đĩa và gửi phản hồi: `226 Transfer complete` qua Kênh điều khiển.
+Phân tích hành trình thông điệp FTP đi qua 7 tầng mô hình OSI (End-to-End Traversal):
+Bảng sau đây phân tích chi tiết hành trình của một thông điệp FTP điển hình (lệnh `STOR tailieu.zip\r\n`) từ đối tượng gửi ở Client đi qua 7 tầng mạng đến đối tượng nhận ở Server:
+Tầng mô hình OSI
+Bên gửi (FTP Client - Đóng gói)
+Bên nhận (FTP Server - Giải đóng gói)
+Tầng trong OSI
+Tại máy tính FTP Client (Đóng gói Encapsulation)
+Tại máy tính FTP Server (Giải đóng gói Decapsulation)
+7. Tầng Ứng dụng (Application)
+FTPClientCore tạo chuỗi lệnh chuẩn: 'STOR tailieu.zip\r\n'. Đây là dữ liệu ứng dụng FTP gốc.
+FTPClientHandler tiếp nhận chuỗi ký tự, nhận diện mã lệnh STOR và tên tệp 'tailieu.zip', chuẩn bị kênh dữ liệu.
+6. Tầng Trình diễn (Presentation)
+Dữ liệu được mã hóa từ ký tự Unicode của Java thành mảng các bytes định dạng chuẩn US-ASCII / UTF-8.
+Hệ điều hành Server giải mã mảng bytes nhận được thành chuỗi ký tự Unicode mà máy ảo Java có thể đọc hiểu.
+5. Tầng Phiên (Session)
+Xác định phiên kết nối Kênh điều khiển FTP hiện hành (thông qua Socket File Descriptor) để gửi vào đúng luồng.
+Kiểm tra phiên làm việc của user (Session đã đăng nhập hợp lệ chưa) trước khi cho phép chuyển dữ liệu lên tầng trên.
+4. Tầng Giao vận (Transport)
+Giao thức TCP chia dòng bytes thành các phân đoạn (Segments), gán Cổng nguồn ngẫu nhiên (vd: 52140), Cổng đích cố định (Port 2121), số thứ tự Sequence Number và Checksum kiểm lỗi.
+Giao thức TCP tại Server kiểm tra Checksum, gửi gói ACK xác nhận về Client, sắp xếp lại đúng trật tự các Segments và ghép thành dòng Stream nguyên vẹn.
+3. Tầng Mạng (Network)
+Giao thức IP bao bọc TCP Segment thành Gói tin (IP Packet), bổ sung Header chứa Địa chỉ IP nguồn (vd: 192.168.1.50) và Địa chỉ IP đích của FTP Server (vd: 192.168.1.100).
+Bộ định tuyến và card mạng Server kiểm tra IP đích. Nếu trùng khớp với IP máy chủ, tiến hành bóc bỏ IP Header và đẩy gói tin lên tầng Transport.
+2. Tầng Liên kết dữ liệu (Data Link)
+Giao thức Ethernet đóng gói IP Packet thành Khung (Ethernet Frame), gắn Địa chỉ MAC nguồn và Địa chỉ MAC đích, bổ sung mã kiểm lỗi FCS/CRC ở đuôi Frame.
+Card mạng Server kiểm tra địa chỉ MAC và mã lỗi CRC. Nếu khung dữ liệu không bị suy hao hoặc biến dạng, bóc bỏ Frame Header/Trailer và chuyển lên tầng Network.
+1. Tầng Vật lý (Physical)
+Khung dữ liệu được card mạng chuyển đổi thành các xung điện áp (cáp Cat6) hoặc tín hiệu sóng radio (Wi-Fi) truyền qua môi trường vật lý.
+Card mạng Server tiếp nhận các xung điện áp từ môi trường vật lý, tái cấu trúc thành luồng các bit nhị phân 0 và 1.
+2.3.5. Thiết kế chi tiết Giao thức truyền tập tin FTP RFC 959
+Hệ thống hiện thực hóa đầy đủ các lệnh và mã phản hồi chuẩn theo đặc tả kỹ thuật RFC 959:
+1. Bảng đặc tả các Lệnh FTP chuẩn (Commands):
+Lệnh FTP
+Tham số
+Mô tả nghiệp vụ
+Cú pháp ví dụ
+Lệnh (Command)
+Tham số (Arguments)
+Mô tả nghiệp vụ
+Ví dụ thực tế
+USER
+<username>
+Khai báo tên tài khoản đăng nhập.
+USER admin
+PASS
+<password>
+Khai báo mật khẩu xác thực.
+PASS admin123
+PWD
+[none]
+Lấy đường dẫn thư mục làm việc hiện tại trên Server.
+PWD
+CWD
+<pathname>
+Thay đổi thư mục làm việc trên Server.
+CWD /tailieu
+PASV
+[none]
+Yêu cầu Server chuyển sang Chế độ thụ động (Passive Mode).
+PASV
+PORT
+<h1..h4,p1,p2>
+Khai báo IP và Cổng dữ liệu ở Chế độ chủ động (Active Mode).
+PORT 192,168,1,50,200,10
+TYPE
+<A | I>
+Thiết lập chế độ truyền: A (ASCII) hoặc I (Binary).
+TYPE I
+LIST
+[pathname]
+Yêu cầu truyền danh sách tệp qua Kênh dữ liệu.
+LIST
+RETR
+<filename>
+Tải tệp tin từ Server về Client qua Kênh dữ liệu.
+RETR baocao.pdf
+STOR
+<filename>
+Tải tệp tin từ Client lên Server qua Kênh dữ liệu.
+STOR source.zip
+DELE
+<filename>
+Xóa một tệp tin trên máy chủ.
+DELE temp.txt
+MKD
+<pathname>
+Tạo thư mục mới trên máy chủ.
+MKD project_2026
+QUIT
+[none]
+Đóng phiên làm việc và ngắt kết nối FTP.
+QUIT
+2. Bảng đặc tả các Mã phản hồi FTP chuẩn (Response Codes):
+Mã FTP
+Tên mã trạng thái
+Ý nghĩa chuyên ngành tiếng Việt
+Mã phản hồi
+Tên mã trạng thái (Reply Text)
+Ý nghĩa nghiệp vụ chuyên ngành
+150
+File status okay; about to open data connection
+Trạng thái tệp hợp lệ; chuẩn bị mở kênh truyền dữ liệu.
+200
+Command okay
+Lệnh thực thi thành công, sẵn sàng nhận lệnh tiếp theo.
+215
+NAME system type
+Thông báo định dạng hệ điều hành của máy chủ (UNIX Type: L8).
+220
+Service ready for new user
+Dịch vụ FTP Server đã sẵn sàng tiếp nhận kết nối mới.
+226
+Closing data connection; transfer successful
+Đóng kênh dữ liệu; thao tác truyền tệp đã hoàn thành trọn vẹn.
+227
+Entering Passive Mode (h1,h2,h3,h4,p1,p2)
+Chuyển sang chế độ Passive; cung cấp địa chỉ IP và Cổng dữ liệu.
+230
+User logged in, proceed
+Đăng nhập thành công; phiên làm việc được thiết lập.
+250
+Requested file action okay, completed
+Thao tác trên tệp/thư mục đã hoàn thành thành công.
+257
+"PATHNAME" created
+Thư mục mới đã được tạo thành công.
+331
+User name okay, need password
+Tên tài khoản hợp lệ; yêu cầu gửi tiếp mật khẩu bằng lệnh PASS.
+425
+Can't open data connection
+Lỗi không thể mở được kênh kết nối dữ liệu TCP.
+530
+Not logged in
+Người dùng chưa đăng nhập hoặc sai thông tin xác thực.
+550
+Requested action not taken; file unavailable
+Không tìm thấy tệp tin hoặc không đủ quyền hạn truy cập.
+CHƯƠNG 3: CÀI ĐẶT - KIỂM THỬ VÀ KẾT QUẢ ĐẠT ĐƯỢC
+3.1. Giới thiệu môi trường cài đặt và cấu hình hệ thống
+Hệ thống phần mềm được xây dựng và kiểm thử trong môi trường phòng thực hành mạng tiêu chuẩn tại Khoa Khoa học máy tính - VKU. Dưới đây là bảng thông số cấu hình môi trường chi tiết:
+Thành phần hệ thống
+Cấu hình tối thiểu
+Cấu hình thử nghiệm thực tế
+Thành phần môi trường
+Cấu hình tối thiểu (Minimum)
+Cấu hình thử nghiệm thực tế (Testbed)
+Bộ vi xử lý (CPU)
+Intel Core i3 thế hệ 6 hoặc tương đương
+Intel Core i5-1135G7 @ 2.40GHz (4 Cores, 8 Threads)
+Bộ nhớ trong (RAM)
+Dung lượng tối thiểu 4.0 GB
+16.0 GB DDR4 Bus 3200 MHz
+Ổ đĩa lưu trữ (Storage)
+Ổ cứng cơ HDD tốc độ 5400 RPM
+Ổ cứng thể rắn SSD NVMe PCIe dung lượng 512 GB (Tốc độ đọc/ghi > 2000 MB/s)
+Card giao tiếp mạng (NIC)
+Ethernet Fast Ethernet 100 Mbps
+Realtek Gigabit Ethernet (1000 Mbps) / Wi-Fi 6 802.11ax
+Hệ điều hành (OS)
+Windows 10 / Ubuntu 20.04 LTS
+Windows 11 Home 64-bit (Build 22631)
+Môi trường thực thi Java
+Java Runtime Environment (JRE 11)
+Java Development Kit (Oracle JDK 23 / OpenJDK 17)
+Môi trường phát triển IDE
+Text Editor / Eclipse IDE
+IntelliJ IDEA Ultimate 2024.2.2
+Cấu hình thông số mạng và tường lửa:
+Địa chỉ IP Server: Sử dụng IP loopback `127.0.0.1` khi chạy kiểm thử trên máy
+đơn, và gán IP tĩnh nội bộ `192.168.1.100` khi thử nghiệm trong mạng LAN.
+Số hiệu cổng: Cổng điều khiển FTP cấu hình là `2121` (tránh xung đột với cổng 21
+mặc định của IIS/Windo ws FTP Service); dải cổng dữ liệu Passive Mode mở động
+từ `50000` đến `50050`.
+Cấu hình Tường lửa (Windows Defender Firewall): Mở quy tắc Inbound Rule cho
+phép ứng dụng Java tiếp nhận lưu lượng mạng trên cổng điều khiển `2121` và dải
+cổng `50000-50050`.
+3.2. Hướng dẫn cài đặt và sử dụng phần mềm FTP Client & Server
+Quy trình triển khai và vận hành phần mềm gồm hai giai đoạn độc lập: Khởi động Máy chủ FTP Server và Vận hành Máy trạm FTP Client:
+1. Hướng dẫn khởi động và vận hành FTP Server:
+Bước 1: Mở dự án trong IntelliJ IDEA hoặc thực thi file thực thi `FTPServer.jar`. Bước 2: Giao diện FTPServer xuất hiện với thông số mặc định (Port: 2121, Thư mục gốc: `./server_storage/`). Bước 3: Nhấn nút [Khởi động Server]. Đèn trạng thái chuyển sang màu xanh, log hiển thị thông báo: "FTP Server running on port 2121. Ready for connections.". Bước 4: Bảng danh sách Client trực tuyến và khung nhật ký thời gian thực hiển thị chi tiết mọi lệnh FTP từ các máy trạm.
+2. Hướng dẫn vận hành FTP Client:
+Bước 1: Khởi chạy file `FTPClient.jar` trên một hoặc nhiều máy tính trong cùng mạng LAN. Bước 2: Trên thanh Quick Connect, nhập Host IP (ví dụ: `192.168.1.100`), Port `2121`, Username và Password. Bước 3: Nhấn nút [Quick Connect]. Sau khi nhận phản hồi `230 Logged in`, giao diện hiển thị đầy đủ:    - Khung bên trái: Cây thư mục máy tính cục bộ (Local Site).    - Khung bên phải: Cây thư mục máy chủ FTP từ xa (Remote Site).    - Khung phía trên: Cửa sổ hiển thị luồng lệnh/mã phản hồi FTP thời gian thực.    - Khung phía dưới: Thanh tiến trình truyền dữ liệu (Progress Bar) và danh sách tệp chờ truyền.
+Bước 4: Thao tác tải tệp lên (Upload): Chọn tệp trên Local Site, nhấp chuột phải chọn [Upload]; tệp được truyền qua kênh dữ liệu lên Server kèm thanh tiến trình chạy từ 0% đến 100%. Bước 5: Thao tác tải tệp về (Download): Chọn tệp trên Remote Site, nhấp chuột phải chọn [Download]; tệp được tải về thư mục cục bộ an toàn. Bước 6: Thao tác tạo thư mục / xóa tệp: Sử dụng menu ngữ cảnh chuột phải trên bảng Remote Site.
+Kịch bản kiểm thử (Test Cases) và Ma trận kết quả FTP
+Để đánh giá chất lượng hệ thống, nhóm đã xây dựng và thực thi bộ 12 ca kiểm thử chuyên sâu về giao thức FTP:
+Mã TC
+Tên ca kiểm thử
+Dữ liệu thử nghiệm
+Kết quả mong đợi
+Kết quả thực tế
+Đánh giá
+Mã TC
+Tên ca kiểm thử
+Dữ liệu thử nghiệm
+Kết quả mong đợi
+Kết quả thực tế
+Đánh giá
+TC01
+Khởi động Server cổng hợp lệ
+Cổng TCP 2121 chưa bị chiếm dụng
+Server mở cổng thành công, chuyển trạng thái sang Listening, sẵn sàng accept().
+Server mở cổng 2121 thành công, log ghi nhận sẵn sàng.
+ĐẠT (PASS)
+TC02
+Khởi động Server cổng trùng lặp
+Cổng 2121 đang có tiến trình khác chạy
+Bắt ngoại lệ BindException, hiển thị hộp thoại cảnh báo người dùng đổi cổng.
+Bắt lỗi chính xác, hiển thị thông báo 'Cổng đã được sử dụng'.
+ĐẠT (PASS)
+TC03
+Client kết nối khi Server tắt
+IP: 127.0.0.1, Port: 2121 (Server tắt)
+Bắt ngoại lệ ConnectException, hiển thị thông báo 'Không thể kết nối tới Server'.
+Bắt lỗi kịp thời sau 2 giây timeout, không gây treo ứng dụng.
+ĐẠT (PASS)
+TC04
+Đăng nhập tài khoản hợp lệ
+User: 'admin', Pass: 'admin123'
+Server phản hồi mã 230, Client nạp danh sách tệp ban đầu lên Remote Site.
+Đăng nhập thành công, hiển thị chính xác cây thư mục Remote.
+ĐẠT (PASS)
+TC05
+Đăng nhập sai mật khẩu
+User: 'admin', Pass: 'sai_mat_khau'
+Server phản hồi mã 530 Not logged in, Client hiển thị cảnh báo sai thông tin.
+Hiển thị thông báo 'Thông tin đăng nhập không chính xác'.
+ĐẠT (PASS)
+TC06
+Duyệt thư mục từ xa (LIST)
+Lệnh PASV + LIST thư mục có 20 tệp
+Mở cổng dữ liệu PASV, truyền danh sách tệp, hiển thị đúng 20 hàng trên bảng.
+Hiển thị đầy đủ 20 tệp tin kèm kích thước và ngày tháng.
+ĐẠT (PASS)
+TC07
+Tải lên tệp nhỏ (STOR <1MB)
+File 'baocao.docx' dung lượng 450 KB
+Kênh dữ liệu mở, truyền hoàn tất trong <100ms, Server phản hồi mã 226.
+Thời gian truyền 55ms, file mở đọc hoàn toàn nguyên vẹn.
+ĐẠT (PASS)
+TC08
+Tải lên tệp lớn (STOR >500MB)
+File video 'bai_giang.mp4' dung lượng 780 MB
+Thanh tiến trình cập nhật đều đặn, không bị OutOfMemoryError, ghi trọn vẹn file.
+Truyền ổn định trong 10.8 giây, RAM JVM không vượt quá 150MB.
+ĐẠT (PASS)
+TC09
+Kiểm tra tính toàn vẹn (Checksum)
+Tính SHA-256 file trước và sau khi RETR
+Mã băm SHA-256 của tệp tải về trùng khớp 100% với mã băm trên Server.
+Mã băm SHA-256 trùng khớp tuyệt đối từng bit.
+ĐẠT (PASS)
+TC10
+Kiểm thử tải đồng thời (Concurrency)
+5 máy trạm cùng lúc Upload/Download tệp
+Server duy trì 5 luồng Worker độc lập, truyền trơn tru, không xung đột.
+Cả 5 Client đều hoàn thành truyền tệp mà không bị nghẽn.
+ĐẠT (PASS)
+TC11
+Ngắt mạng đột ngột khi truyền
+Rút cáp mạng LAN khi file đang truyền 50%
+Server bắt lỗi SocketException, tự động xóa file dở dang, cập nhật offline.
+Server dọn dẹp tài nguyên sau 5 giây timeout, không bị rác đĩa.
+ĐẠT (PASS)
+TC12
+Thao tác xóa và tạo thư mục
+Lệnh MKD 'new_folder' và DELE file
+Server thực thi thao tác trên đĩa, phản hồi mã 257 và 250, Client tự làm mới.
+Tạo thư mục và xóa tệp thành công, đồng bộ hiển thị ngay.
+ĐẠT (PASS)
+3.4. Đánh giá hiệu năng và kết quả đạt được
+Nhóm đã tiến hành đo đạc các chỉ số hiệu năng thực tế của hệ thống trong môi trường mạng LAN Gigabit Ethernet (băng thông lý thuyết 1000 Mbps):
+Dung lượng tệp
+Thời gian truyền
+Tốc độ thực tế
+Mức chiếm CPU
+Bộ nhớ RAM
+Kích thước tệp tin thử nghiệm
+Thời gian truyền trung bình
+Tốc độ truyền tải thực tế (Throughput)
+Mức sử dụng CPU của Server
+Bộ nhớ RAM tiêu hao (Heap Memory)
+Tệp nhỏ (1 MB)
+0.02 giây (20 ms)
+50.0 MB/s
+Dưới 2%
+~ 45 MB
+Tệp trung bình (50 MB)
+0.68 giây
+73.5 MB/s
+~ 4%
+~ 65 MB
+Tệp lớn (200 MB)
+2.58 giây
+77.5 MB/s
+~ 6%
+~ 85 MB
+Tệp rất lớn (1.0 GB)
+12.8 giây
+80.0 MB/s (xấp xỉ 640 Mbps)
+~ 7 - 9%
+~ 120 - 150 MB
+Nhận xét và Đánh giá tổng quát:
+Tốc độ truyền tải FTP: Đạt mức trung bình từ 73.5 đến 80.0 MB/s trên mạng Gigabit LAN, khai thác tối đa năng lực I/O của ổ cứng SSD và đường truyền vật lý.
+Hiệu quả quản lý tài nguyên: Cơ chế đệm khối 16KB giúp máy chủ tiết kiệm bộ nhớ, mức chiếm dụng RAM luôn dưới 150MB ngay cả khi truyền tải tệp tin dung lượng lớn.
+Độ tin cậy: Toàn bộ 12/12 ca kiểm thử chuẩn FTP đều đạt kết quả ĐẠT (PASS), dữ liệu xác thực nguyên vẹn 100% qua mã băm kiểm tra SHA-256.
+KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN
+1. Những kiến thức và kỹ năng học được:
+Về lý thuyết mạng máy tính: Hiểu sâu sắc và làm chủ bản chất vận hành của mô hình 7 tầng OSI, 4 tầng TCP/IP và chuẩn giao thức truyền tập tin FTP.
+Về kỹ thuật lập trình Socket: Làm chủ việc phân tách 2 kênh kết nối TCP độc lập (Kênh điều khiển và Kênh dữ liệu), cơ chế Active Mode vs Passive Mode, và sự dịch chuyển của luồng dữ liệu byte stream.
+Về kỹ thuật lập trình đa luồng (Multithreading): Nắm vững việc xây dựng các luồng Worker độc lập để xử lý đồng thời nhiều kết nối mạng, giải quyết triệt để bài toán nghẽn máy chủ.
+Về phương pháp phân tích thiết kế hệ thống (OOAD): Vận dụng thành công phương pháp luận của PGS.TS Huỳnh Công Pháp trong việc mô hình hóa các thực thể phân tán ở xa nhau trao đổi thông điệp qua mạng, chuẩn hóa các sơ đồ Use Case, Class Diagram và Sequence Diagram theo chuẩn UML.
+Về kỹ năng phát triển phần mềm: Nâng cao năng lực tổ chức cấu trúc mã nguồn theo mô hình phân tầng, xây dựng giao diện người dùng chuyên nghiệp bằng Java Swing/FlatLaf và kỹ năng viết báo cáo khoa học.
+2. Những kết quả thực tiễn đã làm được
+Xây dựng thành công hệ thống phần mềm mạng hoàn chỉnh gồm ứng dụng FTP Server và ứng dụng FTP Client hoạt động ổn định và tin cậy theo đúng chuẩn RFC 959.
+Triển khai xuất sắc kiến trúc 2 kênh giao tiếp: Kênh điều khiển duy trì liên tục và Kênh dữ liệu mở động ở chế độ Passive Mode (PASV), vượt qua mọi tường lửa/NAT phía Client.
+Hiện thực hóa trọn vẹn các lệnh FTP cốt lõi: USER, PASS, PWD, CWD, LIST, PASV, TYPE, STOR, RETR, DELE, MKD, QUIT.
+Đảm bảo tính toàn vẹn dữ liệu 100% qua thuật toán mã băm kiểm tra SHA-256.
+Giao diện người dùng đồ họa hiện đại, trực quan, có thanh tiến trình hiển thị % hoàn thành và tốc độ truyền thực tế.
+Vượt qua toàn bộ 12 kịch bản kiểm thử khắt khe với hiệu năng truyền tải trung bình đạt trên 75 - 80 MB/s trong mạng Gigabit LAN.
+3. Những hạn chế còn tồn tại
+Hệ thống hiện tại truyền dữ liệu trên kênh Socket thuần (Plain Socket), chưa tích hợp lớp bảo mật mã hóa SSL/TLS (FTPS), do đó dữ liệu trên đường truyền vẫn có nguy cơ bị bắt gói tin (Sniffing) nếu có kẻ tấn công trong cùng mạng nội bộ.
+Chưa hỗ trợ cơ chế tự động tiếp tục truyền tệp khi bị đứt mạng giữa chừng thông qua lệnh `REST` (Resume broken file transfers); nếu mạng ngắt thì tệp phải tải lại từ đầu.
+Chưa triển khai cơ chế giới hạn băng thông (Bandwidth Throttling / Rate Limiting) cho từng người dùng cụ thể.
+4. Hướng khắc phục và phát triển trong tương lai
+Nâng cấp an toàn kênh truyền: Tích hợp `SSLSocket` / `SSLServerSocket` với chứng chỉ số X.509 và giao thức TLS v1.3 để mã hóa toàn bộ dữ liệu điều khiển và tệp tin (FTPS - FTP over TLS).
+Cơ chế Resume: Bổ sung lệnh `REST <byte_offset>` cho phép Client gửi lại vị trí byte đã nhận thành công trước đó để Server chỉ truyền tiếp phần còn thiếu khi kết nối lại.
+Tối ưu hóa băng thông: Tích hợp thuật toán nén dữ liệu Deflater/GZIP trực tiếp trên đường truyền trước khi ghi đĩa để giảm dung lượng truyền tải.
+Tải đa phân đoạn (Multi-part Segmented Download): Cho phép Client mở đồng thời nhiều luồng Socket song song để tải các phần khác nhau của cùng một tệp tin lớn, giúp đẩy tốc độ tải lên mức tối đa.
+TÀI LIỆU THAM KHẢO
+Toàn bộ các tài liệu học thuật, giáo trình chuyên ngành và chuẩn kỹ thuật quốc tế được trích dẫn và tham khảo trong quá trình thực hiện đồ án được lập danh mục chuẩn mực dưới đây:
+I. TÀI LIỆU TIẾNG VIỆT
+STT
+Tác giả
+Tên giáo trình / Sách
+Nhà xuất bản
+Năm
+Phương thức xem / Địa chỉ tiếp cận
+[1]
+PGS. TS. Huỳnh Công Pháp, ThS. Trịnh Công Duy
+Giáo trình Lập trình mạng
+Nhà xuất bản Đại học Đà Nẵng
+2013 / 2021
+Thư viện Trường ĐH CNTT & TT Việt - Hàn (VKU); Tài liệu lưu hành nội bộ học phần Lập trình mạng.
+[2]
+PGS. TS. Huỳnh Công Pháp
+Bài giảng Phân tích và Thiết kế Hệ thống Hướng đối tượng
+Khoa Khoa học máy tính, Trường ĐH CNTT & TT Việt - Hàn
+2018
+Hệ thống học tập trực tuyến E-Learning VKU; Thư viện số Đại học Đà Nẵng.
+[3]
+ThS. Nguyễn Thanh Cẩm
+Đề cương bài giảng và Hướng dẫn thực hành Lập trình mạng
+Khoa Khoa học máy tính, Trường ĐH CNTT & TT Việt - Hàn
+2024
+Tài liệu giảng dạy chính khóa lớp Lập trình mạng (11), học kỳ 1 năm học 2025 - 2026.
+[4]
+TS. Nguyễn Tri Tuấn
+Giáo trình Phân tích và Thiết kế Hệ thống Hướng đối tượng với UML
+Nhà xuất bản Thông tin và Truyền thông, Hà Nội
+2019
+Sách in chuyên ngành CNTT; Thư viện Quốc gia Việt Nam.
+[5]
+Đặng Văn Đức
+Phân tích thiết kế hướng đối tượng bằng UML
+Nhà xuất bản Giáo dục Việt Nam, Hà Nội
+2008
+Giáo trình tham khảo nhập môn phân tích phần mềm hướng đối tượng.
+II. TÀI LIỆU TIẾNG ANH (CÁC TIÊU CHUẨN VÀ SÁCH CHUYÊN NGÀNH QUỐC TẾ)
+STT
+Tác giả
+Tên sách / Tiêu chuẩn kỹ thuật
+Nhà xuất bản
+Năm
+Đường dẫn & Thời gian truy cập
+[6]
+Kurose, J. F., & Ross, K. W.
+Computer Networking: A Top-Down Approach (Tái bản lần thứ 8)
+Pearson Education, New York
+2021
+Giáo trình chuẩn quốc tế về mạng máy tính; ISBN: 978-0136681557.
+[7]
+Harold, E. R.
+Java Network Programming: Developing Networked Applications (Tái bản lần 4)
+O'Reilly Media, Sebastopol, CA
+2014
+Tài liệu chuyên sâu về lập trình Java Socket; ISBN: 978-1449357672.
+[8]
+Schildt, H.
+Java: The Complete Reference (Tái bản lần thứ 12)
+McGraw-Hill Education, New York
+2021
+Sách tra cứu toàn diện về ngôn ngữ Java và thư viện java.net, java.io.
+[9]
+Postel, J., & Reynolds, J.
+RFC 959: File Transfer Protocol (FTP) Specification - Đặc tả chuẩn giao thức truyền tệp
+Internet Engineering Task Force (IETF)
+1985
+Trực tuyến: https://datatracker.ietf.org/
+doc/html/rfc959
+Truy cập ngày 25/10/2026.
+[10]
+Oracle Corporation
+Java SE Documentation: Lesson - All About Sockets (Tài liệu lập trình Socket chính thống)
+Oracle Technology Network
+2024
+Trực tuyến: https://docs.oracle.com/javase
+/tutorial/networking/sockets/
+Truy cập ngày 25/10/2026.
+[11]
+Eckel, B.
+Thinking in Java (Tư duy lập trình hướng đối tượng trong Java, Tái bản lần 4)
+Prentice Hall, Upper Saddle River, NJ
+2006
+Tư duy thiết kế phần mềm hướng đối tượng và đa luồng trong Java.

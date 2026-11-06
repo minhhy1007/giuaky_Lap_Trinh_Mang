@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Báo Cáo Nội Dung Tổng Thể Dự Án (Lập Trình Mạng)</title>
+<style>
+  @page {
+    size: A4;
+    margin: 20mm 20mm 20mm 20mm;
+  }
+  body {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 13pt;
+    line-height: 1.4;
+    color: #1a1a1a;
+  }
+  .header-box {
+    text-align: center;
+    margin-bottom: 25px;
+  }
+  .school-name {
+    font-size: 11pt;
+    font-weight: bold;
+    color: #4b5563;
+    text-transform: uppercase;
+  }
+  .doc-title {
+    font-size: 18pt;
+    font-weight: bold;
+    color: #1e3a8a;
+    margin-top: 15px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+  .doc-sub {
+    font-size: 11.5pt;
+    font-style: italic;
+    color: #374151;
+    margin-bottom: 20px;
+  }
+  .callout {
+    background-color: #eff6ff;
+    border-left: 5px solid #3b82f6;
+    padding: 12px 18px;
+    margin: 15px 0;
+    border-radius: 4px;
+  }
+  .callout-success {
+    background-color: #f0fdf4;
+    border-left-color: #22c55e;
+  }
+  .callout-title {
+    font-weight: bold;
+    color: #1e40af;
+    margin-bottom: 4px;
+  }
+  .callout-success .callout-title {
+    color: #166534;
+  }
+  h1 {
+    font-size: 15pt;
+    color: #1e3a8a;
+    border-bottom: 2px solid #cbd5e1;
+    padding-bottom: 4px;
+    margin-top: 25px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+  }
+  h2 {
+    font-size: 13.5pt;
+    color: #0f766e;
+    margin-top: 18px;
+    margin-bottom: 8px;
+  }
+  h3 {
+    font-size: 12pt;
+    color: #1e293b;
+    margin-top: 14px;
+    margin-bottom: 6px;
+  }
+  p, li {
+    text-align: justify;
+    margin-bottom: 6px;
+  }
+  ul, ol {
+    margin-top: 4px;
+    margin-bottom: 10px;
+    padding-left: 25px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+    font-size: 10.5pt;
+  }
+  th, td {
+    border: 1px solid #cbd5e1;
+    padding: 8px 10px;
+  }
+  th {
+    background-color: #1e3a8a;
+    color: #ffffff;
+    text-align: center;
+    font-weight: bold;
+  }
+  th.teal {
+    background-color: #0f766e;
+  }
+  tr:nth-child(even) {
+    background-color: #f8fafc;
+  }
+  .badge-done {
+    background-color: #dcfce7;
+    color: #166534;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 9.5pt;
+    display: inline-block;
+  }
+  pre {
+    background-color: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    padding: 10px;
+    font-family: Consolas, monospace;
+    font-size: 9.5pt;
+    border-radius: 4px;
+    overflow-x: auto;
+  }
+</style>
+</head>
+<body>
+
+<div class="header-box">
+  <div class="school-name">BỘ CÔNG THƯƠNG — TRƯỜNG ĐẠI HỌC CÔNG THƯƠNG TP. HỒ CHÍ MINH (HUIT)<br>KHOA CÔNG NGHỆ THÔNG TIN — BỘ MÔN LẬP TRÌNH MẠNG</div>
+  <div class="doc-title">BÁO CÁO NỘI DUNG TỔNG THỂ DỰ ÁN<br>(HỆ THỐNG TRUYỀN NHẬN TẬP TIN CLIENT - SERVER CUSTOM FTP)</div>
+  <div class="doc-sub">Học phần: Lập Trình Mạng (Mạng Máy Tính & Truyền Thông Dữ Liệu)<br>Giảng viên hướng dẫn: ThS. Nguyễn Thanh Cẩm<br>Thời điểm thực hiện: Học kỳ 1 — Năm học 2026 - 2027</div>
+</div>
+
+<div class="callout callout-success">
+  <div class="callout-title">📌 TỔNG QUAN HỒ SƠ TOÀN DIỆN DỰ ÁN:</div>
+  <div>Tài liệu này là hồ sơ kiến trúc và thuyết minh toàn diện của đề tài, tổng hợp từ A-Z mọi khía cạnh: Lý thuyết nền tảng TCP/IP, Thiết kế hướng đối tượng OOAD theo tài liệu Thầy Pháp, Kiến trúc ghép kênh đơn luồng (Single-Channel Multiplexing), Toàn bộ 22 chức năng hiện có trong mã nguồn Java, Các giải pháp kỹ thuật đột phá (ProtocolInputStream, Chống Path Traversal), Thiết kế Database MySQL 3NF nâng cấp cuối kỳ, Kịch bản kiểm thử và Bộ câu hỏi bảo vệ đồ án.</div>
+</div>
+
+<h1>CHƯƠNG 1: TỔNG QUAN ĐỀ TÀI & BÀI TOÁN KỸ THUẬT</h1>
+<h2>1.1. Bối cảnh & Tính cấp thiết của đề tài</h2>
+<p>Trong kỷ nguyên số hóa, nhu cầu trao đổi các tệp tin kỹ thuật số dung lượng lớn (video bài giảng 4K, bản sao lưu database dumps, máy ảo VMware/VirtualBox từ 5GB đến 20GB, tệp nén mã nguồn dự án) giữa các phòng máy thực hành và máy chủ trung tâm là vô cùng thường xuyên và liên tục.</p>
+<p>Các phương thức truyền thống bộc lộ nhiều hạn chế nghiêm trọng:</p>
+<ul>
+  <li><b>USB / Ổ cứng ngoài:</b> Dễ hỏng hóc vật lý và là con đường số một lây lan mã độc (virus Autorun, Ransomware) trong phòng máy thực hành.</li>
+  <li><b>Email:</b> Giới hạn 25MB, cơ chế mã hóa Base64 làm phình dung lượng thực tế hơn 33%.</li>
+  <li><b>Cloud công cộng (Google Drive, Dropbox):</b> Phụ thuộc đường truyền Internet quốc tế, tiềm ẩn rủi ro lộ lọt bí mật dữ liệu nội bộ.</li>
+  <li><b>Chia sẻ Windows SMB:</b> Xung đột giữa các hệ điều hành khác nhau, cấu hình phân quyền phức tạp và có nhiều lỗ hổng khai thác mạng LAN.</li>
+</ul>
+<p>Chính vì vậy, đề tài cung cấp giải pháp chia sẻ tệp tin nội bộ độc lập, an toàn, tốc độ tối đa của hạ tầng LAN Gigabit (lên tới 1000Mbps ~ 125MB/giây) mà không cần phần mềm bên thứ ba.</p>
+
+<h2>1.2. Mục tiêu nghiên cứu & Phạm vi sản phẩm</h2>
+<ul>
+  <li>Xây dựng giải pháp trọn gói bao gồm 2 phân hệ: TCP Server (phía máy chủ lưu trữ, xử lý đa luồng) và TCP Client (phía máy trạm, giao diện đồ họa Swing trực quan).</li>
+  <li>Tự định nghĩa Giao thức Ứng dụng tùy biến (Custom Application Protocol) kế thừa các mã lệnh chuẩn mực của FTP RFC 959 (USER, PASS, PWD, LIST, STOR, RETR, DELE, RNFR, RNTO, QUIT).</li>
+  <li>Hỗ trợ truyền nhận nguyên vẹn 100% mọi định dạng tệp tin nhị phân (ảnh, video, file nén zip, tài liệu pdf/docx, file thực thi exe/jar).</li>
+  <li>Phân định rõ 2 giai đoạn: Phiên bản giữa kỳ (Hiện tại: Socket TCP thuần, Single-Channel Multiplexing, In-memory Auth, Lưu trữ file vật lý trên đĩa cứng, Swing UI hiện đại) và Phiên bản nâng cấp cuối kỳ (Tích hợp MySQL RDBMS, FTPS TLS/SSL, Phân quyền thư mục Sandbox, Quản lý thư mục con).</li>
+</ul>
+
+<h1>CHƯƠNG 2: KIẾN TRÚC HỆ THỐNG & NGUYÊN LÝ TRUYỀN THÔNG MẠNG</h1>
+<h2>2.1. Mô hình Kiến trúc Phân tầng Client - Server (3 Tầng)</h2>
+<p>Hệ thống được thiết kế theo mô hình 3 tầng phân tách rõ ràng:</p>
+<ol>
+  <li><b>Tầng Trình diễn (Presentation Layer - Client):</b> Xây dựng bằng Java Swing / AWT với thiết kế phẳng hiện đại. Gồm LoginFrame.java (màn hình đăng nhập, hỗ trợ đổi 4 bộ Look & Feel) và MainFrame.java (bảng tệp JTable, thanh công cụ, thanh tiến trình JProgressBar và màn hình Terminal Console Log). Tách biệt hoàn toàn tác vụ mạng khỏi luồng giao diện nhờ SwingWorker.</li>
+  <li><b>Tầng Dịch vụ & Giao thức (Service & Protocol Layer):</b> Đóng gói toàn bộ logic giao thức mạng. Phía Client là FtpClientService.java. Phía Server là ClientHandler.java (luồng phục vụ client), CommandHandler.java (phân tích cú pháp lệnh), Session.java (máy trạng thái phiên) và ProtocolInputStream.java (bộ đọc luồng nhị phân tùy biến).</li>
+  <li><b>Tầng Mạng & Lưu trữ Dữ liệu (Network & Storage Layer):</b> Quản trị hạ tầng kết nối vật lý qua ServerSocket lắng nghe trên cổng 6789. Tầng lưu trữ gồm StorageManager.java (quản lý đọc ghi tệp an toàn trên đĩa cứng storage/, chống Path Traversal) và UserDatabase.java (quản lý xác thực tài khoản).</li>
+</ol>
+
+<h2>2.2. Cơ chế truyền thông Socket TCP hướng kết nối (Connection-Oriented)</h2>
+<p>Trước khi truyền bất kỳ dữ liệu nào, hai máy Client và Server bắt buộc phải thiết lập kết nối thông qua quy trình Bắt tay 3 bước (Three-way Handshake: SYN ➔ SYN-ACK ➔ ACK). Nhờ TCP, hệ thống đảm bảo dữ liệu truyền đi không bao giờ bị mất mát, đến đích đúng thứ tự, có cơ chế kiểm tra lỗi (Checksum) và tự động truyền lại khi bị suy hao tín hiệu.</p>
+
+<h2>2.3. Đột phá Kiến trúc: Ghép kênh Đơn luồng (Single-Channel Stream Multiplexing)</h2>
+<p>Khác biệt so với FTP RFC 959 (phải mở 2 kết nối riêng: Port 21 cho lệnh và Port ngẫu nhiên cho dữ liệu rất hay bị Firewall chặn), đề tài sử dụng <b>DUY NHẤT MỘT KẾT NỐI TCP (Cổng 6789)</b> để truyền cả dòng lệnh text ASCII lẫn luồng tệp tin nhị phân. Mô hình này giúp ứng dụng hoạt động thông suốt qua mọi Firewall và bộ định tuyến NAT.</p>
+
+<h2>2.4. Hành trình Thông điệp qua 7 Tầng Mô hình OSI (End-to-End Traversal)</h2>
+<table>
+  <thead>
+    <tr>
+      <th style="width: 25%;">Tầng OSI</th>
+      <th style="width: 37%;">Phía Gửi (FTP Client - Đóng gói)</th>
+      <th style="width: 38%;">Phía Nhận (FTP Server - Giải đóng gói)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><b>7. Tầng Ứng dụng (Application)</b></td>
+      <td>FtpClientService tạo chuỗi ký tự lệnh: 'STOR tailieu.zip\r\n'. Đây là dữ liệu ứng dụng gốc.</td>
+      <td>CommandHandler tiếp nhận chuỗi text, nhận diện mã lệnh STOR và tên tệp, kiểm tra quyền hạn.</td>
+    </tr>
+    <tr>
+      <td><b>6. Tầng Trình diễn (Presentation)</b></td>
+      <td>Chuỗi ký tự Unicode của Java được mã hóa thành mảng các bytes chuẩn UTF-8 / US-ASCII.</td>
+      <td>Hệ điều hành Server giải mã mảng bytes nhận được thành chuỗi ký tự Unicode mà máy ảo Java hiểu được.</td>
+    </tr>
+    <tr>
+      <td><b>5. Tầng Phiên (Session)</b></td>
+      <td>Xác định phiên kết nối Socket TCP hiện hành (File Descriptor) để định tuyến dữ liệu vào đúng luồng.</td>
+      <td>Kiểm tra phiên làm việc (Session) của client xem đã đăng nhập hợp lệ (AUTHENTICATED) hay chưa.</td>
+    </tr>
+    <tr>
+      <td><b>4. Tầng Giao vận (Transport)</b></td>
+      <td>TCP chia mảng bytes thành các Segments, gán Port nguồn ngẫu nhiên, Port đích 6789, số Seq và Checksum.</td>
+      <td>TCP Server kiểm tra Checksum, gửi gói ACK xác nhận, sắp xếp lại thứ tự Segments và tái tạo dòng Stream.</td>
+    </tr>
+    <tr>
+      <td><b>3. Tầng Mạng (Network)</b></td>
+      <td>Giao thức IP đóng gói TCP Segment thành IP Packet, gán Địa chỉ IP nguồn và IP đích của Server.</td>
+      <td>Card mạng và router đọc IP đích, nếu trùng khớp với máy chủ thì bóc bỏ IP Header và đẩy lên Transport.</td>
+    </tr>
+    <tr>
+      <td><b>2. Tầng Liên kết dữ liệu (Data Link)</b></td>
+      <td>Ethernet đóng gói IP Packet thành Frame, gán Địa chỉ MAC nguồn, MAC đích và mã kiểm lỗi CRC/FCS.</td>
+      <td>Card mạng kiểm tra MAC và CRC. Nếu khung dữ liệu toàn vẹn, bóc bỏ Frame Header/Trailer và đẩy lên Network.</td>
+    </tr>
+    <tr>
+      <td><b>1. Tầng Vật lý (Physical)</b></td>
+      <td>Khung dữ liệu được chuyển đổi thành các xung điện áp (cáp đồng Cat6) hoặc sóng radio (Wi-Fi).</td>
+      <td>Card mạng Server tiếp nhận tín hiệu vật lý, tái cấu trúc thành luồng các bit nhị phân 0 và 1 thuần túy.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1>CHƯƠNG 3: PHÂN TÍCH VÀ THIẾT KẾ HỆ THỐNG HƯỚNG ĐỐI TƯỢNG (OOAD)</h1>
+<h2>3.1. Triết lý OOAD trong môi trường Mạng Phân tán (Tài liệu Thầy Pháp)</h2>
+<p>Theo tài liệu của PGS.TS Huỳnh Công Pháp, trong môi trường mạng phân tán, các đối tượng Client và Server cư trú ở hai máy tính độc lập, không có bộ nhớ dùng chung. Tương tác giữa các đối tượng được thực hiện qua Cơ chế truyền thông điệp (Message Passing) qua Socket mạng.</p>
+
+<h2>3.2. Mô hình hóa Ca sử dụng (Use Case Analysis)</h2>
+<ul>
+  <li><b>UC01 - Khởi động và Lắng nghe Server:</b> Server khởi tạo lắng nghe cổng 6789, sẵn sàng tiếp nhận kết nối.</li>
+  <li><b>UC02 - Kết nối và Xác thực (USER & PASS):</b> Client gửi USER (Server đáp 331), gửi PASS (Server đối chiếu UserDatabase và đáp 230).</li>
+  <li><b>UC03 - Xem danh sách tệp tin (LIST & PWD):</b> Server quét storage/, trả về danh sách kèm metadata đổ lên JTable.</li>
+  <li><b>UC04 - Tải tệp lên máy chủ (Upload - STOR):</b> Client gửi tên và kích thước file (Server đáp 150), stream khối byte nhị phân 4KB, Server đóng file và đáp 226.</li>
+  <li><b>UC05 - Tải tệp về máy trạm (Download - RETR):</b> Server kiểm tra file, gửi mã 150 kèm kích thước, stream byte về máy trạm, cập nhật thanh tiến trình.</li>
+  <li><b>UC06 - Quản trị tệp từ xa (DELE & RNFR/RNTO):</b> Xóa tệp hoặc đổi tên tệp 2 bước an toàn trên đĩa cứng máy chủ.</li>
+</ul>
+
+<h2>3.3. Mô hình hóa Lớp và Đối tượng (Class Diagram Architecture)</h2>
+<table>
+  <thead>
+    <tr>
+      <th class="teal" style="width: 15%;">Gói (Package)</th>
+      <th class="teal" style="width: 25%;">Tên Lớp (Class)</th>
+      <th class="teal" style="width: 60%;">Vai Trò & Trách Nhiệm Thiết Kế Hướng Đối Tượng</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>server</code></td>
+      <td><b>TCPServer.java</b></td>
+      <td>Lớp chính máy chủ. Khởi tạo ServerSocket(6789), vòng lặp accept(), cấp phát Client ID qua AtomicInteger và tạo Thread phục vụ.</td>
+    </tr>
+    <tr>
+      <td><code>server</code></td>
+      <td><b>ClientHandler.java</b></td>
+      <td>Thực thi Runnable. Đại diện cho tiến trình phục vụ độc lập một Client; quản lý vòng lặp đọc lệnh và bắt ngoại lệ ngắt kết nối.</td>
+    </tr>
+    <tr>
+      <td><code>server</code></td>
+      <td><b>CommandHandler.java</b></td>
+      <td>Bộ điều phối phân tích cú pháp (Dispatcher). Nhận chuỗi lệnh, kiểm tra quyền trong Session và ánh xạ tới phương thức tương ứng.</td>
+    </tr>
+    <tr>
+      <td><code>server</code></td>
+      <td><b>ProtocolInputStream.java</b></td>
+      <td>Bộ đọc luồng tùy biến giải quyết lỗi Buffer-Ahead. Đọc byte-by-byte cho lệnh text và trả về luồng thô InputStream cho file nhị phân.</td>
+    </tr>
+    <tr>
+      <td><code>server</code></td>
+      <td><b>Session.java</b></td>
+      <td>Quản lý máy trạng thái phiên (FSM: UNAUTHENTICATED, NEED_PASSWORD, AUTHENTICATED), lưu username và tên file chờ đổi tên.</td>
+    </tr>
+    <tr>
+      <td><code>server</code></td>
+      <td><b>StorageManager.java</b></td>
+      <td>Đóng gói toàn bộ thao tác I/O trên đĩa cứng storage/. Triển khai cơ chế bảo mật resolveSafe() chống Path Traversal.</td>
+    </tr>
+    <tr>
+      <td><code>server</code></td>
+      <td><b>UserDatabase.java</b></td>
+      <td>Cơ sở dữ liệu in-memory (HashMap) lưu 4 tài khoản mẫu, kiểm tra validate() và userExists(), dễ dàng thay thế bằng MySQL DAO.</td>
+    </tr>
+    <tr>
+      <td><code>client</code></td>
+      <td><b>TCPClient.java</b></td>
+      <td>Client giao diện dòng lệnh (CLI Terminal) phục vụ việc kiểm thử nhanh các lệnh giao thức mạng từ bàn phím.</td>
+    </tr>
+    <tr>
+      <td><code>client</code></td>
+      <td><b>FtpClientService.java</b></td>
+      <td>Tầng dịch vụ mạng Client. Đóng gói toàn bộ lệnh mạng thành các phương thức Java (login, stor, retr, dele), quản lý luồng nhị phân.</td>
+    </tr>
+    <tr>
+      <td><code>client</code></td>
+      <td><b>LoginFrame.java</b></td>
+      <td>Giao diện đăng nhập Swing. Cấu hình IP/Port, đổi 4 bộ giao diện Look & Feel, bắt lỗi kết nối và chuyển hướng sang MainFrame.</td>
+    </tr>
+    <tr>
+      <td><code>client</code></td>
+      <td><b>MainFrame.java</b></td>
+      <td>Giao diện chính Swing. Bảng JTable hiển thị file, JFileChooser duyệt tệp, đa luồng SwingWorker không đơ UI, JProgressBar và Console Log.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1>CHƯƠNG 4: TOÀN BỘ CÁC CHỨC NĂNG CỦA SẢN PHẨM HIỆN TẠI (ĐÃ HOÀN TẤT 100%)</h1>
+<table>
+  <thead>
+    <tr>
+      <th style="width: 5%;">STT</th>
+      <th style="width: 15%;">Nhóm Chức Năng</th>
+      <th style="width: 25%;">Tên Chức Năng Cụ Thể</th>
+      <th style="width: 20%;">Mã Lệnh / Thao Tác</th>
+      <th style="width: 20%;">File Xử Lý</th>
+      <th style="width: 15%;">Trạng Thái</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center;">1</td>
+      <td><b>Mạng & Đa luồng</b></td>
+      <td>Khởi tạo Server lắng nghe TCP</td>
+      <td><code>ServerSocket(6789)</code></td>
+      <td>TCPServer.java</td>
+      <td style="text-align: center;"><span class="badge-done">100% Hoàn thành</span></td>
+    </tr>
+    <tr>
+      <td style="text-align: center;">2</td>
+      <td><b>Mạng & Đa luồng</b></td>
+      <td>Xử lý đồng thời đa máy trạm</td>
+      <td><code>Thread-per-client / AtomicInt</code></td>
+      <td>TCPServer, ClientHandler</td>
+      <td style="text-align: center;"><span class="badge-done">100% Hoàn thành</span></td>
+    </tr>
+    <tr>
+      <td style="text-align: center;">3</td>
+      <td><b>Mạng & Đa luồng</b></td>
+      <td>Kiểm tra kết nối mạng (Heartbeat)</td>
+      <td><code>PING -> 200 PONG</code></td>
+      <td>CommandHandler.java</td>
+      <td style="text-align: center;"><span class="badge-done">100% Hoàn thành</span></td>
+    </tr>
+    <tr>
+      <td style="text-align: center;">4</td>
+      <td><b>Mạng & Đa luồng</b></td>
+      <td>Kiểm tra phản hồi văn bản</td>
+      <td><code>ECHO <msg> -> 200 <msg></code></td>
+      <td>CommandHandler.java</td>
+      <td style="text-align: center;"><span class="badge-done">100% Hoàn thành</span></td>
+    </tr>
+    <tr>
+      <td style="text-align: center;">5</td>
+      <td><b>Mạng & Đa luồng</b></td>
+      <td>Ngắt kết nối an toàn, lịch sự</td>
+      <td><code>QUIT -> 221 Goodbye</code></td>
+      <td>CommandHandler, ClientHandler</td>
+      <td style="text-align: center;"><span class="badge-done">100% Hoàn thành</span></td>
+    </tr>
+    <tr>
+      <td style="text-align: center;">6</td>
+      <td><b>Phiên & Xác thực</b></td>
+      <td>Máy trạng thái phiên (FSM)</td>
+      <td><code>UNAUTH, NEED_PASS, AUTH</code></td>
+      <td>Session.java</td>
+      <td style="text-align: center;"><span class="badge-done">100% Hoàn thành</span></td>
+    </tr>
+    <tr>
+      <td style="text-align: center;">7</td>
+      <td><b>Phiên & Xác thực</b></td>
+      <td>Định danh tài khoản người dùng</td>
+      <td><code>USER <username> -> 331</code></td>
+      <td>CommandHandler, Session</td>
+      <td style="text-align: center;"><span class="badge-done">100% Hoàn thành</span></td>
+    </tr>
+    <tr>
+      <td style="text-align: center;">8</td>
+      <td><b>Phiên & Xác thực</b></td>
+      <td>Xác thực mật khẩu đăng nhập</td>
+      <td><code>PASS <password> -> 230/530</code></td>
+      <td>CommandHandler, UserDB</td>
+      <td style="text-align: center;"><span class="badge-done">100% Hoàn thành</span></td>
+    </tr>
+    <tr>
+      <td style="text-align: center;">9</td>
+      <td><b>Phiên & Xác thực</b></td>
+      <td>Cơ sở dữ liệu tài khoản</td>
+      <td><code>HashMap (admin, alice, bob)</code></td>
+      <td>UserDatabase.java</td>
+      <td style="text-align: center;"><span class="badge-done">100% Hoàn thành</span></td>
+    </tr>
+    <tr>
+      <td style="text-align: center;">10</td>
+      <td><b>Phiên & Xác thực</b></td>
+      <td>Đăng xuất tài khoản an toàn</td>
+      <td><code>LOGOUT -> 200 Logged out</code></td>
+      <td>CommandHandler, Session</td>
+      <td style="text-align: center;"><span class="badge-done">100% Hoàn thành</span></td>
+    </tr>
+    <tr>
+      <td style="text-align: center;">11</td>
+      <td><b>Phiên & Xác thực</b></td>
+      <td>Chặn truy cập trái phép</td>
+      <td><code>530 Not logged in</code></td>
+      <td>CommandHandler.java</td>
+      <td style="text-align: center;"><span class="badge-done">100% Hoàn thành</span></td>
+    </tr>
+    <tr>
+      <td style="text-align: center;">12</td>
+      <td><b>Thư mục</b></td>
+      <td>Xem thư mục làm việc hiện hành</td>
+      <td><code>PWD -> 257 "/"</code></td>
+      <td>CommandHandler.java</td>
+      <td style="text-align: center;"><span class="badge-done">100% Hoàn thành</span></td>
+    </tr>
+    <tr>
+      <td style="text-align: center;">13</td>
+      <td><b>Thư mục</b></td>
+      <td>Liệt kê tệp tin & metadata</td>
+      <td><code>LIST -> 150 ... 226</code></td>
+      <td>CommandHandler, StorageMgr</td>
+      <td style="text-align: center;"><span class="badge-done">100% Hoàn thành</span></td>
+    </tr>
+    <tr>
+      <td style="text-align: center;">14</td>
+      <td><b>Truyền file</b></td>
+      <td>Tải file lên Server (Upload)</td>
+      <td><code>STOR <filename> (Binary)</code></td>
+      <td>CommandHandler, StorageMgr</td>
+      <td style="text-align: center;"><span class="badge-done">100% Hoàn thành</span></td>
+    </tr>
+    <tr>
+      <td style="text-align: center;">15</td>
+      <td><b>Truyền file</b></td>
+      <td>Tải file về Client (Download)</td>
+      <td><code>RETR <filename> (Binary)</code></td>
+      <td>CommandHandler, StorageMgr</td>
+      <td style="text-align: center;"><span class="badge-done">100% Hoàn thành</span></td>
+    </tr>
+    <tr>
+      <td style="text-align: center;">16</td>
+      <td><b>Quản lý file</b></td>
+      <td>Xóa file từ xa trên Server</td>
+      <td><code>DELE <filename> -> 250</code></td>
+      <td>CommandHandler, StorageMgr</td>
+      <td style="text-align: center;"><span class="badge-done">100% Hoàn thành</span></td>
+    </tr>
+    <tr>
+      <td style="text-align: center;">17</td>
+      <td><b>Quản lý file</b></td>
+      <td>Đổi tên file 2 bước chuẩn FTP</td>
+      <td><code>RNFR <old> & RNTO <new></code></td>
+      <td>CommandHandler, Session</td>
+      <td style="text-align: center;"><span class="badge-done">100% Hoàn thành</span></td>
+    </tr>
+    <tr>
+      <td style="text-align: center;">18</td>
+      <td><b>Bảo mật</b></td>
+      <td>Chống Path Traversal (../../)</td>
+      <td><code>resolveSafe()</code></td>
+      <td>StorageManager.java</td>
+      <td style="text-align: center;"><span class="badge-done">100% Hoàn thành</span></td>
+    </tr>
+    <tr>
+      <td style="text-align: center;">19</td>
+      <td><b>Giao diện Swing</b></td>
+      <td>Màn hình Đăng nhập (Login)</td>
+      <td><code>Host/Port/User/Pass</code></td>
+      <td>LoginFrame.java</td>
+      <td style="text-align: center;"><span class="badge-done">100% Hoàn thành</span></td>
+    </tr>
+    <tr>
+      <td style="text-align: center;">20</td>
+      <td><b>Giao diện Swing</b></td>
+      <td>Bộ đổi giao diện (4 Themes)</td>
+      <td><code>Dark Custom, Nimbus, Win, Metal</code></td>
+      <td>LoginFrame.java</td>
+      <td style="text-align: center;"><span class="badge-done">100% Hoàn thành</span></td>
+    </tr>
+    <tr>
+      <td style="text-align: center;">21</td>
+      <td><b>Giao diện Swing</b></td>
+      <td>Màn hình chính & Bảng tệp</td>
+      <td><code>JTable, Icon, Size format</code></td>
+      <td>MainFrame.java</td>
+      <td style="text-align: center;"><span class="badge-done">100% Hoàn thành</span></td>
+    </tr>
+    <tr>
+      <td style="text-align: center;">22</td>
+      <td><b>Giao diện Swing</b></td>
+      <td>Bất đồng bộ & Thanh tiến trình</td>
+      <td><code>SwingWorker, JProgressBar %</code></td>
+      <td>MainFrame, FtpClientService</td>
+      <td style="text-align: center;"><span class="badge-done">100% Hoàn thành</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<h1>CHƯƠNG 5: CÁC ĐỘT PHÁ KỸ THUẬT & KHẮC PHỤC LỖI KINH ĐIỂN</h1>
+<h2>5.1. Sáng chế ProtocolInputStream — Khắc phục Lỗi Buffer-Ahead Kinh điển</h2>
+<p>Lớp <code>BufferedReader.readLine()</code> tự động đọc trước 8KB vào bộ đệm ngầm, nuốt mất 8KB đầu tiên của tệp tin nhị phân. Lớp <code>ProtocolInputStream.java</code> đọc chính xác byte-by-byte cho đến khi gặp ký tự <code>\n</code> cho lệnh text, sau đó trả về luồng thô <code>InputStream</code> cho file nhị phân, bảo vệ toàn vẹn 100% dữ liệu tệp tin.</p>
+
+<h2>5.2. Cơ chế Bảo mật Chống tấn công Path Traversal (resolveSafe)</h2>
+<p>Phương thức <code>resolveSafe()</code> trong <code>StorageManager.java</code> sử dụng <code>Path.normalize()</code> để giải quyết các chuỗi <code>../../</code> và kiểm tra nếu đường dẫn đích không bắt đầu bằng <code>storageRoot</code> thì lập tức ném ngoại lệ <code>SecurityException</code>, bảo vệ an toàn cho máy chủ.</p>
+
+<h2>5.3. Xử lý Đa luồng SwingWorker — Chống Treo Giao Diện (EDT Freeze)</h2>
+<p>Tách biệt toàn bộ thao tác mạng khỏi luồng giao diện (EDT), đưa vào luồng nền Worker Thread để truyền file lớn mà giao diện Swing vẫn luôn mượt mà 60fps.</p>
+
+<h1>CHƯƠNG 6: THIẾT KẾ CƠ SỞ DỮ LIỆU & LỘ TRÌNH NÂNG CẤP BÀI CUỐI KỲ</h1>
+<h2>6.1. Thiết kế Cơ sở dữ liệu Quan hệ MySQL chuẩn 3NF (Bản Cuối Kỳ)</h2>
+<p>Gồm 4 bảng: <code>roles</code>, <code>users</code>, <code>files</code>, <code>transfer_logs</code>. Dưới đây là kịch bản SQL DDL:</p>
+<pre>
+CREATE DATABASE IF NOT EXISTS ftp_database CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE ftp_database;
+
+CREATE TABLE roles (
+    role_id INT AUTO_INCREMENT PRIMARY KEY,
+    role_name VARCHAR(50) NOT NULL UNIQUE
+);
+
+CREATE TABLE users (
+    user_id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password_hash VARCHAR(255) NOT NULL,
+    role_id INT NOT NULL,
+    home_dir VARCHAR(255) NOT NULL,
+    is_active BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (role_id) REFERENCES roles(role_id)
+);
+
+CREATE TABLE files (
+    file_id INT AUTO_INCREMENT PRIMARY KEY,
+    filename VARCHAR(255) NOT NULL,
+    relative_path VARCHAR(500) NOT NULL,
+    size_bytes BIGINT NOT NULL,
+    file_hash VARCHAR(64) NULL,
+    user_id INT NOT NULL,
+    uploaded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
+);
+
+CREATE TABLE transfer_logs (
+    log_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NULL,
+    client_ip VARCHAR(50) NOT NULL,
+    action_type ENUM('LOGIN', 'UPLOAD', 'DOWNLOAD', 'DELETE', 'RENAME') NOT NULL,
+    filename VARCHAR(255) NULL,
+    bytes_transferred BIGINT DEFAULT 0,
+    status ENUM('SUCCESS', 'FAILED') NOT NULL,
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
+);
+</pre>
+
+<h2>6.2. Lộ trình nâng cấp chức năng cho Bài thi Cuối kỳ</h2>
+<ul>
+  <li>Tích hợp MySQL JDBC và băm mật khẩu BCrypt.</li>
+  <li>Cách ly Thư mục Người dùng (User Sandbox Isolation: <code>storage/&lt;username&gt;/</code>).</li>
+  <li>Bổ sung quản lý cây thư mục con (lệnh <code>MKD</code> và <code>RMD</code>).</li>
+  <li>Mã hóa bảo mật đường truyền FTPS (TLS/SSL Sockets).</li>
+</ul>
+
+<h1>CHƯƠNG 7: KỊCH BẢN KIỂM THỬ (TEST CASES) & KẾT QUẢ ĐẠT ĐƯỢC</h1>
+<table>
+  <thead>
+    <tr>
+      <th style="width: 8%;">Mã TC</th>
+      <th style="width: 25%;">Tên Ca Kiểm Thử</th>
+      <th style="width: 25%;">Dữ Liệu Đầu Vào</th>
+      <th style="width: 27%;">Kết Quả Mong Đợi</th>
+      <th style="width: 15%;">Kết Quả</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center;"><b>TC01</b></td>
+      <td>Khởi động Server</td>
+      <td>Port 6789</td>
+      <td>Server mở cổng, log sẵn sàng lắng nghe</td>
+      <td style="text-align: center;"><span class="badge-done">ĐẠT (Pass 100%)</span></td>
+    </tr>
+    <tr>
+      <td style="text-align: center;"><b>TC02</b></td>
+      <td>Đăng nhập hợp lệ</td>
+      <td>admin / 123</td>
+      <td>Server phản hồi 230, mở MainFrame</td>
+      <td style="text-align: center;"><span class="badge-done">ĐẠT (Pass 100%)</span></td>
+    </tr>
+    <tr>
+      <td style="text-align: center;"><b>TC03</b></td>
+      <td>Đăng nhập sai mật khẩu</td>
+      <td>admin / sai_pass</td>
+      <td>Server phản hồi 530, báo lỗi đỏ</td>
+      <td style="text-align: center;"><span class="badge-done">ĐẠT (Pass 100%)</span></td>
+    </tr>
+    <tr>
+      <td style="text-align: center;"><b>TC04</b></td>
+      <td>Chặn truy cập chưa login</td>
+      <td>Gửi lệnh LIST trực tiếp</td>
+      <td>Server chặn, trả về mã 530 Not logged in</td>
+      <td style="text-align: center;"><span class="badge-done">ĐẠT (Pass 100%)</span></td>
+    </tr>
+    <tr>
+      <td style="text-align: center;"><b>TC05</b></td>
+      <td>Xem danh sách file</td>
+      <td>Nhấn nút [Làm mới]</td>
+      <td>Bảng JTable hiển thị đầy đủ icon, size, date</td>
+      <td style="text-align: center;"><span class="badge-done">ĐẠT (Pass 100%)</span></td>
+    </tr>
+    <tr>
+      <td style="text-align: center;"><b>TC06</b></td>
+      <td>Tải lên file văn bản & ảnh</td>
+      <td>File PDF (5MB), PNG (2MB)</td>
+      <td>Server nhận đủ 100% bytes, mở xem nguyên vẹn</td>
+      <td style="text-align: center;"><span class="badge-done">ĐẠT (Pass 100%)</span></td>
+    </tr>
+    <tr>
+      <td style="text-align: center;"><b>TC07</b></td>
+      <td>Tải lên file lớn</td>
+      <td>File ZIP (500MB)</td>
+      <td>JProgressBar cập nhật %, không treo UI</td>
+      <td style="text-align: center;"><span class="badge-done">ĐẠT (Pass 100%)</span></td>
+    </tr>
+    <tr>
+      <td style="text-align: center;"><b>TC08</b></td>
+      <td>Tải về file từ Server</td>
+      <td>Chọn file trên JTable</td>
+      <td>Client lưu đúng thư mục, checksum khớp 100%</td>
+      <td style="text-align: center;"><span class="badge-done">ĐẠT (Pass 100%)</span></td>
+    </tr>
+    <tr>
+      <td style="text-align: center;"><b>TC09</b></td>
+      <td>Đổi tên file 2 bước</td>
+      <td>RNFR old.txt & RNTO new.txt</td>
+      <td>Server đổi tên an toàn, phản hồi mã 250</td>
+      <td style="text-align: center;"><span class="badge-done">ĐẠT (Pass 100%)</span></td>
+    </tr>
+    <tr>
+      <td style="text-align: center;"><b>TC10</b></td>
+      <td>Kiểm thử Path Traversal</td>
+      <td>DELE ../../test.txt</td>
+      <td>Server chặn đứng, ném SecurityException</td>
+      <td style="text-align: center;"><span class="badge-done">ĐẠT (Pass 100%)</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<h1>CHƯƠNG 8: BỘ CÂU HỎI & TRẢ LỜI BẢO VỆ ĐỒ ÁN (DEFENSE Q&A)</h1>
+<div style="margin-top: 15px;">
+  <p><b>1. Đề tài của em giải quyết bài toán thực tế gì và có ưu điểm gì so với việc gửi file qua Google Drive hay USB?</b></p>
+  <div class="callout">
+    <div class="callout-title">💡 TRẢ LỜI CÂU HỎI BẢO VỆ 1:</div>
+    <div>Dạ thưa Thầy/Cô, đề tài giải quyết bài toán chia sẻ và đồng bộ dữ liệu tốc độ cao trong mạng nội bộ (LAN). So với USB, hệ thống loại bỏ nguy cơ lây nhiễm mã độc virus Autorun. So với Google Drive, hệ thống hoạt động hoàn toàn độc lập với đường truyền Internet quốc tế, đạt tốc độ truyền tải tối đa của hạ tầng LAN Gigabit (lên tới 125MB/giây) và đảm bảo an toàn bí mật dữ liệu nội bộ.</div>
+  </div>
+</div>
+<div style="margin-top: 15px;">
+  <p><b>2. Tại sao em lại chọn mô hình Ghép kênh đơn luồng (Single-Channel Multiplexing) thay vì 2 kênh như FTP chuẩn (RFC 959)?</b></p>
+  <div class="callout">
+    <div class="callout-title">💡 TRẢ LỜI CÂU HỎI BẢO VỆ 2:</div>
+    <div>Dạ thưa Thầy/Cô, chuẩn FTP cổ điển (RFC 959) bắt buộc mở 2 kết nối TCP: Kênh điều khiển cố định (Port 21) và Kênh dữ liệu mở trên cổng động ngẫu nhiên qua chế độ PASV. Mô hình 2 kênh này rất hay bị Tường lửa (Firewall) hoặc Bộ định tuyến NAT chặn các cổng ngẫu nhiên. Trong đề tài, em áp dụng kỹ thuật ghép kênh đơn luồng trên duy nhất cổng 6789. Nhờ đó, ứng dụng hoạt động xuyên suốt qua mọi Firewall và bộ định tuyến NAT mà không cần cấu hình mạng phức tạp.</div>
+  </div>
+</div>
+<div style="margin-top: 15px;">
+  <p><b>3. Khi truyền cả lệnh văn bản lẫn file nhị phân qua cùng 1 Socket, em đã giải quyết lỗi mất byte (Buffer-Ahead) như thế nào?</b></p>
+  <div class="callout">
+    <div class="callout-title">💡 TRẢ LỜI CÂU HỎI BẢO VỆ 3:</div>
+    <div>Dạ thưa Thầy/Cô, nếu dùng BufferedReader.readLine(), lớp này sẽ đọc trước 8KB vào bộ đệm ngầm, nuốt mất 8KB đầu tiên của tệp tin nhị phân theo sau khiến file bị hỏng. Em đã tự viết lớp ProtocolInputStream.java đọc chính xác từng byte một cho đến ký tự xuống dòng '\n' cho lệnh text, sau đó trả về luồng gốc InputStream nguyên vẹn để stream file nhị phân. Nhờ vậy, dữ liệu tệp tin luôn chính xác 100%.</div>
+  </div>
+</div>
+<div style="margin-top: 15px;">
+  <p><b>4. Dự án giữa kỳ của em đã có Database thực tế (như MySQL) chưa?</b></p>
+  <div class="callout">
+    <div class="callout-title">💡 TRẢ LỜI CÂU HỎI BẢO VỆ 4:</div>
+    <div>Dạ thưa Thầy/Cô, trong phiên bản giữa kỳ, hệ thống sử dụng cơ sở dữ liệu In-Memory (HashMap trong UserDatabase.java) và lưu trữ tệp vật lý trên đĩa cứng (storage/). Mục đích là để ứng dụng có thể chạy demo độc lập trên mọi máy trạm mà không bị phụ thuộc vào dịch vụ MySQL bên ngoài. Lớp UserDatabase đã được em thiết kế phân tách độc lập theo nguyên lý Single Responsibility, sẵn sàng kết nối MySQL JDBC cho bài thi cuối kỳ.</div>
+  </div>
+</div>
+<div style="margin-top: 15px;">
+  <p><b>5. Hệ thống của em xử lý đồng thời nhiều Client kết nối cùng lúc bằng cơ chế gì?</b></p>
+  <div class="callout">
+    <div class="callout-title">💡 TRẢ LỜI CÂU HỎI BẢO VỆ 5:</div>
+    <div>Dạ thưa Thầy/Cô, Server của em áp dụng mô hình Đa luồng (Thread-per-Client). Khi có kết nối mới tại ServerSocket.accept(), Server dùng AtomicInteger cấp phát một Client ID duy nhất và chuyển Socket đó cho một đối tượng ClientHandler chạy trên một Thread độc lập. Nhờ đó, việc upload file nặng của một Client không bao giờ làm nghẽn các Client khác.</div>
+  </div>
+</div>
+<div style="margin-top: 15px;">
+  <p><b>6. Khi tải file nặng vài trăm MB, tại sao giao diện Swing của Client không bị treo (Not Responding)?</b></p>
+  <div class="callout">
+    <div class="callout-title">💡 TRẢ LỜI CÂU HỎI BẢO VỆ 6:</div>
+    <div>Dạ thưa Thầy/Cô, trong Java Swing, nếu thực hiện tác vụ mạng trên luồng giao diện chính (Event Dispatch Thread - EDT) thì giao diện sẽ bị đơ cứng. Em đã sử dụng SwingWorker để đưa toàn bộ tác vụ truyền file chạy ở luồng nền (Worker Thread), đồng thời gửi tín hiệu % tiến độ về luồng EDT để cập nhật thanh tiến trình JProgressBar mượt mà ở tốc độ 60fps.</div>
+  </div>
+</div>
+<div style="margin-top: 15px;">
+  <p><b>7. Hệ thống phòng chống tấn công Path Traversal (../../) như thế nào?</b></p>
+  <div class="callout">
+    <div class="callout-title">💡 TRẢ LỜI CÂU HỎI BẢO VỆ 7:</div>
+    <div>Dạ thưa Thầy/Cô, hệ thống được bảo vệ 100% nhờ hàm resolveSafe() trong StorageManager.java. Khi nhận đường dẫn từ Client, hàm này sử dụng Path.normalize() để giải quyết các ký tự '../', sau đó kiểm tra nếu đường dẫn đích không bắt đầu bằng storageRoot thì Server lập tức ném ngoại lệ SecurityException và từ chối xử lý, bảo vệ an toàn cho hệ thống tệp máy chủ.</div>
+  </div>
+</div>
+<div style="margin-top: 15px;">
+  <p><b>8. Trong bài thi cuối kỳ, em dự định nâng cấp thêm những tính năng gì?</b></p>
+  <div class="callout">
+    <div class="callout-title">💡 TRẢ LỜI CÂU HỎI BẢO VỆ 8:</div>
+    <div>Dạ thưa Thầy/Cô, ở bài thi cuối kỳ em sẽ thực hiện 4 nâng cấp lớn: (1) Kết nối Database MySQL lưu trữ thông tin tài khoản, phân quyền và lịch sử truyền file; (2) Phân quyền thư mục Sandbox cách ly riêng cho từng user (storage/<username>/); (3) Bổ sung lệnh tạo và xóa thư mục con (MKD / RMD); (4) Mã hóa đường truyền mạng bằng giao thức bảo mật FTPS (TLS/SSL Sockets).</div>
+  </div>
+</div>
+
+<h1>KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN</h1>
+<p>Đề tài đã hoàn thành xuất sắc các mục tiêu đề ra: làm chủ kiến trúc Socket TCP đa luồng, tự định nghĩa và hiện thực giao thức truyền file nhị phân nguyên vẹn 100%, khắc phục các lỗi kinh điển trong lập trình mạng và phát triển giao diện đồ họa trực quan, hiện đại, sẵn sàng bảo vệ đồ án với kết quả cao nhất.</p>
+
+</body>
+</html>

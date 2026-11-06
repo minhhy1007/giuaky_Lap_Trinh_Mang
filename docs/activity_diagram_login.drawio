@@ -1,0 +1,175 @@
+<?xml version="1.0" ?>
+<mxfile host="app.diagrams.net" modified="2026-11-02T08:35:00.000Z" agent="SecureFTPClientPro" version="24.0.0" type="device">
+  <diagram id="Activity_Diagram_Login" name="Sơ đồ Hoạt động (Activity Diagram) - Chức năng Đăng nhập">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="#FFFFFF" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="lane_user" value="NGƯỜI DÙNG (USER)" style="swimlane;startSize=30;html=1;whiteSpace=wrap;strokeWidth=2;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=13;fontStyle=1;collapsible=0;" vertex="1" parent="1">
+          <mxGeometry x="45" y="35" width="300" height="755" as="geometry"/>
+        </mxCell>
+        <mxCell id="lane_sys" value="HỆ THỐNG (SYSTEM / SERVER)" style="swimlane;startSize=30;html=1;whiteSpace=wrap;strokeWidth=2;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=13;fontStyle=1;collapsible=0;" vertex="1" parent="1">
+          <mxGeometry x="345" y="35" width="480" height="755" as="geometry"/>
+        </mxCell>
+        <mxCell id="lane_db" value="CƠ SỞ DỮ LIỆU (DATABASE / MYSQL)" style="swimlane;startSize=30;html=1;whiteSpace=wrap;strokeWidth=2;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=13;fontStyle=1;collapsible=0;" vertex="1" parent="1">
+          <mxGeometry x="825" y="35" width="300" height="755" as="geometry"/>
+        </mxCell>
+        <mxCell id="node_init" value="" style="ellipse;html=1;strokeColor=#000000;fillColor=#000000;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="185" y="75" width="22" height="22" as="geometry"/>
+        </mxCell>
+        <mxCell id="act_access_login" value="1. Truy cập giao diện&lt;br&gt;đăng nhập (LoginFrame)" style="rounded=1;arcSize=24;whiteSpace=wrap;html=1;strokeWidth=1.8;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="120" y="115" width="150" height="42" as="geometry"/>
+        </mxCell>
+        <mxCell id="act_input_creds" value="3. Nhập Email / Username&lt;br&gt;&amp;amp; Mật khẩu" style="rounded=1;arcSize=24;whiteSpace=wrap;html=1;strokeWidth=1.8;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="115" y="215" width="160" height="42" as="geometry"/>
+        </mxCell>
+        <mxCell id="act_click_login" value="4. Nhấn nút 'Đăng nhập'" style="rounded=1;arcSize=24;whiteSpace=wrap;html=1;strokeWidth=1.8;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="120" y="275" width="150" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="act_user_view" value="14. Truy cập giao diện&lt;br&gt;chính (MainFrame / Admin)" style="rounded=1;arcSize=24;whiteSpace=wrap;html=1;strokeWidth=1.8;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="115" y="680" width="160" height="42" as="geometry"/>
+        </mxCell>
+        <mxCell id="node_final_success" value="" style="ellipse;html=1;shape=endState;fillColor=#000000;strokeColor=#000000;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="183" y="745" width="24" height="24" as="geometry"/>
+        </mxCell>
+        <mxCell id="act_show_form" value="2. Hiển thị biểu mẫu&lt;br&gt;đăng nhập cho người dùng" style="rounded=1;arcSize=24;whiteSpace=wrap;html=1;strokeWidth=1.8;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="495" y="115" width="175" height="42" as="geometry"/>
+        </mxCell>
+        <mxCell id="act_validate_form" value="5. Kiểm tra dữ liệu đầu vào&lt;br&gt;(Validation: trống, format)" style="rounded=1;arcSize=24;whiteSpace=wrap;html=1;strokeWidth=1.8;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="490" y="275" width="185" height="42" as="geometry"/>
+        </mxCell>
+        <mxCell id="dec_valid_input" value="Dữ liệu&lt;br&gt;hợp lệ?" style="rhombus;whiteSpace=wrap;html=1;strokeWidth=1.8;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=10;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="560" y="335" width="45" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="act_notify_invalid" value="6. Thông báo lỗi định dạng&lt;br&gt;&amp;amp; yêu cầu nhập lại" style="rounded=1;arcSize=24;whiteSpace=wrap;html=1;strokeWidth=1.8;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="365" y="337" width="160" height="42" as="geometry"/>
+        </mxCell>
+        <mxCell id="act_req_auth" value="7. Gửi truy vấn tìm kiếm&lt;br&gt;tài khoản sang CSDL" style="rounded=1;arcSize=24;whiteSpace=wrap;html=1;strokeWidth=1.8;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="495" y="400" width="175" height="42" as="geometry"/>
+        </mxCell>
+        <mxCell id="act_verify_hash" value="8. Kiểm tra &amp;amp; đối soát&lt;br&gt;mật khẩu băm (SHA-256)" style="rounded=1;arcSize=24;whiteSpace=wrap;html=1;strokeWidth=1.8;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="490" y="465" width="185" height="42" as="geometry"/>
+        </mxCell>
+        <mxCell id="dec_creds_match" value="Thông tin&lt;br&gt;đúng?" style="rhombus;whiteSpace=wrap;html=1;strokeWidth=1.8;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=10;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="560" y="525" width="45" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="act_notify_wrong" value="9. Thông báo sai tài khoản&lt;br&gt;hoặc mật khẩu" style="rounded=1;arcSize=24;whiteSpace=wrap;html=1;strokeWidth=1.8;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="365" y="527" width="160" height="42" as="geometry"/>
+        </mxCell>
+        <mxCell id="act_check_status" value="10. Kiểm tra trạng thái&lt;br&gt;tài khoản (ACTIVE/LOCKED)" style="rounded=1;arcSize=24;whiteSpace=wrap;html=1;strokeWidth=1.8;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="490" y="590" width="185" height="42" as="geometry"/>
+        </mxCell>
+        <mxCell id="dec_acc_status" value="Trạng thái?" style="rhombus;whiteSpace=wrap;html=1;strokeWidth=1.8;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=10;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="560" y="650" width="45" height="45" as="geometry"/>
+        </mxCell>
+        <mxCell id="act_notify_locked" value="11. Thông báo tài khoản&lt;br&gt;bị khóa &amp;amp; từ chối" style="rounded=1;arcSize=24;whiteSpace=wrap;html=1;strokeWidth=1.8;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="365" y="652" width="160" height="42" as="geometry"/>
+        </mxCell>
+        <mxCell id="node_final_locked" value="" style="ellipse;html=1;shape=endState;fillColor=#000000;strokeColor=#000000;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="433" y="745" width="24" height="24" as="geometry"/>
+        </mxCell>
+        <mxCell id="act_create_session" value="12. Khởi tạo phiên (Session)&lt;br&gt;&amp;amp; Cấp quyền đăng nhập" style="rounded=1;arcSize=24;whiteSpace=wrap;html=1;strokeWidth=1.8;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="645" y="650" width="170" height="42" as="geometry"/>
+        </mxCell>
+        <mxCell id="act_route_role" value="13. Xác định vai trò (Role)&lt;br&gt;&amp;amp; Điều hướng giao diện" style="rounded=1;arcSize=24;whiteSpace=wrap;html=1;strokeWidth=1.8;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="645" y="715" width="170" height="42" as="geometry"/>
+        </mxCell>
+        <mxCell id="act_db_search" value="7.1. Tìm kiếm bản ghi User&lt;br&gt;theo Username / Email" style="rounded=1;arcSize=24;whiteSpace=wrap;html=1;strokeWidth=1.8;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="875" y="400" width="195" height="42" as="geometry"/>
+        </mxCell>
+        <mxCell id="act_db_result" value="7.2. Trả về Hash, Salt,&lt;br&gt;Trạng thái &amp;amp; Vai trò" style="rounded=1;arcSize=24;whiteSpace=wrap;html=1;strokeWidth=1.8;strokeColor=#000000;fillColor=#FFFFFF;fontFamily=Segoe UI;fontSize=11;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="875" y="465" width="195" height="42" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge_100" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.6;strokeColor=#000000;fontFamily=Segoe UI;fontSize=11;fontStyle=1;" edge="1" parent="1" source="node_init" target="act_access_login">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge_101" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.6;strokeColor=#000000;fontFamily=Segoe UI;fontSize=11;fontStyle=1;" edge="1" parent="1" source="act_access_login" target="act_show_form">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge_102" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.6;strokeColor=#000000;fontFamily=Segoe UI;fontSize=11;fontStyle=1;" edge="1" parent="1" source="act_show_form" target="act_input_creds">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="582" y="185"/>
+              <mxPoint x="195" y="185"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_103" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.6;strokeColor=#000000;fontFamily=Segoe UI;fontSize=11;fontStyle=1;" edge="1" parent="1" source="act_input_creds" target="act_click_login">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge_104" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.6;strokeColor=#000000;fontFamily=Segoe UI;fontSize=11;fontStyle=1;" edge="1" parent="1" source="act_click_login" target="act_validate_form">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge_105" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.6;strokeColor=#000000;fontFamily=Segoe UI;fontSize=11;fontStyle=1;" edge="1" parent="1" source="act_validate_form" target="dec_valid_input">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge_106" value="[Không hợp lệ]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.6;strokeColor=#000000;fontFamily=Segoe UI;fontSize=11;fontStyle=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="dec_valid_input" target="act_notify_invalid">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge_107" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.6;strokeColor=#000000;fontFamily=Segoe UI;fontSize=11;fontStyle=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="act_notify_invalid" target="act_input_creds">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="315" y="358"/>
+              <mxPoint x="315" y="236"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_108" value="[Hợp lệ]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.6;strokeColor=#000000;fontFamily=Segoe UI;fontSize=11;fontStyle=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="dec_valid_input" target="act_req_auth">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge_109" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.6;strokeColor=#000000;fontFamily=Segoe UI;fontSize=11;fontStyle=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="act_req_auth" target="act_db_search">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge_110" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.6;strokeColor=#000000;fontFamily=Segoe UI;fontSize=11;fontStyle=1;" edge="1" parent="1" source="act_db_search" target="act_db_result">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge_111" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.6;strokeColor=#000000;fontFamily=Segoe UI;fontSize=11;fontStyle=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="act_db_result" target="act_verify_hash">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge_112" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.6;strokeColor=#000000;fontFamily=Segoe UI;fontSize=11;fontStyle=1;" edge="1" parent="1" source="act_verify_hash" target="dec_creds_match">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge_113" value="[Sai thông tin]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.6;strokeColor=#000000;fontFamily=Segoe UI;fontSize=11;fontStyle=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="dec_creds_match" target="act_notify_wrong">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge_114" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.6;strokeColor=#000000;fontFamily=Segoe UI;fontSize=11;fontStyle=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.8;entryDx=0;entryDy=0;" edge="1" parent="1" source="act_notify_wrong" target="act_input_creds">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="295" y="548"/>
+              <mxPoint x="295" y="248"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_115" value="[Đúng thông tin]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.6;strokeColor=#000000;fontFamily=Segoe UI;fontSize=11;fontStyle=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="dec_creds_match" target="act_check_status">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge_116" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.6;strokeColor=#000000;fontFamily=Segoe UI;fontSize=11;fontStyle=1;" edge="1" parent="1" source="act_check_status" target="dec_acc_status">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge_117" value="[Bị khóa - LOCKED]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.6;strokeColor=#000000;fontFamily=Segoe UI;fontSize=11;fontStyle=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="dec_acc_status" target="act_notify_locked">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge_118" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.6;strokeColor=#000000;fontFamily=Segoe UI;fontSize=11;fontStyle=1;" edge="1" parent="1" source="act_notify_locked" target="node_final_locked">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge_119" value="[Hoạt động - ACTIVE]" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.6;strokeColor=#000000;fontFamily=Segoe UI;fontSize=11;fontStyle=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="dec_acc_status" target="act_create_session">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge_120" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.6;strokeColor=#000000;fontFamily=Segoe UI;fontSize=11;fontStyle=1;" edge="1" parent="1" source="act_create_session" target="act_route_role">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge_121" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.6;strokeColor=#000000;fontFamily=Segoe UI;fontSize=11;fontStyle=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="act_route_role" target="act_user_view">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="605" y="736"/>
+              <mxPoint x="605" y="701"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_122" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;strokeWidth=1.6;strokeColor=#000000;fontFamily=Segoe UI;fontSize=11;fontStyle=1;" edge="1" parent="1" source="act_user_view" target="node_final_success">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
